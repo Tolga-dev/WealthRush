@@ -1,12 +1,23 @@
 using System;
-using UnityEngine;
 
-namespace GameStates
+namespace GameStates.Base
 {
-    [Serializable]
     public class GameState
     {
+        public virtual void Enter()
+        {
+            
+        }
+
+        public virtual void Update()
+        {
+            
+        }
         
+        public virtual void Exit()
+        {
+            
+        }
         
     }
 }
