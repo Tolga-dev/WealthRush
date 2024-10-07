@@ -2,6 +2,7 @@ using System;
 using Core;
 using GameStates;
 using GameStates.Base;
+using Player;
 using Save;
 
 namespace Managers
@@ -14,8 +15,9 @@ namespace Managers
         
         public MenuState menuState;
         public PlayingState playingState;
-        
-        
+
+        public PlayerController playerController;
+
         public void Start()
         {
             menuState = new MenuState();

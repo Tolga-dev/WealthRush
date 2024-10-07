@@ -9,6 +9,7 @@ namespace Player
         public CharacterController controller;
         public InputController inputController;
         public PileController pileController;
+        public SelectorManager selectorManager;
         
         public float xSpeed = 15f;
         public float zSpeed = 10f;
@@ -45,6 +46,12 @@ namespace Player
             {
                 pileController.AddPrizeToPile(other.gameObject);
             }
+            else if (other.CompareTag("Selection"))
+            {
+                var selected = other.GetComponent<Selector>();
+                selectorManager.PerformSelection(selected.selectionAction);
+            }
+
         }
     }
 } 
