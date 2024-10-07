@@ -1,11 +1,8 @@
 using System;
 using System.Collections.Generic;
-using Managers;
-using Prizes;
-using Unity.VisualScripting;
 using UnityEngine;
 
-namespace Player
+namespace Managers
 {
     public enum SelectionAction
     {

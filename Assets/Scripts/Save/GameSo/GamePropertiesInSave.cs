@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Save.GameObjects.Grounds;
 using Save.Sound;
 using UnityEngine;
 
@@ -22,5 +23,11 @@ namespace Save
         }
     }
 
+    [Serializable]
+    public class Grounds
+    {
+        public List<NormalGround> normalGroundsList = new List<NormalGround>();
+        public List<FinalGround> finalGroundsList = new List<FinalGround>();
+    }
  
 }
