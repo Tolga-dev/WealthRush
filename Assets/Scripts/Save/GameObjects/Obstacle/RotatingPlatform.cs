@@ -1,12 +1,15 @@
 ﻿using UnityEngine;
 
-public class RotatingPlatform : MonoBehaviour
+namespace Save.GameObjects.Obstacle
 {
-    [SerializeField] float rotatingSpeed = 10f;
-    [SerializeField] Vector3 rotatingAxis;
-
-    void Update()
+    public class RotatingPlatform : MonoBehaviour
     {
-        transform.Rotate(rotatingAxis, rotatingSpeed * Time.deltaTime);
+        [SerializeField] float rotatingSpeed = 10f;
+        [SerializeField] Vector3 rotatingAxis;
+
+        void Update()
+        {
+            transform.Rotate(rotatingAxis, rotatingSpeed * Time.deltaTime);
+        }
     }
 }

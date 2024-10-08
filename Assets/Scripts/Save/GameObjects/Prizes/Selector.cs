@@ -1,10 +1,9 @@
 using Managers;
-using Player;
 using UnityEngine;
 
-namespace Prizes
+namespace Save.GameObjects.Prizes
 {
-    public class Selector : MonoBehaviour
+    public class Selector : Prize
     {
         public SelectionAction selectionAction;
     }

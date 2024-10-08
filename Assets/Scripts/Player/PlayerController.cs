@@ -1,5 +1,6 @@
 using Managers;
 using Prizes;
+using Save.GameObjects.Prizes;
 using Save.GameObjects.Road;
 using UnityEngine;
 

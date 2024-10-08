@@ -5,17 +5,8 @@ using UnityEngine;
 
 namespace Save.GameObjects.Obstacle
 {
-    public enum Obstacles
-    {
-        Knife,
-        Brick
-    }
-    
     public class Obstacle : GameObjectBase
     {
-        [Header("Id")]
-        public Obstacles obstacles;
-        
         public override void OnTriggerEnter(Collider other)
         {
             base.OnTriggerEnter(other);

@@ -1,6 +1,8 @@
+using UnityEngine;
+
 namespace Save.GameObjects.Prizes
 {
-    public class Money : Prize
+    public class Key : Prize
     {
         
     }

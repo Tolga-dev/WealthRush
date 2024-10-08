@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using Save.Sound;
 using UnityEngine;
 
 namespace Save.GameSo
