@@ -21,9 +21,11 @@ namespace Managers.Controllers.Spawner
         public Transform spawnPoint;
 
         public Vector3 initPos;
+        
         public List<Road> createdRoads = new List<Road>();
         public List<Road> createdCircleRoads = new List<Road>();
-
+        public BossRoad createdBossRoad;
+        
         public int startAmountOfRoad = 5;
         public void Init()
         {
@@ -45,7 +47,7 @@ namespace Managers.Controllers.Spawner
         public void SpawnBossObject()
         {
             var created = Object.Instantiate(bossRoad, spawnPoint.position, bossRoad.transform.rotation);
-            createdRoads.Add(created.GetComponent<BossRoad>());
+            createdBossRoad = created.GetComponent<BossRoad>();
             SetNewPos();
         }
 
@@ -67,6 +69,9 @@ namespace Managers.Controllers.Spawner
                 Object.Destroy(createdRoad);
             }
             createdCircleRoads.Clear();
+
+            Object.Destroy(createdBossRoad);
+            createdBossRoad = null;
             
             spawnPoint.position = initPos;
         }

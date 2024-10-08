@@ -14,7 +14,9 @@ namespace Managers
         [Header("Road Spawner")]
         public RoadSpawner roadSpawner;
         
-        /*public ObstacleSpawner obstacleSpawner;
+        [Header("Obstacle Spawner")]
+        public ObstacleSpawner obstacleSpawner;
+        /*
         public GameObject prize;
         public float zOffsetAmount;
         public float maxXOffsetAmount;
@@ -27,16 +29,20 @@ namespace Managers
             roadSpawner.Init();
 
             SpawnRoads();
-            /*ObstacleSpawner();
-            PrizeSpawner();
+            SpawnObstacles();
+            /*PrizeSpawner();
             BossSpawner();*/
+        }
+        
+        private void SpawnObstacles()
+        {
+            obstacleSpawner.SpawnObject(this);
         }
 
         private void SpawnRoads()
         {
             for (int i = 0; i < roadSpawner.GetNumberOfRoad(_gameManager); i++)
             {
-                // 2 levelde bir spawn et? circleRoad 2 kez
                 roadSpawner.SpawnNormalRoad();
             }
             

@@ -147,7 +147,6 @@ MonoBehaviour:
   playerHitSound: {fileID: 8300000, guid: 68e3da0187b7e6a21848271af804c349, type: 3}
   particleSystem: {fileID: 8112208998834963864}
   isHitPlayer: 0
-  obstacles: 0
   moveSpeed: 10
   rotationSpeed: 1000
 --- !u!1001 &8112208998820114656

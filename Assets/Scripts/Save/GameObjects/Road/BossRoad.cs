@@ -43,13 +43,9 @@ namespace Save.GameObjects.Road
                 yield return null;
             }
 
-            // Ensure the money pile is exactly at the boss position
             moneyPile.transform.position = bossPosition;
-
-            // Optionally disable the money pile after it reaches the boss
             moneyPile.SetActive(false);
 
-            // Scale the boss after each money pile arrives
             StartCoroutine(ScaleBoss());
         }
 
