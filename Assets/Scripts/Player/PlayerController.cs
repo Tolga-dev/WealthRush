@@ -1,6 +1,7 @@
 using System;
 using Managers;
 using Prizes;
+using Save.GameObjects.Road;
 using UnityEngine;
 
 namespace Player
@@ -51,6 +52,11 @@ namespace Player
             {
                 var selected = other.GetComponent<Selector>();
                 selectorManager.PerformSelection(selected.selectionAction);
+            }
+            else if (other.CompareTag("BossRoad"))
+            {
+                var selected = other.transform.parent.GetComponent<BossRoad>();
+                selected.PlayerArrived(this);
             }
 
         }

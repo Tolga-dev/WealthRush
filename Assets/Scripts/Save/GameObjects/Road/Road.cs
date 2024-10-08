@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Road
+namespace Save.GameObjects.Road
 {
     public class Road : MonoBehaviour
     {

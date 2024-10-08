@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Managers.Controllers.Spawner;
 using Save.GameObjects.Obstacle;
+using Save.GameObjects.Road;
 using UnityEngine;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
@@ -19,18 +20,23 @@ namespace Managers
         public float maxXOffsetAmount;
         public float minXOffsetAmount;
         
-        public List<Road.Road> createdRoads = new List<Road.Road>();
+        public List<Road> createdRoads = new List<Road>();
 
         private void Start()
         {
             RoadSpawner();
             ObstacleSpawner();
             PrizeSpawner();
+            BossSpawner();
+        }
+
+        private void BossSpawner()
+        {
         }
 
         private void PrizeSpawner()
         {
-            for (int i = 0; i < createdRoads.Count; i++)
+            for (int i = 0; i < createdRoads.Count-1; i++)
             {
                 var spawnPoints = createdRoads[i].spawnPoint;
                 for (int j = 0; j < spawnPoints.Count; j++)
@@ -38,7 +44,7 @@ namespace Managers
                     var spawnPoint = spawnPoints[j];
                     if (j % 2 == 0)
                         continue;
-
+    
                     Vector3 basePosition = spawnPoint.position;
 
                     int randomCubeCount = Random.Range(1, 10); // 1 to 9
@@ -66,7 +72,7 @@ namespace Managers
 
         private void ObstacleSpawner()
         {
-            for (int i = 0; i < createdRoads.Count; i++)
+            for (int i = 0; i < createdRoads.Count-1; i++)
             {
                 var spawnPoints = createdRoads[i].spawnPoint;
                 for (int j = 0; j < spawnPoints.Count; j++)
@@ -87,14 +93,14 @@ namespace Managers
 
         private void RoadSpawner()
         {
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 3; i++)
             {
                 var created = roadSpawner.SpawnObject();
-                createdRoads.Add(created.GetComponent<Road.Road>());
+                createdRoads.Add(created.GetComponent<Road>());
             }
 
             var boss = roadSpawner.SpawnBossObject();
-            createdRoads.Add(boss.GetComponent<Road.Road>());
+            createdRoads.Add(boss.GetComponent<Road>());
         }
     }
     [Serializable]

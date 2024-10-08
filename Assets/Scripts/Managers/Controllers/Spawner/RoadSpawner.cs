@@ -10,7 +10,7 @@ namespace Managers.Controllers.Spawner
     {
         [FormerlySerializedAs("bossGroundObjectBase")] public ObjectBaseSo bossGroundObjectBaseSo;
         public Vector3 offset;
-
+        
         public override GameObject SpawnObject(GameObject spawn = null)
         {
             SetNewPos();
