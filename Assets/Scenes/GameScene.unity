@@ -1212,6 +1212,7 @@ MonoBehaviour:
   gamePropertiesInSave: {fileID: 11400000, guid: 5a1d6e4fb84df75028cbcae685faf561, type: 2}
   playingState:
     playerInitialPosition: {fileID: 1750286391}
+    playerWon: 0
   playerController: {fileID: 5949256529953088783}
   selectorManager: {fileID: 789870819}
   spawnerManager: {fileID: 789870820}

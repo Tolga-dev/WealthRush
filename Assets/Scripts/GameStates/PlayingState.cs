@@ -8,6 +8,7 @@ namespace GameStates
     public class PlayingState : GameState
     {
         public Transform playerInitialPosition;
+        public bool playerWon = false;
         
         public override void Enter()
         {
@@ -19,12 +20,15 @@ namespace GameStates
 
         public override void Update()
         {
+            if (playerWon) return;
+            
             GameManager.playerController.UpdatePlayer();
             Debug.Log("PlayingState Update");
         }
 
         public override void Exit()
         {
+            playerWon = false;
             Debug.Log("PlayingState Exit");
         }
     }

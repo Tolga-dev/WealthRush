@@ -92,6 +92,7 @@ namespace Player
 
         public void SetWin()
         {
+            gameManager.playingState.playerWon = true;
             animationController.StartWinner();
         }
     }

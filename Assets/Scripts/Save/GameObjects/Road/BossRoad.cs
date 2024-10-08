@@ -7,14 +7,22 @@ namespace Save.GameObjects.Road
 {
     public class BossRoad : Road
     {
+        private PlayerController _playerController;
+        
         public GameObject boss;
         public float scaleIncreasePerPile = 0.1f; // How much the scale increases per money pile
         public float scaleDuration = 0.5f; // Duration of the scaling animation for each pile
         public float moveDuration = 1f; // Duration for moving the money pile to the boss
 
-        public void PlayerArrived(PlayerController playerController)
+        public void PlayerArrived()
         {
-            var moneyPiles = playerController.pileController.moneyPiles;
+            var moneyPiles = _playerController.pileController.moneyPiles;
+            if (moneyPiles.Count == 0)
+            {
+                StartCoroutine(SetGameMainMenu());
+                return;
+            }
+            
             foreach (var moneyPile in moneyPiles)
             {
                 StartCoroutine(MovePileToBossAndScale(moneyPile));
@@ -57,18 +65,27 @@ namespace Save.GameObjects.Road
                 elapsedTime += Time.deltaTime;
                 yield return null;
             }
-
-            // Ensure the final scale is exactly the target scale
             boss.transform.localScale = targetScale;
+
+            StartCoroutine(SetGameMainMenu());
+        }
+
+        private IEnumerator SetGameMainMenu()
+        {
+            yield return new WaitForSeconds(2);
+            var gameManager = _playerController.gameManager;
+            gameManager.ChangeState(gameManager.menuState);
         }
 
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Player"))
             {
-                var playerController = other.GetComponent<PlayerController>();
-                playerController.SetWin();
-                PlayerArrived(playerController);
+                _playerController = other.GetComponent<PlayerController>();
+                _playerController.SetWin();
+                
+                PlayerArrived();
+                
                 Debug.Log("Win!");
             }
         }
