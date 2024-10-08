@@ -222,6 +222,7 @@ MonoBehaviour:
   - {fileID: 4814338874143377516}
   - {fileID: 2420207004275400922}
   - {fileID: 8047802284876951104}
+  isObjSpawned: 00000000
 --- !u!1 &3600355679441102108
 GameObject:
   m_ObjectHideFlags: 0
