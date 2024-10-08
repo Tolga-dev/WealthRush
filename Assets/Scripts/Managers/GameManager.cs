@@ -17,7 +17,8 @@ namespace Managers
         public PlayingState playingState;
 
         public PlayerController playerController;
-
+        public SelectorManager selectorManager;
+        
         public void Start()
         {
             menuState = new MenuState();

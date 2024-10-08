@@ -29,11 +29,7 @@ namespace Prizes
         
         private void CollectMoney(GameObject prize, Vector3 finalPosition)
         {
-            prize.GetComponent<Collider>().enabled = false;
-            prize.tag = "Untagged";
-
             prize.transform.position = finalPosition;
-
             moneyPiles.Add(prize);
         }
     }

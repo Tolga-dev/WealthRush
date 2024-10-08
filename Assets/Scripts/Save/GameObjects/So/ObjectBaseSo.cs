@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Save.GameObjects
 {
-    public class ObjectBase : ScriptableObject
+    public class ObjectBaseSo : ScriptableObject
     {
         public string objectName;
         public GameObject objectPrefab;
