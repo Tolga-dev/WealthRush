@@ -1,39 +1,55 @@
 using System;
 using System.Collections.Generic;
 using Managers.Controllers.Spawner;
-using Save.GameObjects.Obstacle;
 using Save.GameObjects.Road;
 using UnityEngine;
 using Object = UnityEngine.Object;
-using Random = UnityEngine.Random;
 
 namespace Managers
 {
     public class SpawnerManager : MonoBehaviour
     {
-        /*public GameManager gameManager;
-
+        private GameManager _gameManager;
+        
+        [Header("Road Spawner")]
         public RoadSpawner roadSpawner;
-        public ObstacleSpawner obstacleSpawner;
+        
+        /*public ObstacleSpawner obstacleSpawner;
         public GameObject prize;
         public float zOffsetAmount;
         public float maxXOffsetAmount;
         public float minXOffsetAmount;
+        */
         
-        public List<Road> createdRoads = new List<Road>();
-
         private void Start()
         {
-            RoadSpawner();
-            ObstacleSpawner();
+            _gameManager = GameManager.Instance;
+            roadSpawner.Init();
+
+            SpawnRoads();
+            /*ObstacleSpawner();
             PrizeSpawner();
-            BossSpawner();
+            BossSpawner();*/
         }
 
-        private void BossSpawner()
+        private void SpawnRoads()
         {
+            for (int i = 0; i < roadSpawner.GetNumberOfRoad(_gameManager); i++)
+            {
+                // 2 levelde bir spawn et? circleRoad 2 kez
+                roadSpawner.SpawnNormalRoad();
+            }
+            
+            if (_gameManager.currenLevel % 2 == 0) 
+            {
+                roadSpawner.SpawnCircleRoad();
+            }
+
+            roadSpawner.SpawnBossObject();
+
         }
 
+        /*
         private void PrizeSpawner()
         {
             for (int i = 0; i < createdRoads.Count-1; i++)
@@ -69,8 +85,9 @@ namespace Managers
                 }
             }
         }
+        */
 
-        private void ObstacleSpawner()
+        /*private void ObstacleSpawner()
         {
             for (int i = 0; i < createdRoads.Count-1; i++)
             {
@@ -89,40 +106,16 @@ namespace Managers
                     }
                 }
             }
-        }
-
-        private void RoadSpawner()
-        {
-            for (int i = 0; i < 3; i++)
-            {
-                var created = roadSpawner.SpawnObject();
-                createdRoads.Add(created.GetComponent<Road>());
-            }
-
-            var boss = roadSpawner.SpawnBossObject();
-            createdRoads.Add(boss.GetComponent<Road>());
         }*/
+
+
+        public void ResetSpawners()
+        {
+            roadSpawner.ResetRoads();
+
+            SpawnRoads();
+        }
+
     }
-    [Serializable]
-    public class ObstacleSpawner
-    {
-        private Transform _spawnPoint;
-        public List<GameObject> obstacles = new List<GameObject>();
-
-        public virtual void SpawnObject(GameObject spawn = null)
-        {
-            var created = Object.Instantiate(spawn, _spawnPoint, true);
-            
-            var position = created.transform.position;
-            position.x = _spawnPoint.position.x;
-            position.z = _spawnPoint.position.z;
-
-            created.transform.position = position;
-        }
-        
-        public void SetTransform(Transform newTransform)
-        {
-            _spawnPoint = newTransform;
-        }
-    }    
+   
 }

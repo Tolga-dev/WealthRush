@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Save.GameObjects.Road
 {
-    public class BossRoad : MonoBehaviour
+    public class BossRoad : Road
     {
         public GameObject boss;
         public float scaleIncreasePerPile = 0.1f; // How much the scale increases per money pile
@@ -64,9 +64,12 @@ namespace Save.GameObjects.Road
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("BossRoad"))
+            if (other.CompareTag("Player"))
             {
-                PlayerArrived(other.GetComponent<PlayerController>());
+                var playerController = other.GetComponent<PlayerController>();
+                playerController.SetWin();
+                PlayerArrived(playerController);
+                Debug.Log("Win!");
             }
         }
     }

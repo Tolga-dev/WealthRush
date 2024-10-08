@@ -33,5 +33,10 @@ namespace Player
         {
             SetAnimation(IsCarrying);
         }
+
+        public void StartWinner()
+        {
+            SetAnimation(IsFinished);
+        }
     }
 }

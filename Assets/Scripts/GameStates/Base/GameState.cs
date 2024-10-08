@@ -14,7 +14,7 @@ namespace GameStates.Base
         
         public virtual void Enter()
         {
-            
+            GameManager.spawnerManager.ResetSpawners();
         }
 
         public virtual void Update()

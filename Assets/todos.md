@@ -8,11 +8,17 @@
       * 0 or 3
       
 * Player
-* Yol
-* Boss
+  * death -> yapilacak
+  * dance 
+  * finish 
+  
+* Yol - ok
+* Yol spawn
+
+* Boss 
+  * animayon ve ses efektleri 
 * selector
 
-* Yol spawn
 * Boss spawn
 * Engeller spawn
 * odullerin spawn

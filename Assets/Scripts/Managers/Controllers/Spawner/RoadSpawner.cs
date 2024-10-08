@@ -1,34 +1,89 @@
 using System;
 using Save.GameObjects;
+using System;
+using System.Collections.Generic;
+using Save.GameObjects;
+using Save.GameObjects.Road;
 using UnityEngine;
 using UnityEngine.Serialization;
-
+using Object = UnityEngine.Object;
 namespace Managers.Controllers.Spawner
 {
     [Serializable]
-    public class RoadSpawner: GameObjectSpawner
+    public class RoadSpawner
     {
-        /*[FormerlySerializedAs("bossGroundObjectBase")] public ObjectBaseSo bossGroundObjectBaseSo;
-        public Vector3 offset;
+        public GameObject road;
+        public GameObject circleRoad;
         
-        public override GameObject SpawnObject(GameObject spawn = null)
-        {
-            SetNewPos();
-            var spawnObject = base.SpawnObject(objectBaseSo[0].objectPrefab);
-            return spawnObject;
-        }
+        public GameObject bossRoad;
+    
+        public Vector3 offset;
+        public Transform spawnPoint;
 
-        public GameObject SpawnBossObject()
+        public Vector3 initPos;
+        public List<Road> createdRoads = new List<Road>();
+        public List<Road> createdCircleRoads = new List<Road>();
+
+        public int startAmountOfRoad = 5;
+        public void Init()
         {
+            initPos = spawnPoint.position;
+        }
+        public void SpawnNormalRoad()
+        {
+            var created = Object.Instantiate(road, spawnPoint.position,road.transform.rotation);
+            createdRoads.Add(created.GetComponent<Road>());
             SetNewPos();
-            var spawnObject = base.SpawnObject(bossGroundObjectBaseSo.objectPrefab);
-            return spawnObject;
+        }
+        public void SpawnCircleRoad()
+        {
+            var created = Object.Instantiate(circleRoad, spawnPoint.position,circleRoad.transform.rotation);
+            createdCircleRoads.Add(created.GetComponent<Road>());
+            SetNewPos();
+        }
+        
+        public void SpawnBossObject()
+        {
+            var created = Object.Instantiate(bossRoad, spawnPoint.position, bossRoad.transform.rotation);
+            createdRoads.Add(created.GetComponent<BossRoad>());
+            SetNewPos();
         }
 
         public Vector3 SetNewPos()
         {
             return spawnPoint.position += offset; 
-        }*/
+        }
+        
+        public void ResetRoads()
+        {
+            foreach (var createdRoad in createdRoads)
+            {
+                Object.Destroy(createdRoad);
+            }
+            createdRoads.Clear();
+            
+            foreach (var createdRoad in createdCircleRoads)
+            {
+                Object.Destroy(createdRoad);
+            }
+            createdCircleRoads.Clear();
+            
+            spawnPoint.position = initPos;
+        }
+
+
+        public int GetNumberOfRoad(GameManager gameManager)
+        {
+            var level = gameManager.currenLevel;
+            var numberOfRoadsToSpawn = startAmountOfRoad;
+
+            if (level % 5 == 0)
+            {
+                numberOfRoadsToSpawn += level / 5;
+            }
+
+            return numberOfRoadsToSpawn;
+        }
     }
 
 }

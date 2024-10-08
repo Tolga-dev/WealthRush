@@ -89,5 +89,10 @@ namespace Player
         {
             animationController.StartRunner();
         }
+
+        public void SetWin()
+        {
+            animationController.StartWinner();
+        }
     }
 } 

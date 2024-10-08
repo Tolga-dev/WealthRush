@@ -21,11 +21,14 @@ namespace Managers
 
         public PlayerController playerController;
         public SelectorManager selectorManager;
-
+        public SpawnerManager spawnerManager;
+        
         [Header("Road Borders")]
         public Transform targetA; // First target position
         public Transform targetB; // Second target position
-        
+
+        [Header("Level")]
+        public int currenLevel;
         public void Start()
         {
             menuState.Init(this);
