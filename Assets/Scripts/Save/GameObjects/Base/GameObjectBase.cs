@@ -28,12 +28,20 @@ namespace Save.GameObjects.Base
     
             if(animator != null)
                 animator.SetBool(PlayerHit, true);
-            if(particleSystem != null)
+            if (particleSystem != null)
+            {
                 particleSystem.Play();
+                PlayAdditionalEffects();
+            }
 
             isHitPlayer = true;
             
             DisableGameObject();
+        }
+
+        protected virtual void PlayAdditionalEffects()
+        {
+            
         }
 
         protected virtual void DisableGameObject()

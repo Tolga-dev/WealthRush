@@ -5,15 +5,15 @@ namespace Save.GameObjects.Prizes
 {
     public class Prize : GameObjectBase
     {
-        public override void OnTriggerEnter(Collider other)
+        public ParticleSystem emoji;
+        public int prizeAmount;
+
+        protected override void PlayAdditionalEffects()
         {
-            base.OnTriggerEnter(other);
-            
-            if (isHitPlayer == false)
+            if (emoji != null)
             {
-                
+                emoji.Play();
             }
         }
-        
     }
 }
