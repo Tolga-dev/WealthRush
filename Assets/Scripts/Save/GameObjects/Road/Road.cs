@@ -7,6 +7,6 @@ namespace Save.GameObjects.Road
     {
         [Header("Closest to far")]
         public List<Transform> spawnPoint = new List<Transform>();
-        
+        public List<bool> isObjSpawned = new List<bool>(); // hate sorry
     }
 }

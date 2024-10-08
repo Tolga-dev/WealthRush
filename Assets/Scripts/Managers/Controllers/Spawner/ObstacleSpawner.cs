@@ -9,7 +9,6 @@ namespace Managers.Controllers.Spawner
     public class ObstacleSpawner
     {
         public List<GameObject> obstacles = new List<GameObject>();
-        
         public List<GameObject> createdObstacles = new List<GameObject>();
 
         public virtual void SpawnObject(SpawnerManager spawnerManager)
@@ -19,21 +18,42 @@ namespace Managers.Controllers.Spawner
             foreach (var road in createdRoads)
             {
                 var spawnPoints = road.spawnPoint;
-                var spawnPoint = spawnPoints[0];
-                var spawn = obstacles[0];
-                
-                var created = Object.Instantiate(spawn, spawnPoint, true);
-                var position = created.transform.position;
-                var position1 = spawnPoint.position;
-                
-                position.x = position1.x;
-                position.z = position1.z;
 
-                created.transform.position = position;
+                int randomIndex = UnityEngine.Random.Range(0, 2); // 0 = spawnPoints[0], 1 = spawnPoints[1]
+                int pairedIndex =
+                    randomIndex == 0 ? 3 : 2; // If 0 is chosen, pair with 3 (index 3), else pair with 2 (index 2)
 
-                createdObstacles.Add(created);
+                var selectedSpawnPoint1 = spawnPoints[randomIndex]; // Randomly selected spawn point
+                var selectedSpawnPoint2 = spawnPoints[pairedIndex]; // Paired spawn point
+
+                var spawn = obstacles[0]; // You can adjust this to select a random obstacle if needed
+
+                var created1 = Object.Instantiate(spawn, selectedSpawnPoint1, true);
+                AdjustPositionToSpawnPoint(created1, selectedSpawnPoint1);
+
+                var created2 = Object.Instantiate(spawn, selectedSpawnPoint2, true);
+                AdjustPositionToSpawnPoint(created2, selectedSpawnPoint2);
+
+                createdObstacles.Add(created1);
+                createdObstacles.Add(created2);
+
+                road.isObjSpawned[randomIndex] = true;
+                road.isObjSpawned[pairedIndex] = true;
             }
         }
-        
-    }    
+
+        private void AdjustPositionToSpawnPoint(GameObject created, Transform spawnPoint)
+        {
+            var position = created.transform.position;
+            var spawnPosition = spawnPoint.position;
+
+            position.x = spawnPosition.x;
+            position.z = spawnPosition.z;
+
+            created.transform.position = position;
+        }
+
+
+
+    }
 }

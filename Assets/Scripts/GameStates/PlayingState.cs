@@ -23,7 +23,6 @@ namespace GameStates
             if (playerWon) return;
             
             GameManager.playerController.UpdatePlayer();
-            Debug.Log("PlayingState Update");
         }
 
         public override void Exit()

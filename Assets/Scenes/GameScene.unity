@@ -246,11 +246,11 @@ Light:
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
-    m_Type: 2
-    m_Resolution: -1
+    m_Type: 1
+    m_Resolution: 0
     m_CustomResolution: -1
     m_Strength: 1
-    m_Bias: 0.05
+    m_Bias: 0
     m_NormalBias: 0.4
     m_NearPlane: 0.2
     m_CullingMatrixOverride:
@@ -279,7 +279,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 2
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
@@ -1266,6 +1266,14 @@ MonoBehaviour:
     - {fileID: 3236718058140866936, guid: e5ae14fe78275bc0f8b949ef0b1754ef, type: 3}
     - {fileID: 7980592550645374983, guid: 7299b9104232c290ab23fa3dfea621f9, type: 3}
     createdObstacles: []
+  prizeSpawner:
+    prizes:
+    - {fileID: 878732086903297617, guid: ca0abf828b1b155738a4a8fb4030016d, type: 3}
+    - {fileID: 3790174673472564242, guid: f1a43edaf6fe5fc5595339f83e20204c, type: 3}
+    - {fileID: 5480849866933351741, guid: 5a3311e86bfb6dd7eb9dbb97e2277de6, type: 3}
+    - {fileID: 5360832222098810650, guid: 1c33eb62f37a5862f8a83d5de60ec00c, type: 3}
+    - {fileID: 136092664323873161, guid: 608a4a7ab2e18c8b78fdabc75a734350, type: 3}
+    createdPrizes: []
 --- !u!1001 &794023064
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2757,6 +2765,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: RotatingObstacle
       objectReference: {fileID: 0}
+    - target: {fileID: 7835820043269349452, guid: 5cb4e6d4b0ac9951396928ce84289429, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2870,6 +2882,10 @@ PrefabInstance:
     - target: {fileID: 5679311953507544461, guid: 07cfe1a153eed606c90d25e4eec545f1, type: 3}
       propertyPath: m_Name
       value: HalfDonut
+      objectReference: {fileID: 0}
+    - target: {fileID: 5679311953507544461, guid: 07cfe1a153eed606c90d25e4eec545f1, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7123008356544327812, guid: 07cfe1a153eed606c90d25e4eec545f1, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3009,6 +3025,10 @@ PrefabInstance:
     - target: {fileID: 6101474983760764076, guid: 041888e5d2b73f8b0bd12ae34ddf59ef, type: 3}
       propertyPath: m_Name
       value: Half_Donut_01 (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6101474983760764076, guid: 041888e5d2b73f8b0bd12ae34ddf59ef, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6447904128763750807, guid: 041888e5d2b73f8b0bd12ae34ddf59ef, type: 3}
       propertyPath: m_LocalScale.x
@@ -3301,6 +3321,7 @@ MonoBehaviour:
   - {fileID: 13230391}
   - {fileID: 367472212}
   - {fileID: 331120152}
+  isObjSpawned: 
 --- !u!65 &4636919939757734523
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3516,6 +3537,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Half_Donut_Side
       objectReference: {fileID: 0}
+    - target: {fileID: 7919248655856774208, guid: bd29cbd5b5733376e9d26fcdd01bd151, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3572,6 +3597,10 @@ PrefabInstance:
     - target: {fileID: 7980592550645374983, guid: 7299b9104232c290ab23fa3dfea621f9, type: 3}
       propertyPath: m_Name
       value: StaticObstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 7980592550645374983, guid: 7299b9104232c290ab23fa3dfea621f9, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3852,6 +3881,10 @@ PrefabInstance:
     - target: {fileID: 3265439876958530759, guid: 69bbfa5274b0497acbd6ea0d4d7650c2, type: 3}
       propertyPath: m_Name
       value: HorizontalObstacle
+      objectReference: {fileID: 0}
+    - target: {fileID: 3265439876958530759, guid: 69bbfa5274b0497acbd6ea0d4d7650c2, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7260040197378425534, guid: 69bbfa5274b0497acbd6ea0d4d7650c2, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4162,6 +4195,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPoint: []
+  isObjSpawned: 
 --- !u!137 &8378467730690343753
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0
@@ -4265,6 +4299,10 @@ PrefabInstance:
     - target: {fileID: 3236718058140866936, guid: e5ae14fe78275bc0f8b949ef0b1754ef, type: 3}
       propertyPath: m_Name
       value: Rotator
+      objectReference: {fileID: 0}
+    - target: {fileID: 3236718058140866936, guid: e5ae14fe78275bc0f8b949ef0b1754ef, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8287884363434431748, guid: e5ae14fe78275bc0f8b949ef0b1754ef, type: 3}
       propertyPath: m_LocalPosition.x

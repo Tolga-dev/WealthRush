@@ -16,12 +16,9 @@ namespace Managers
         
         [Header("Obstacle Spawner")]
         public ObstacleSpawner obstacleSpawner;
-        /*
-        public GameObject prize;
-        public float zOffsetAmount;
-        public float maxXOffsetAmount;
-        public float minXOffsetAmount;
-        */
+        
+        [Header("Prize Spawner")]
+        public PrizeSpawner prizeSpawner;
         
         private void Start()
         {
@@ -30,10 +27,14 @@ namespace Managers
 
             SpawnRoads();
             SpawnObstacles();
-            /*PrizeSpawner();
-            BossSpawner();*/
+            SpawnerPrizes();
         }
-        
+
+        private void SpawnerPrizes()
+        {
+            prizeSpawner.SpawnObject(this);
+        }
+
         private void SpawnObstacles()
         {
             obstacleSpawner.SpawnObject(this);
