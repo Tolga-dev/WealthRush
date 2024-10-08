@@ -11,7 +11,7 @@ namespace Managers
 {
     public class SpawnerManager : MonoBehaviour
     {
-        public GameManager gameManager;
+        /*public GameManager gameManager;
 
         public RoadSpawner roadSpawner;
         public ObstacleSpawner obstacleSpawner;
@@ -101,7 +101,7 @@ namespace Managers
 
             var boss = roadSpawner.SpawnBossObject();
             createdRoads.Add(boss.GetComponent<Road>());
-        }
+        }*/
     }
     [Serializable]
     public class ObstacleSpawner

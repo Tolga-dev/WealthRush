@@ -8,7 +8,7 @@ namespace Managers.Controllers.Spawner
     [Serializable]
     public class RoadSpawner: GameObjectSpawner
     {
-        [FormerlySerializedAs("bossGroundObjectBase")] public ObjectBaseSo bossGroundObjectBaseSo;
+        /*[FormerlySerializedAs("bossGroundObjectBase")] public ObjectBaseSo bossGroundObjectBaseSo;
         public Vector3 offset;
         
         public override GameObject SpawnObject(GameObject spawn = null)
@@ -28,7 +28,7 @@ namespace Managers.Controllers.Spawner
         public Vector3 SetNewPos()
         {
             return spawnPoint.position += offset; 
-        }
+        }*/
     }
 
 }

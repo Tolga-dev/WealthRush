@@ -4,6 +4,9 @@ using GameStates;
 using GameStates.Base;
 using Player;
 using Save;
+using Save.GameSo;
+using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Managers
 {
@@ -18,6 +21,10 @@ namespace Managers
 
         public PlayerController playerController;
         public SelectorManager selectorManager;
+
+        [Header("Road Borders")]
+        public Transform targetA; // First target position
+        public Transform targetB; // Second target position
         
         public void Start()
         {
@@ -40,5 +47,13 @@ namespace Managers
             CurrentState.Enter();
         }
 
+        public void SoundPlayer(AudioClip audioClip)
+        {
+            var tempSoundPlayer = new GameObject("TempSoundPlayer");
+            var audioSource = tempSoundPlayer.AddComponent<AudioSource>();
+            audioSource.clip = audioClip;
+            audioSource.PlayOneShot(audioClip);
+            Destroy(tempSoundPlayer, audioClip.length);
+        }
     }
 }

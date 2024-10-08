@@ -1,4 +1,3 @@
-using System;
 using Managers;
 using Prizes;
 using Save.GameObjects.Road;

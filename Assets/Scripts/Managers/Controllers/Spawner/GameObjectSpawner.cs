@@ -10,7 +10,7 @@ namespace Managers.Controllers.Spawner
     [Serializable]
     public class GameObjectSpawner
     {
-        public Transform spawnPoint;
+        /*public Transform spawnPoint;
         public List<ObjectBaseSo> objectBaseSo = new List<ObjectBaseSo>();
 
         public virtual GameObject SpawnObject(GameObject spawn = null)
@@ -19,6 +19,7 @@ namespace Managers.Controllers.Spawner
                 spawn = objectBaseSo[0].objectPrefab;
             return Object.Instantiate(spawn, spawnPoint.position, Quaternion.identity);
         }
+        */
         
         
     }

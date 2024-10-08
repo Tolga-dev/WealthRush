@@ -1,5 +1,6 @@
 using System;
 using Managers;
+using Save.GameObjects.Base;
 using UnityEngine;
 
 namespace Save.GameObjects.Obstacle
@@ -9,26 +10,30 @@ namespace Save.GameObjects.Obstacle
         Knife,
         Brick
     }
-    public class Obstacle : MonoBehaviour
+    
+    public class Obstacle : GameObjectBase
     {
+        [Header("Id")]
         public Obstacles obstacles;
-        public GameManager gameManager;
-
-        private void OnTriggerEnter(Collider other)
+        
+        public override void OnTriggerEnter(Collider other)
         {
-            if (other.CompareTag("Player"))
+            base.OnTriggerEnter(other);
+            
+            if (isHitPlayer == false)
             {
-                CallPlayerGotHit();
-            }
-            else if (other.CompareTag("Money"))
-            {
-                CallMoneyPileGotHit(other.gameObject);
+                if (other.CompareTag("Money"))
+                {
+                    CallMoneyPileGotHit(other.gameObject);
+                }
             }
         }
 
         protected virtual void CallMoneyPileGotHit(GameObject money)
         {
-            var moneyPiles = gameManager.playerController.pileController.moneyPiles;
+            Debug.Log("Money Pile Got Hit");
+            
+            /*var moneyPiles = gameManager.playerController.pileController.moneyPiles;
 
             var foundIndex = 0;
             for (int i = 0; i < moneyPiles.Count; i++)
@@ -49,14 +54,11 @@ namespace Save.GameObjects.Obstacle
                 
                 moneyPiles.RemoveAt(moneyPiles.Count - 1);   // Remove it from the list
                 Destroy(pile);                               // Destroy the GameObject
-            }
+            }*/
         }
 
 
-        protected virtual void  CallPlayerGotHit()
-        {
-            Debug.Log("Game Over");
-        }
+
         
     }
 }
