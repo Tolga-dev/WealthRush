@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 136092664323873161}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 1.645, y: 1.151, z: 0}
+  m_LocalPosition: {x: 1.645, y: 0.5, z: 0}
   m_LocalScale: {x: 14.949636, y: 14.949636, z: 14.189147}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -102,6 +102,7 @@ MonoBehaviour:
   playerHitSound: {fileID: 8300000, guid: e33a3636e9bc33146bacf8277541ea38, type: 3}
   particleSystem: {fileID: 7558318554366414962}
   isHitPlayer: 0
+  emoji: {fileID: 0}
   prizeAmount: 10
 --- !u!65 &6565771329492624708
 BoxCollider:
