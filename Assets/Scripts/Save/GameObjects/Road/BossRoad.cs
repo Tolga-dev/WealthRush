@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Player;
 using UnityEngine;
@@ -61,5 +62,12 @@ namespace Save.GameObjects.Road
             boss.transform.localScale = targetScale;
         }
 
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("BossRoad"))
+            {
+                PlayerArrived(other.GetComponent<PlayerController>());
+            }
+        }
     }
 }

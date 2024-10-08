@@ -1,9 +1,11 @@
+using System;
 using UnityEngine;
 using UnityEngine.Serialization;
 
 namespace Player
 {
-    public class InputController : MonoBehaviour
+    [Serializable]
+    public class InputController
     {
         public bool isMouseDown;
         public bool canMove;

@@ -1,9 +1,11 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Prizes
+namespace Player
 {
-    public class PileController : MonoBehaviour
+    [Serializable]
+    public class PileController
     {
         public Transform firstPilePosition;
 
@@ -13,7 +15,7 @@ namespace Prizes
         {
             prize.transform.SetParent(firstPilePosition);
 
-            Vector3 targetPosition = CalculateTargetPosition(prize.transform);
+            var targetPosition = CalculateTargetPosition(prize.transform);
             CollectMoney(prize, targetPosition);
         }
 

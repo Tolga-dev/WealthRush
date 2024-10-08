@@ -6,6 +6,12 @@ TagManager:
   tags:
   - Money
   - Selection
+  - Obstacle
+  - BossRoad
+  - Stick
+  - Gold
+  - RotatingPlatform
+  - Chest
   layers:
   - Default
   - TransparentFX

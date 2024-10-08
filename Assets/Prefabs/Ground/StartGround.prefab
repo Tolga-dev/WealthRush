@@ -44,7 +44,6 @@ GameObject:
   - component: {fileID: 5582884132478809630}
   - component: {fileID: 1565926128613159212}
   - component: {fileID: 7963818358852587986}
-  - component: {fileID: 2349756248354972661}
   m_Layer: 0
   m_Name: SpawnPoint1
   m_TagString: Untagged
@@ -117,27 +116,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &2349756248354972661
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2406852169147595030}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3527428111456042374
 GameObject:
   m_ObjectHideFlags: 0
@@ -180,7 +158,6 @@ GameObject:
   - component: {fileID: 2099891726787446634}
   - component: {fileID: 7457424450948822435}
   - component: {fileID: 6126355535546629115}
-  - component: {fileID: 1092332731852776062}
   m_Layer: 0
   m_Name: SpawnPoint1
   m_TagString: Untagged
@@ -253,27 +230,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &1092332731852776062
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3639337807418500933}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &4373936923949624834
 GameObject:
   m_ObjectHideFlags: 0
@@ -539,7 +495,6 @@ GameObject:
   - component: {fileID: 3260712947263727842}
   - component: {fileID: 7074145755804616450}
   - component: {fileID: 1077850660727086771}
-  - component: {fileID: 1761861098814508302}
   m_Layer: 0
   m_Name: SpawnPoint2
   m_TagString: Untagged
@@ -612,27 +567,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &1761861098814508302
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8546572966846313759}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8999845631703153572
 GameObject:
   m_ObjectHideFlags: 0
@@ -644,7 +578,6 @@ GameObject:
   - component: {fileID: 8596858516621661202}
   - component: {fileID: 130062392590827976}
   - component: {fileID: 1414607646939451978}
-  - component: {fileID: 416505636998837530}
   m_Layer: 0
   m_Name: SpawnPoint2
   m_TagString: Untagged
@@ -717,24 +650,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &416505636998837530
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8999845631703153572}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}

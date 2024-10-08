@@ -14,6 +14,10 @@ namespace GameStates
 
         public override void Update()
         {
+            GameManager.playerController.inputController.HandleMouseInput();
+            if(GameManager.playerController.inputController.canMove)
+               GameManager.ChangeState(GameManager.playingState);
+            
             Debug.Log("MenuState Update");
         }
 

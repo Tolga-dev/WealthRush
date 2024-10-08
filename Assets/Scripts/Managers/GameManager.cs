@@ -28,9 +28,9 @@ namespace Managers
         
         public void Start()
         {
-            menuState = new MenuState();
-            playingState = new PlayingState();
-
+            menuState.Init(this);
+            playingState.Init(this);
+            
             ChangeState(menuState);
         }
         
