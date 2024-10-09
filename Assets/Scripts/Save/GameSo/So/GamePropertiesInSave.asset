@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b641e6644d0e49a890eb47fe4baaed96, type: 3}
   m_Name: GamePropertiesInSave
   m_EditorClassIdentifier: 
-  audiosInSave:
-    audioInSaves:
-    - {fileID: 11400000, guid: 3a7b62988bb998b02832e53d6d0756a8, type: 2}
-    audioSetting:
-    - {fileID: 11400000, guid: ca8fff226a1f28781a1cc9288c0a0d1d, type: 2}
+  money: 0
+  isGameMusicOn: 1
+  isGameSoundOn: 1
+  gameMusicStartVolume: 0.25
+  gameMusicChangeDuration: 1
+  isNoAds: 1

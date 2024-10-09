@@ -6,6 +6,13 @@ namespace Save.GameSo
     public class GamePropertiesInSave : ScriptableObject
     {
         public int money;
+        
+        public bool isGameMusicOn;
+        public bool isGameSoundOn;
+        
+        public float gameMusicStartVolume = 0.25f;
+        public float gameMusicChangeDuration = 3;
+        public bool isNoAds;
     }
  
 

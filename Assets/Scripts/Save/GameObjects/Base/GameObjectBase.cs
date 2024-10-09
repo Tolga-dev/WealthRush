@@ -24,7 +24,7 @@ namespace Save.GameObjects.Base
         }
         protected virtual void  CallPlayerGotHit()
         {
-            GameManager.Instance.SoundPlayer(playerHitSound);
+            GameManager.Instance.PlayASound(playerHitSound);
     
             if(animator != null)
                 animator.SetBool(PlayerHit, true);

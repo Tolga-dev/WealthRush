@@ -1,6 +1,7 @@
 using System;
 using GameStates.Base;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace GameStates
 {
@@ -13,7 +14,8 @@ namespace GameStates
         public override void Enter()
         {
             Debug.Log("PlayingState Enter");
-
+            GameManager.GameMusic(GameManager.onGameSound[Random.Range(0, GameManager.onGameSound.Count)]);
+            
             GameManager.playerController.ResetPlayer();
             GameManager.playerController.StartRunning();
         }
