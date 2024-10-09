@@ -15,6 +15,11 @@ namespace Save.GameObjects.Road
 
         public void PlayerArrived()
         {
+            _playerController.SetWin();
+            _playerController.gameManager.PlayASound(_playerController.gameManager.onGameWinSound);
+            _playerController.gameManager.gamePropertiesInSave.currenLevel++;
+            _playerController.gameManager.playingState.isGameWon = true;
+
             var moneyPiles = _playerController.pileController.moneyPiles;
             if (moneyPiles.Count == 0)
             {
@@ -51,7 +56,7 @@ namespace Save.GameObjects.Road
         private IEnumerator ScaleBoss()
         {
             Vector3 initialScale = boss.transform.localScale;
-            Vector3 targetScale = initialScale + initialScale * (_playerController.pileController.moneyPiles.Count * 0.5f);
+            Vector3 targetScale = initialScale + initialScale * (_playerController.pileController.moneyPiles.Count * 0.1f);
             float elapsedTime = 0f;
 
             while (elapsedTime < scaleDuration)
@@ -77,11 +82,7 @@ namespace Save.GameObjects.Road
             if (other.CompareTag("Player"))
             {
                 _playerController = other.GetComponent<PlayerController>();
-                _playerController.SetWin();
-                
                 PlayerArrived();
-                
-                Debug.Log("Win!");
             }
         }
     }

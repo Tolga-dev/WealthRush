@@ -6,9 +6,11 @@
   * chest 
     * 3 chest in sign and out -> spawn kisminda cozecegiz
       * 0 or 3
-      
+  
+* gameLoop
+
 * Player
-  * death -> yapilacak
+  * death -> yapilacak 
   * dance 
   * finish 
 
@@ -18,13 +20,17 @@
 * odullerin spawn - ok
 * selector - ok
 
-* Main menu
+* Main menu - ok
+* Settings - ok
+* Shop - ok
+* on road prizes -> object pool
+
+* son kisim 
+  * spawn more cub
+ 
 * Restart
-* Settings
-* Shop
-* son kisim
-  * spawn more cuba
 * Level
+
 * optimizations
 * reklamlar
 * oyun ici satin alim

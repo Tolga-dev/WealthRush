@@ -35,10 +35,40 @@ namespace GameStates
         public override void Init(GameManager gameManager)
         {
             base.Init(gameManager);
-
             SetUI();
         }
+        public override void Enter()
+        {
+            SetMenuStateUI();
 
+            GameManager.playerController.inputController.isMouseDown = false;
+            GameManager.playerController.inputController.canMove = false;
+            
+            GameManager.playerController.ResetPlayer();
+            GameManager.GameMusic(GameManager.onMenuStateSound);
+            Debug.Log("MenuState Enter");
+        }
+        public override void Update()
+        {
+            GameManager.playerController.inputController.HandleMouseInput();
+            if(GameManager.playerController.inputController.canMove)
+               GameManager.ChangeState(GameManager.playingState);
+        }
+
+        public override void Exit()
+        {
+            menuPanel.gameObject.SetActive(false);
+            Debug.Log("MenuState Exit");
+        }
+        public void UpdateCombo()
+        {
+            Debug.Log("Combo Updated");
+        }
+        private void SetMenuStateUI()
+        {
+            paraAmount.text = GameManager.gamePropertiesInSave.money.ToString();
+            menuPanel.gameObject.SetActive(true);
+        }
         private void SetUI()
         {
             ToggleButtonPosition(changeStatusMusicButton, GameManager.gamePropertiesInSave.isGameMusicOn);
@@ -132,33 +162,6 @@ namespace GameStates
             }
             rectTransform.anchoredPosition = vector2;
 
-        }
-        public override void Enter()
-        {
-            menuPanel.gameObject.SetActive(true);
-            paraAmount.text = GameManager.gamePropertiesInSave.money.ToString();
-            
-            GameManager.GameMusic(GameManager.onMenuStateSound);
-            Debug.Log("MenuState Enter");
-        }
-
-        public override void Update()
-        {
-            GameManager.playerController.inputController.HandleMouseInput();
-            if(GameManager.playerController.inputController.canMove)
-               GameManager.ChangeState(GameManager.playingState);
-            
-            Debug.Log("MenuState Update");
-        }
-
-        public override void Exit()
-        {
-            menuPanel.gameObject.SetActive(false);
-            Debug.Log("MenuState Exit");
-        }
-        public void UpdateCombo()
-        {
-            Debug.Log("Combo Updated");
         }
     }
 }

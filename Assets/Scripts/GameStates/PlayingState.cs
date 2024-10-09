@@ -4,6 +4,7 @@ using GameStates.Base;
 using Managers;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
@@ -12,19 +13,24 @@ namespace GameStates
     [Serializable]
     public class PlayingState : GameState
     {
+        // static
         public Transform playerInitialPosition;
-        public bool playerWon = false;
+        public float startPosZ;
+        
+        // parameters
         public int score = 0;
+        public bool isGameWon = false;
         
         [Header("Player Settings")] 
         public Transform gamePanel;
         // upper ui
-        public Button reloadButton;
         public TextMeshProUGUI scoreText;
         public List<Transform> stars = new List<Transform>();
         public Slider processSlider;
-        public float startPosZ;
+        public TextMeshProUGUI processLeftText;
+        public TextMeshProUGUI processRightText;
         
+        public Button reloadButton;
         public override void Init(GameManager gameManager)
         {
             base.Init(gameManager);
@@ -34,26 +40,36 @@ namespace GameStates
             {
                 Debug.Log("Reloading game");
             });
-            scoreText.text = "0";
-
 
             startPosZ = playerInitialPosition.transform.position.z;
         }
         public override void Enter()
         {
-            gamePanel.gameObject.SetActive(true);
-            score = 0;
-            
             Debug.Log("PlayingState Enter");
+            ResetPlayGameUI();
+            
             GameManager.GameMusic(GameManager.onGameSound[Random.Range(0, GameManager.onGameSound.Count)]);
             
             GameManager.playerController.ResetPlayer();
             GameManager.playerController.StartRunning();
         }
 
+        private void ResetPlayGameUI()
+        {
+            gamePanel.gameObject.SetActive(true);
+            scoreText.text = "0";
+            processSlider.value = 0;
+            score = 0;
+            isGameWon = false;
+            processLeftText.text = GameManager.gamePropertiesInSave.currenLevel.ToString();
+            processRightText.text = (GameManager.gamePropertiesInSave.currenLevel + 1).ToString();
+            
+            SetStarsTransform(false);
+        }
+        
         public override void Update()
         {
-            if (playerWon) return;
+            if (isGameWon) return;
             
             GameManager.playerController.UpdatePlayer();
 
@@ -101,17 +117,25 @@ namespace GameStates
 
         public override void Exit()
         {
-            playerWon = false;
-            foreach (var star in stars)
-            {
-                star.gameObject.SetActive(false);
-            }
+            gamePanel.gameObject.SetActive(false);
+            isGameWon = false;
+            SetStarsTransform(false);
+            GameManager.playerController.pileController.ResetPile();
+            
             Debug.Log("PlayingState Exit");
         }
+        
         public void UpdateScore()
         {
             scoreText.text = score.ToString();
         }
-        
+        private void SetStarsTransform(bool active)
+        {
+            foreach (var star in stars)
+            {
+                star.gameObject.SetActive(active);
+            }
+        }
+
     }
 }

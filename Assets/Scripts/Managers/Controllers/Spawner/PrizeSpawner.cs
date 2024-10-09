@@ -98,8 +98,8 @@ namespace Managers.Controllers.Spawner
             var operations = selectorManager.GetOperations();
             
             selector.selection = operations[Random.Range(0, operations.Count)];
-
-            var currentLevel = gameManager.currenLevel;
+    
+            var currentLevel = gameManager.gamePropertiesInSave.currenLevel;
 
             selector.selection.value = selector.selection.selectionAction switch
             {

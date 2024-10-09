@@ -79,7 +79,7 @@ namespace Managers.Controllers.Spawner
 
         public int GetNumberOfRoad(GameManager gameManager)
         {
-            var level = gameManager.currenLevel;
+            var level = gameManager.gamePropertiesInSave.currenLevel;
             var numberOfRoadsToSpawn = startAmountOfRoad;
 
             if (level % 5 == 0)

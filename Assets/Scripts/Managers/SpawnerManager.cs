@@ -47,7 +47,7 @@ namespace Managers
                 roadSpawner.SpawnNormalRoad();
             }
             
-            if (_gameManager.currenLevel % 2 == 0) 
+            if (_gameManager.gamePropertiesInSave.currenLevel % 2 == 0) 
             {
                 roadSpawner.SpawnCircleRoad();
             }

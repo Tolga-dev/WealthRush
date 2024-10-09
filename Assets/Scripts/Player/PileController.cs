@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Managers;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Player
 {
@@ -9,6 +10,7 @@ namespace Player
     public class PileController
     {
         public Transform firstPilePosition;
+        public float initHigh;
 
         public List<GameObject> moneyPiles = new List<GameObject>();
         public float heightAdjustment = 0.1f;
@@ -17,6 +19,7 @@ namespace Player
         
         public void Init(PlayerController playerController)
         {
+            initHigh = firstPilePosition.position.y;
             _playerController = playerController;
         }
         public void AddPrizeToPile(GameObject prize)
@@ -42,6 +45,19 @@ namespace Player
         {
             prize.transform.position = finalPosition;
             moneyPiles.Add(prize);
+        }
+
+        public void ResetPile()
+        {
+            var vector3 = firstPilePosition.position;
+            vector3.y = initHigh;
+            firstPilePosition.position = vector3;
+            
+            foreach (var moneyPile in moneyPiles)
+            {
+                Object.Destroy(moneyPile);
+            }
+            moneyPiles.Clear();
         }
     }
 }

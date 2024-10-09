@@ -13,6 +13,9 @@ namespace Save.GameSo
         public float gameMusicStartVolume = 0.25f;
         public float gameMusicChangeDuration = 3;
         public bool isNoAds;
+        
+        [Header("Level")]
+        public int currenLevel;
     }
  
 

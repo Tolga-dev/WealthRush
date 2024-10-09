@@ -41,11 +41,8 @@ namespace Managers
         public AudioClip updateComboSound;
         public AudioClip starSound;
         
-        [Header("Level")]
-        public int currenLevel;
 
-
-
+        
         public void Start()
         {
             menuState.Init(this);
@@ -53,9 +50,7 @@ namespace Managers
             selectorManager.Start();
             
             ChangeState(menuState);
-            
         }
-
 
         public void Update()
         {
