@@ -10,7 +10,8 @@ namespace Player
         public Transform firstPilePosition;
 
         public List<GameObject> moneyPiles = new List<GameObject>();
-
+        public float heightAdjustment = 0.1f;
+        
         public void AddPrizeToPile(GameObject prize)
         {
             prize.transform.SetParent(firstPilePosition);
@@ -21,10 +22,8 @@ namespace Player
 
         private Vector3 CalculateTargetPosition(Transform prizeTransform)
         {
-            float heightAdjustment = prizeTransform.GetComponent<Renderer>().bounds.size.y;
-
             Vector3 newPosition = firstPilePosition.position;
-            newPosition.y += (moneyPiles.Count * heightAdjustment) + heightAdjustment / 2; // Adjust position
+            newPosition.y += moneyPiles.Count * heightAdjustment; // Adjust position
             
             return newPosition;
         }

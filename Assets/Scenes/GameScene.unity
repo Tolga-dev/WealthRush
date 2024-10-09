@@ -3690,6 +3690,7 @@ MonoBehaviour:
   pileController:
     firstPilePosition: {fileID: 676564505}
     moneyPiles: []
+    heightAdjustment: 0.3
   animationController:
     animator: {fileID: 5949256529953088781}
   xSpeed: 10

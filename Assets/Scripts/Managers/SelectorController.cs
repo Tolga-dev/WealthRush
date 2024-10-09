@@ -85,6 +85,7 @@ namespace Managers
                 var prize = moneyPiles[^1];
                 moneyPiles.Remove(prize);
                 Object.Destroy(prize);
+                
             }
         }
 
@@ -98,8 +99,9 @@ namespace Managers
             if (moneyPiles.Count == 0) return;
 
             var prize = _gameManager.spawnerManager.prizeSpawner.prizes[0];
-
-            for (int i = 0; i < value * moneyPiles.Count; i++)
+            var amount = value * moneyPiles.Count;
+            
+            for (int i = 0; i < amount; i++)
             {
                 pileController.AddPrizeToPile(Object.Instantiate(prize));
             }
