@@ -66,11 +66,7 @@ namespace Player
                 pileController.AddPrizeToPile(other.gameObject);
                 animationController.SetPlayerHolding();
             }
-            else if (other.CompareTag("Selection"))
-            {
-                var selected = other.GetComponent<Selector>();
-                gameManager.selectorManager.PerformSelection(selected.selectionAction);
-            }
+            
         }
 
         public void ResetPlayer()

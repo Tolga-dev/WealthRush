@@ -10,9 +10,8 @@ namespace Save.GameObjects.Road
         private PlayerController _playerController;
         
         public GameObject boss;
-        public float scaleIncreasePerPile = 0.1f; // How much the scale increases per money pile
         public float scaleDuration = 0.5f; // Duration of the scaling animation for each pile
-        public float moveDuration = 1f; // Duration for moving the money pile to the boss
+        public float moveDuration = 0.5f; // Duration for moving the money pile to the boss
 
         public void PlayerArrived()
         {
@@ -52,7 +51,7 @@ namespace Save.GameObjects.Road
         private IEnumerator ScaleBoss()
         {
             Vector3 initialScale = boss.transform.localScale;
-            Vector3 targetScale = initialScale + new Vector3(scaleIncreasePerPile, scaleIncreasePerPile, scaleIncreasePerPile);
+            Vector3 targetScale = initialScale + initialScale * (_playerController.pileController.moneyPiles.Count * 0.5f);
             float elapsedTime = 0f;
 
             while (elapsedTime < scaleDuration)

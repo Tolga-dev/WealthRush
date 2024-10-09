@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Save.GameObjects.Prizes;
 using Save.GameObjects.Road;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -13,12 +14,15 @@ namespace Managers.Controllers.Spawner
         public GameObject chest;
         
         public List<GameObject> createdPrizes = new List<GameObject>();
-        
+
         private int chestSpawnCount = 0; 
         private const int maxChestSpawns = 3;
         
+        private SpawnerManager _spawnerManager;
         public void SpawnObject(SpawnerManager spawnerManager)
         {
+            _spawnerManager = spawnerManager;
+            
             SpawnPrizes(spawnerManager.roadSpawner.createdRoads);
             SpawnPrizes(spawnerManager.roadSpawner.createdCircleRoads);
             
@@ -47,15 +51,69 @@ namespace Managers.Controllers.Spawner
         private void CreatePrize(Transform spawnPoint)
         {
             var rate = Random.Range(0, 200);
-            var index = rate > 100 ? 0 : rate > 12.5 ? 1 : 2;
             
-            var prizePrefab = prizes[index];  
-            var prize = UnityEngine.Object.Instantiate(prizePrefab, spawnPoint, true);
-            var position = spawnPoint.position;
+            int index = rate switch
+            {
+                > 120 => 0,
+                > 100 => 1,
+                > 45 => 2,
+                _ => 3
+            };
+
+            var prizePrefab = prizes[index];
+
+            int spawnCount = index switch
+            {
+                0 => 10,
+                1 => 4,
+                2 => 1,
+                _ => 2
+            };
+
+            float[] positionOffsets = { 0, 1, -1, 2, -2, 3, -3, 4, -4, 5 }; // Covers all potential spawn counts for index 0
             
-            prize.transform.position = new Vector3(position.x, prize.transform.position.y, position.z);
-            createdPrizes.Add(prize);
+            
+            for (int i = 0; i < spawnCount; i++)
+            {
+                var prize = UnityEngine.Object.Instantiate(prizePrefab, spawnPoint, true);
+                var position = spawnPoint.position;
+
+                float randomXOffset = Random.Range(-2f, 2f);
+        
+                prize.transform.position = new Vector3(position.x + randomXOffset, prize.transform.position.y, position.z + positionOffsets[i]);
+                createdPrizes.Add(prize);
+
+                if (index == 2)
+                {
+                    ConfigureSelector(prize);
+                }
+            }
         }
+
+        private void ConfigureSelector(GameObject prize)
+        {
+            var selector = prize.GetComponentInChildren<Selector>();
+            var gameManager = _spawnerManager.GameManager;
+            var selectorManager = gameManager.selectorManager;
+            var operations = selectorManager.GetOperations();
+            
+            selector.selection = operations[Random.Range(0, operations.Count)];
+
+            var currentLevel = gameManager.currenLevel;
+
+            selector.selection.value = selector.selection.selectionAction switch
+            {
+                SelectionAction.Sum => Random.Range(5, 20 + currentLevel),
+                SelectionAction.Subtraction => Random.Range(5, 20 + currentLevel),
+                SelectionAction.Multiply => Random.Range(2, 10 + currentLevel),
+                SelectionAction.Divide => Random.Range(2, 10 + currentLevel),
+                _ => selector.selection.value
+            };
+            
+            selector.SetText();
+            
+        }
+
         private void SpawnChest(SpawnerManager spawnerManager)
         {
             var road = spawnerManager.roadSpawner.createdRoads[0]; // make it easy some times :)

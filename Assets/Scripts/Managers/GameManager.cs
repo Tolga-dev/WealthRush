@@ -20,7 +20,7 @@ namespace Managers
         public PlayingState playingState;
 
         public PlayerController playerController;
-        public SelectorManager selectorManager;
+        public SelectorController selectorManager;
         public SpawnerManager spawnerManager;
         
         [Header("Road Borders")]
@@ -33,7 +33,7 @@ namespace Managers
         {
             menuState.Init(this);
             playingState.Init(this);
-            
+            selectorManager.Start();
             ChangeState(menuState);
         }
         

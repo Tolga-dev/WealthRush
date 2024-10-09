@@ -26,7 +26,7 @@ namespace Managers.Controllers.Spawner
         public List<Road> createdCircleRoads = new List<Road>();
         public BossRoad createdBossRoad;
         
-        public int startAmountOfRoad = 5;
+        public int startAmountOfRoad = 2;
         public void Init()
         {
             initPos = spawnPoint.position;

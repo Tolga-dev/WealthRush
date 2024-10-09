@@ -15,13 +15,14 @@
 * Yol - ok
 * Yol spawn - ok
 
-* Boss 
-  * animayon ve ses efektleri 
-
-* Engeller spawn
-* odullerin spawn
+* Engeller spawn - ok
+* odullerin spawn - ok
 
 * selector
+  * spawn ol
+  * action sec
+  * action yap
+
 * Main menu
 * Restart
 * Settings
