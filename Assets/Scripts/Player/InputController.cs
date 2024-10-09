@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.Serialization;
 
 namespace Player
@@ -17,6 +18,12 @@ namespace Player
 
         public void HandleMouseInput()
         {
+            if (IsPointerOverUIElement())
+            {
+                canMove = false;
+                isMouseDown = false;
+                return;
+            }
             if (IsMouseButtonDown())
             {
                 canMove = false;
@@ -35,6 +42,9 @@ namespace Player
             }
         }
 
-        
+        private bool IsPointerOverUIElement()
+        {
+            return EventSystem.current != null && EventSystem.current.IsPointerOverGameObject();
+        }
     }
 }

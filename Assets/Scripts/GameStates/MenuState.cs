@@ -3,7 +3,7 @@ using GameStates.Base;
 using Managers;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 namespace GameStates
 {
@@ -36,17 +36,17 @@ namespace GameStates
 
         private void SetUI()
         {
-            startSettings.clicked += () =>
+            startSettings.onClick.AddListener(() =>
             {
                 settingPanel.gameObject.SetActive(true);
-            };
-            
-            startNoAds.clicked += () =>
+            });
+
+            startNoAds.onClick.AddListener(() =>
             {
                 noAdsPanel.gameObject.SetActive(true);
-            };
-            
-            updateCombo.clicked += UpdateCombo;
+            });
+
+            updateCombo.onClick.AddListener(UpdateCombo);
         }
 
         public override void Enter()
@@ -58,6 +58,7 @@ namespace GameStates
 
         public override void Update()
         {
+            
             GameManager.playerController.inputController.HandleMouseInput();
             if(GameManager.playerController.inputController.canMove)
                GameManager.ChangeState(GameManager.playingState);
