@@ -15,9 +15,6 @@ namespace Managers.Controllers.Spawner
         public GameObject chest;
         
         public List<GameObject> createdPrizes = new List<GameObject>();
-
-        private int chestSpawnCount = 0; 
-        private const int maxChestSpawns = 3;
         
         private SpawnerManager _spawnerManager;
         public void SpawnObject(SpawnerManager spawnerManager)
@@ -26,11 +23,11 @@ namespace Managers.Controllers.Spawner
             
             SpawnPrizes(spawnerManager.roadSpawner.createdRoads);
             SpawnPrizes(spawnerManager.roadSpawner.createdCircleRoads);
-            
-            if (chestSpawnCount < maxChestSpawns)
+
+            var save = spawnerManager.GameManager.gamePropertiesInSave;
+            if (save.chestSpawnCount < save.maxChestSpawns)
             {
                 SpawnChest(spawnerManager);
-                // chestSpawnCount++; // when game is finished
             }
             
         }

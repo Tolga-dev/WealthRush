@@ -17,6 +17,7 @@ namespace Save.GameObjects.Road
         {
             _playerController.SetWin();
             _playerController.gameManager.SwitchToWinCam();
+            CheckForChest();
 
             _playerController.gameManager.PlayASound(_playerController.gameManager.onGameWinSound);
             _playerController.gameManager.gamePropertiesInSave.currenLevel++;
@@ -34,6 +35,8 @@ namespace Save.GameObjects.Road
                 StartCoroutine(MovePileToBossAndScale(moneyPile));
             }
         }
+
+
 
         private IEnumerator MovePileToBossAndScale(GameObject moneyPile)
         {
@@ -78,7 +81,17 @@ namespace Save.GameObjects.Road
             var gameManager = _playerController.gameManager;
             gameManager.ChangeState(gameManager.menuState);
         }
-
+        private void CheckForChest()
+        {
+            var foundChest = _playerController.pileController.foundChest;
+            if (foundChest != null)
+            {
+                var save = _playerController.gameManager.gamePropertiesInSave;
+                save.chestSpawnCount++;
+                
+            }
+            
+        }
         private void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Player"))

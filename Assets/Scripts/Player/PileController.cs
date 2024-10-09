@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Managers;
+using Save.GameObjects.Prizes;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -13,6 +14,7 @@ namespace Player
         public float initHigh;
 
         public List<GameObject> moneyPiles = new List<GameObject>();
+        public Chest foundChest;
         public float heightAdjustment = 0.1f;
 
         private PlayerController _playerController;
@@ -58,6 +60,12 @@ namespace Player
                 Object.Destroy(moneyPile);
             }
             moneyPiles.Clear();
+
+            if (foundChest != null)
+            {
+                Object.Destroy(foundChest);
+                foundChest = null;
+            }
         }
     }
 }

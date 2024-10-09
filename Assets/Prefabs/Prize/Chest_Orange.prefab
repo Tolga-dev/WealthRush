@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 3987990150000070587}
   - component: {fileID: 117504035559445111}
-  - component: {fileID: 5576394908644193439}
   - component: {fileID: 6019537986822320203}
+  - component: {fileID: 1537868465791132367}
   m_Layer: 0
   m_Name: Chest_Orange
   m_TagString: Chest
@@ -56,24 +56,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.7143993, y: 0.4717746, z: 0.49288473}
   m_Center: {x: -0.01259464, y: 0.26411286, z: 0.02649591}
---- !u!114 &5576394908644193439
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 878732086903297617}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ac6ac7d15434c9cb224cfef039d241d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 0}
-  playerHitSound: {fileID: 8300000, guid: e33a3636e9bc33146bacf8277541ea38, type: 3}
-  particleSystem: {fileID: 0}
-  isHitPlayer: 0
-  emoji: {fileID: 0}
-  prizeAmount: 17
 --- !u!23 &6019537986822320203
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -115,6 +97,24 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &1537868465791132367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 878732086903297617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3beca09ccdc74423a3d4bd7a61b9c1b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 0}
+  playerHitSound: {fileID: 8300000, guid: e33a3636e9bc33146bacf8277541ea38, type: 3}
+  particleSystem: {fileID: 0}
+  isHitPlayer: 0
+  emoji: {fileID: 0}
+  prizeAmount: 17
 --- !u!1 &3394532595867531353
 GameObject:
   m_ObjectHideFlags: 0

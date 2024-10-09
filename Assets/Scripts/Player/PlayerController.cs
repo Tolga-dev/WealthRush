@@ -67,7 +67,6 @@ namespace Player
             {
                 pileController.AddPrizeToPile(other.gameObject);
                 animationController.SetPlayerHolding();
-
             }
             
         }

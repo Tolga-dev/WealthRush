@@ -7,23 +7,24 @@
     * 3 chest in sign and out -> spawn kisminda cozecegiz
       * 0 or 3
   
-* son kisim 
-  * spawn more cub
-
-* playden menu state e gecerken kamera hawli olmali
-* veya tam tersi
-* win yaparken yine farkli bir kamera acisi
+* playden menu state e gecerken kamera hawli olmali -ok
+* veya tam tersi -ok
+* win yaparken yine farkli bir kamera acisi -ok
 
 * Player
   * death
   * dance 
   * finish - ok
-
+  
 - paralarin effekleri playerin uzerinden spawn olmali oynamali
+
+* son kisim 
+  * spawn more cub 
 - ses efektler duzenlenmeli
 - ui animayonlandirilmali
 - yukleme sahnesi gelmeli
 - booster eklenmeli
+- in every 5 level reset chest
 
 * Yol - ok
 * Yol spawn - ok

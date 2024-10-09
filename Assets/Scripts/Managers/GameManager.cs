@@ -60,6 +60,7 @@ namespace Managers
 
             _activeCam = playerCam;
             ChangeState(menuState);
+            gamePropertiesInSave.ResetThis();
         }
 
         public void Update()

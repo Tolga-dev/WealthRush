@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Save.GameSo
 {
@@ -14,8 +15,16 @@ namespace Save.GameSo
         public float gameMusicChangeDuration = 3;
         public bool isNoAds;
         
+        public int chestSpawnCount = 0; 
+        public int maxChestSpawns = 3;
+        
         [Header("Level")]
         public int currenLevel;
+
+        public void ResetThis()
+        {
+            chestSpawnCount = 0;
+        }
     }
  
 

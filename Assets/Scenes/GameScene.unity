@@ -11888,7 +11888,7 @@ MonoBehaviour:
   animationController:
     animator: {fileID: 5949256529953088781}
   xSpeed: 10
-  zSpeed: 10
+  zSpeed: 100
 --- !u!143 &5949256529953088785
 CharacterController:
   m_ObjectHideFlags: 0
