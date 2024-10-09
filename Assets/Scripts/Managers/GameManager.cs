@@ -39,9 +39,13 @@ namespace Managers
         // ui
         public AudioClip buttonClickSound;
         public AudioClip updateComboSound;
+        public AudioClip starSound;
         
         [Header("Level")]
         public int currenLevel;
+
+
+
         public void Start()
         {
             menuState.Init(this);

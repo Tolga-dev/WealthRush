@@ -30,6 +30,8 @@ namespace Player
         {
             _minBorder = gameManager.targetA.position.x;
             _maxBorder = gameManager.targetB.position.x;
+            
+            pileController.Init(this);
         }
 
         public void UpdatePlayer()
@@ -65,6 +67,7 @@ namespace Player
             {
                 pileController.AddPrizeToPile(other.gameObject);
                 animationController.SetPlayerHolding();
+
             }
             
         }

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Managers;
 using UnityEngine;
 
 namespace Player
@@ -11,13 +12,22 @@ namespace Player
 
         public List<GameObject> moneyPiles = new List<GameObject>();
         public float heightAdjustment = 0.1f;
+
+        private PlayerController _playerController;
         
+        public void Init(PlayerController playerController)
+        {
+            _playerController = playerController;
+        }
         public void AddPrizeToPile(GameObject prize)
         {
             prize.transform.SetParent(firstPilePosition);
 
             var targetPosition = CalculateTargetPosition(prize.transform);
             CollectMoney(prize, targetPosition);
+            
+            _playerController.gameManager.playingState.score++;
+            _playerController.gameManager.playingState.UpdateScore();
         }
 
         private Vector3 CalculateTargetPosition(Transform prizeTransform)
