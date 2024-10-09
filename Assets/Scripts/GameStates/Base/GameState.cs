@@ -7,7 +7,7 @@ namespace GameStates.Base
     public class GameState
     {
         protected GameManager GameManager;
-        public void Init(GameManager gameManager)
+        public virtual void Init(GameManager gameManager)
         {
             GameManager = gameManager;
         }
