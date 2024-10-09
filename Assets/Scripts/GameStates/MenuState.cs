@@ -40,7 +40,7 @@ namespace GameStates
         public override void Enter()
         {
             SetMenuStateUI();
-
+            GameManager.SwitchToMenuStateCam();
             GameManager.playerController.inputController.isMouseDown = false;
             GameManager.playerController.inputController.canMove = false;
             

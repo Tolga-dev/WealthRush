@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using Core;
 using GameStates;
 using GameStates.Base;
@@ -13,42 +14,51 @@ using UnityEngine.Serialization;
 namespace Managers
 {
     [Serializable]
-    public class GameManager :  Singleton<GameManager>
+    public class GameManager : Singleton<GameManager>
     {
         public GamePropertiesInSave gamePropertiesInSave;
         public GameState CurrentState;
-        
+
         public MenuState menuState;
         public PlayingState playingState;
 
         public PlayerController playerController;
         public SelectorController selectorManager;
         public SpawnerManager spawnerManager;
-        
-        [Header("Road Borders")]
-        public Transform targetA; // First target position
+
+        [Header("Road Borders")] public Transform targetA; // First target position
         public Transform targetB; // Second target position
 
         [Header("Game Sounds")]
         // music
         public AudioSource gameMusic;
+
         public AudioClip onMenuStateSound;
         public AudioClip onMarketSound;
         public AudioClip onGameWinSound;
+
         public List<AudioClip> onGameSound = new List<AudioClip>();
+
         // ui
         public AudioClip buttonClickSound;
         public AudioClip updateComboSound;
         public AudioClip starSound;
-        
 
-        
+        // cams
+        public CinemachineVirtualCamera playerCam;
+        public CinemachineVirtualCamera menuStateCam;
+        public CinemachineVirtualCamera winCam;
+
+        private CinemachineVirtualCamera _activeCam;
+
+
         public void Start()
         {
             menuState.Init(this);
             playingState.Init(this);
             selectorManager.Start();
-            
+
+            _activeCam = playerCam;
             ChangeState(menuState);
         }
 
@@ -56,8 +66,8 @@ namespace Managers
         {
             CurrentState.Update();
         }
-        
-        
+
+
         public void ChangeState(GameState newState)
         {
             CurrentState?.Exit();
@@ -67,9 +77,9 @@ namespace Managers
 
         public void PlayASound(AudioClip audioClip)
         {
-            if(gamePropertiesInSave.isGameSoundOn == false)
+            if (gamePropertiesInSave.isGameSoundOn == false)
                 return;
-            
+
             var tempSoundPlayer = new GameObject("TempSoundPlayer");
             var audioSource = tempSoundPlayer.AddComponent<AudioSource>();
             audioSource.clip = audioClip;
@@ -88,6 +98,7 @@ namespace Managers
                 gameMusic.volume = 0;
             }
         }
+
         private IEnumerator FadeOutMusic(AudioClip audioClip)
         {
             float duration = gamePropertiesInSave.gameMusicChangeDuration; // Time in seconds to fade out
@@ -98,7 +109,7 @@ namespace Managers
                 gameMusic.volume -= startVolume * Time.deltaTime / duration;
                 yield return null;
             }
-            
+
             StartCoroutine(FadeInMusic(audioClip));
             gameMusic.volume = 0;
         }
@@ -124,6 +135,34 @@ namespace Managers
         {
             PlayASound(buttonClickSound);
         }
+
+        private void SwitchCam(CinemachineVirtualCamera newActiveCam)
+        {
+            if (_activeCam == newActiveCam) return;
+
+            playerCam.Priority = 0;
+            menuStateCam.Priority = 0;
+            winCam.Priority = 0;
+
+            newActiveCam.Priority = 10;
+            _activeCam = newActiveCam;
+        }
+
+        public void SwitchToPlayerCam()
+        {
+            SwitchCam(playerCam);
+        }
+
+        public void SwitchToMenuStateCam()
+        {
+            SwitchCam(menuStateCam);
+        }
+
+        public void SwitchToWinCam()
+        {
+            SwitchCam(winCam);
+        }
+
 
     }
 }

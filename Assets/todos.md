@@ -7,12 +7,23 @@
     * 3 chest in sign and out -> spawn kisminda cozecegiz
       * 0 or 3
   
-* gameLoop
+* son kisim 
+  * spawn more cub
+
+* playden menu state e gecerken kamera hawli olmali
+* veya tam tersi
+* win yaparken yine farkli bir kamera acisi
 
 * Player
-  * death -> yapilacak 
+  * death
   * dance 
-  * finish 
+  * finish - ok
+
+- paralarin effekleri playerin uzerinden spawn olmali oynamali
+- ses efektler duzenlenmeli
+- ui animayonlandirilmali
+- yukleme sahnesi gelmeli
+- booster eklenmeli
 
 * Yol - ok
 * Yol spawn - ok
@@ -23,14 +34,12 @@
 * Main menu - ok
 * Settings - ok
 * Shop - ok
-* on road prizes -> object pool
 
-* son kisim 
-  * spawn more cub
- 
 * Restart
 * Level
 
+* spawn randoms
+* on road prizes -> object pool
 * optimizations
 * reklamlar
 * oyun ici satin alim

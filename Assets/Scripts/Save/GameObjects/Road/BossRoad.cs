@@ -16,6 +16,8 @@ namespace Save.GameObjects.Road
         public void PlayerArrived()
         {
             _playerController.SetWin();
+            _playerController.gameManager.SwitchToWinCam();
+
             _playerController.gameManager.PlayASound(_playerController.gameManager.onGameWinSound);
             _playerController.gameManager.gamePropertiesInSave.currenLevel++;
             _playerController.gameManager.playingState.isGameWon = true;

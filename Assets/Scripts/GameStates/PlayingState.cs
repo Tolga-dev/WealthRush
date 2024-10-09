@@ -47,7 +47,7 @@ namespace GameStates
         {
             Debug.Log("PlayingState Enter");
             ResetPlayGameUI();
-            
+            GameManager.SwitchToPlayerCam();
             GameManager.GameMusic(GameManager.onGameSound[Random.Range(0, GameManager.onGameSound.Count)]);
             
             GameManager.playerController.ResetPlayer();

@@ -2,6 +2,7 @@ using System;
 using Save.GameObjects;
 using System;
 using System.Collections.Generic;
+using Cinemachine;
 using Save.GameObjects;
 using Save.GameObjects.Road;
 using UnityEngine;
@@ -26,6 +27,8 @@ namespace Managers.Controllers.Spawner
         public BossRoad createdBossRoad;
         
         public int startAmountOfRoad = 2;
+
+        public CinemachineVirtualCamera prizeCamVirtualCamera;
         public void Init()
         {
             initPos = spawnPoint.position;
@@ -47,6 +50,10 @@ namespace Managers.Controllers.Spawner
         {
             var created = Object.Instantiate(bossRoad, spawnPoint.position, bossRoad.transform.rotation);
             createdBossRoad = created.GetComponent<BossRoad>();
+            var transform = createdBossRoad.transform;
+            prizeCamVirtualCamera.LookAt = transform;
+            prizeCamVirtualCamera.Follow = transform;
+            
             SetNewPos();
         }
 
@@ -63,7 +70,7 @@ namespace Managers.Controllers.Spawner
             }
             createdRoads.Clear();
             
-            foreach (var createdRoad in createdCircleRoads)
+            foreach (var createdRoad in createdCircleRoads) 
             {
                 Object.Destroy(createdRoad.gameObject);
             }
