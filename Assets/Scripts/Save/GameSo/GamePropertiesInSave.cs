@@ -21,9 +21,22 @@ namespace Save.GameSo
         [Header("Level")]
         public int currenLevel;
 
+        public int comboRank;
+        public int increaseComboAmount;
+
+        public bool isNewPriceCalculated;
+        public int price; // 100
+        public int priceLevel; // start with 1
+        public int priceMinIncreaseAmount ; // 10 * priceLevel
+        public int priceMaxIncreaseAmount ; // 50 * priceLevel
+
+        public int newAdditionalPrice;
         public void ResetThis()
         {
             chestSpawnCount = 0;
+            newAdditionalPrice = 1;
+            price = 100;
+            priceLevel = 1;
         }
     }
  

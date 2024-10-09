@@ -1,9 +1,11 @@
 using System;
+using System.Globalization;
 using GameStates.Base;
 using Managers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = UnityEngine.Random;
 
 namespace GameStates
 {
@@ -30,7 +32,9 @@ namespace GameStates
         public TextMeshProUGUI paraAmount;
         
         // Combo
-        public Button updateCombo;
+        public Button updateCombo;  
+        public TextMeshProUGUI comboAmount;
+        public TextMeshProUGUI priceAmount;
 
         public override void Init(GameManager gameManager)
         {
@@ -60,12 +64,12 @@ namespace GameStates
             menuPanel.gameObject.SetActive(false);
             Debug.Log("MenuState Exit");
         }
-        public void UpdateCombo()
-        {
-            Debug.Log("Combo Updated");
-        }
+      
         private void SetMenuStateUI()
         {
+            comboAmount.text = "x" + (float)GameManager.gamePropertiesInSave.comboRank/10;
+            priceAmount.text = GameManager.gamePropertiesInSave.price + "$";
+            
             paraAmount.text = GameManager.gamePropertiesInSave.money + "$";
             menuPanel.gameObject.SetActive(true);
         }
@@ -87,7 +91,6 @@ namespace GameStates
             {
                 UpdateCombo();
                 GameManager.ButtonClickSound();
-                GameManager.PlayASound(GameManager.updateComboSound);
             });
             
             changeStatusMusicButton.onClick.AddListener(() =>
@@ -161,7 +164,43 @@ namespace GameStates
                 vector2.x = width;
             }
             rectTransform.anchoredPosition = vector2;
-
         }
+
+        public void UpdateCombo()
+        {
+            var save = GameManager.gamePropertiesInSave;
+            var money = save.money;
+            var price = save.price;
+
+            if (save.isNewPriceCalculated == false)
+            {
+                var priceMinIncreaseAmount = save.priceMinIncreaseAmount * save.priceLevel; // Minimum price increase is 10 * priceLevel
+                var priceMaxIncreaseAmount = save.priceMaxIncreaseAmount * save.priceLevel; // Minimum price increase is 10 * priceLevel
+
+                save.newAdditionalPrice = Random.Range(priceMinIncreaseAmount, priceMaxIncreaseAmount);
+
+                save.isNewPriceCalculated = true;
+            }
+            
+            price += save.newAdditionalPrice;
+            
+            if (money >= price && save.isNewPriceCalculated)
+            {
+                save.money -= price;
+                save.price = price;
+                
+                save.comboRank += (save.increaseComboAmount)*(Random.Range(1, 4));
+                save.priceLevel++;
+
+                save.isNewPriceCalculated = false;
+                GameManager.PlayASound(GameManager.updateComboSound);
+                SetMenuStateUI();
+            }
+            else
+            {
+                GameManager.PlayASound(GameManager.notEnoughMoney);
+            }
+        }
+
     }
 }

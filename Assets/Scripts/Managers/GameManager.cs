@@ -43,6 +43,7 @@ namespace Managers
         public AudioClip buttonClickSound;
         public AudioClip updateComboSound;
         public AudioClip starSound;
+        public AudioClip notEnoughMoney;
 
         // cams
         public CinemachineVirtualCamera playerCam;

@@ -4,8 +4,8 @@
   * money -ok
   * cok money -ok
   * chest 
-    * 3 chest in sign and out -> spawn kisminda cozecegiz
-      * 0 or 3
+    * 3 chest in sign and out -> spawn kisminda cozecegiz -ok
+      * 0 or 3 -ok
   
 * playden menu state e gecerken kamera hawli olmali -ok
 * veya tam tersi -ok
@@ -13,18 +13,25 @@
 
 * Player
   * death
-  * dance 
   * finish - ok
   
+- update combo
 - paralarin effekleri playerin uzerinden spawn olmali oynamali
-
-* son kisim 
-  * spawn more cub 
+  
 - ses efektler duzenlenmeli
 - ui animayonlandirilmali
-- yukleme sahnesi gelmeli
 - booster eklenmeli
 - in every 5 level reset chest
+- chest open in end level
+- from play to menu -> ui - make cam faster
+- top to play animation
+- para tanimla prizelara
+
+* son kisim 
+  * spawn more cub
+
+* Restart
+* Level
 
 * Yol - ok
 * Yol spawn - ok
@@ -36,8 +43,7 @@
 * Settings - ok
 * Shop - ok
 
-* Restart
-* Level
+- yukleme sahnesi gelmeli
 
 * spawn randoms
 * on road prizes -> object pool
