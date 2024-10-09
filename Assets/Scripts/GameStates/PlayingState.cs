@@ -121,7 +121,8 @@ namespace GameStates
             isGameWon = false;
             SetStarsTransform(false);
             GameManager.playerController.pileController.ResetPile();
-            
+            GameManager.StartCoroutine(GameManager.spawnerManager.ResetSpawners());
+            GameManager.gamePropertiesInSave.money += score;
             Debug.Log("PlayingState Exit");
         }
         

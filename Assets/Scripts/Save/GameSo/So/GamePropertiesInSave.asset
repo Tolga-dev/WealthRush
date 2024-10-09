@@ -18,4 +18,4 @@ MonoBehaviour:
   gameMusicStartVolume: 0.25
   gameMusicChangeDuration: 1
   isNoAds: 1
-  currenLevel: 0
+  currenLevel: 1

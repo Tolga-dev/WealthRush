@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using Managers.Controllers.Spawner;
 using Save.GameObjects.Road;
@@ -25,6 +26,11 @@ namespace Managers
             _gameManager = GameManager.Instance;
             roadSpawner.Init();
 
+            SpawnObjects(); 
+        }
+
+        private void SpawnObjects()
+        {
             SpawnRoads();
             SpawnObstacles();
             SpawnerPrizes();
@@ -56,11 +62,16 @@ namespace Managers
 
         }
 
-        public void ResetSpawners()
+        public IEnumerator ResetSpawners()
         {
+            
             roadSpawner.ResetRoads();
+            obstacleSpawner.ResetObstacle();
+            prizeSpawner.ResetPrize();
 
-            SpawnRoads();
+            SpawnObjects();
+
+            yield return null;
         }
         public GameManager GameManager
         {

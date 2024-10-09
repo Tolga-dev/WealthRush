@@ -54,6 +54,13 @@ namespace Managers.Controllers.Spawner
         }
 
 
-
+        public void ResetObstacle()
+        {
+            foreach (var createdObstacle in createdObstacles)
+            {
+                Object.Destroy(createdObstacle);
+            }
+            createdObstacles.Clear();
+        }
     }
 }

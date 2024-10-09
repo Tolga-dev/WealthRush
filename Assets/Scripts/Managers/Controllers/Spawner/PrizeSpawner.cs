@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Save.GameObjects.Prizes;
 using Save.GameObjects.Road;
 using UnityEngine;
+using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 
 namespace Managers.Controllers.Spawner
@@ -124,6 +125,15 @@ namespace Managers.Controllers.Spawner
         {
             var created = UnityEngine.Object.Instantiate(prize, spawnPoint.position, Quaternion.identity);
             createdPrizes.Add(created);
+        }
+
+        public void ResetPrize()
+        {
+            foreach (var createdObstacle in createdPrizes)
+            {
+                Object.Destroy(createdObstacle);
+            }
+            createdPrizes.Clear();
         }
     }
 }

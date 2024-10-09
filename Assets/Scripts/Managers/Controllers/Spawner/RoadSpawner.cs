@@ -14,7 +14,6 @@ namespace Managers.Controllers.Spawner
     {
         public GameObject road;
         public GameObject circleRoad;
-        
         public GameObject bossRoad;
     
         public Vector3 offset;
@@ -60,17 +59,17 @@ namespace Managers.Controllers.Spawner
         {
             foreach (var createdRoad in createdRoads)
             {
-                Object.Destroy(createdRoad);
+                Object.Destroy(createdRoad.gameObject);
             }
             createdRoads.Clear();
             
             foreach (var createdRoad in createdCircleRoads)
             {
-                Object.Destroy(createdRoad);
+                Object.Destroy(createdRoad.gameObject);
             }
             createdCircleRoads.Clear();
 
-            Object.Destroy(createdBossRoad);
+            Object.Destroy(createdBossRoad.gameObject);
             createdBossRoad = null;
             
             spawnPoint.position = initPos;

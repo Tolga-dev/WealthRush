@@ -66,7 +66,7 @@ namespace GameStates
         }
         private void SetMenuStateUI()
         {
-            paraAmount.text = GameManager.gamePropertiesInSave.money.ToString();
+            paraAmount.text = GameManager.gamePropertiesInSave.money + "$";
             menuPanel.gameObject.SetActive(true);
         }
         private void SetUI()
