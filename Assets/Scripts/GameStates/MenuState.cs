@@ -4,6 +4,7 @@ using GameStates.Base;
 using Managers;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
@@ -17,6 +18,7 @@ namespace GameStates
         
         // settings
         public Button startSettings;
+        public Button exitSettings;
         public Transform settingPanel;
         public Button changeStatusMusicButton;
         public Button changeStatusSoundButton;
@@ -27,7 +29,10 @@ namespace GameStates
         public Button buyNoAds;
         public TextMeshProUGUI description;
         public Transform marketPanel;
-        
+        public Animator marketMenuAnimator;
+        public Animator settingMenuAnimator;
+        private static readonly int Pop = Animator.StringToHash("Pop");
+
         // money
         public TextMeshProUGUI paraAmount;
         
@@ -118,15 +123,25 @@ namespace GameStates
                 ToggleButtonPosition(changeStatusSoundButton, GameManager.gamePropertiesInSave.isGameSoundOn);
             });
             
+            // settings
             startSettings.onClick.AddListener(() =>
             {
                 settingPanel.gameObject.SetActive(true);
+                settingMenuAnimator.SetTrigger(Pop);
                 GameManager.ButtonClickSound();
+            }); 
+            exitSettings.onClick.AddListener(() =>
+            {
+                GameManager.ButtonClickSound();
+                settingMenuAnimator.SetTrigger(Pop); 
             });
-
+            
+            
+            // market
             startMarket.onClick.AddListener(() =>
             {
                 marketPanel.gameObject.SetActive(true);
+                marketMenuAnimator.SetTrigger(Pop);
                 GameManager.ButtonClickSound();
                 GameManager.GameMusic(GameManager.onMarketSound);
             });
@@ -134,10 +149,9 @@ namespace GameStates
             exitMarket.onClick.AddListener(() =>
             {
                 GameManager.ButtonClickSound();
-                marketPanel.gameObject.SetActive(false);
+                marketMenuAnimator.SetTrigger(Pop); 
                 GameManager.GameMusic(GameManager.onMenuStateSound);
             });
-            
             exitMarket.onClick.AddListener(() =>
             {
                 GameManager.ButtonClickSound();

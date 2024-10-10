@@ -121,10 +121,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
-  playerHitSound: {fileID: 8300000, guid: e33a3636e9bc33146bacf8277541ea38, type: 3}
-  particleSystem: {fileID: 0}
+  playerHitSound: {fileID: 8300000, guid: ffb159a21c8a04135a5616979c828fab, type: 3}
+  hitPlayerEffect: {fileID: 0}
   isHitPlayer: 0
   emoji: {fileID: 0}
+  prizeCanvas: {fileID: 0}
   prizeAmount: 10
   selection:
     selectionAction: 0

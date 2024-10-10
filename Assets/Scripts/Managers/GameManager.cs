@@ -86,6 +86,7 @@ namespace Managers
             audioSource.clip = audioClip;
             audioSource.volume = gamePropertiesInSave.gameSoundVolume;
             audioSource.PlayOneShot(audioClip);
+            
             Destroy(tempSoundPlayer, audioClip.length);
         }
 

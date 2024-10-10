@@ -20,17 +20,22 @@
 - paralarin effekleri playerin uzerinden spawn olmali oynamali - ok
 - komboyu, kazandigin paranin ustunde efekt olarak koy -ok
 - para tanimla prizelara - ok
-- belli rekorlarda kombo efekti - hep yukseltmeme efekti
-  - personal rekord ekle
+- belli rekorlarda kombo efekti - hep yukseltmeme efekti -ok
+  - personal rekord ekle -ok
 
 - ses efektler duzenlenmeli
+
 - ui animayonlandirilmali
-- in every 5 level reset chest
-- chest open in end level
-- from play to menu -> ui - make cam faster
 - top to play animation
+
+- in every 5 level reset chest
+  - 5 in katlarinda duzgun spawn olurken digerlerinde sikinti
+  - 5 i 10 yap, hizi 0.01 arttir
+  
+- chest open in end level
 - playeer collider
 - negatif actif selectors
+  - miktari azalt
 
 * son kisim 
   * spawn more cub
