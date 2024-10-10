@@ -17,7 +17,8 @@ namespace Save.GameObjects.Obstacle
             
             if (other.CompareTag("Money"))
             {
-                var prize = other.GetComponentInChildren<Prize>();
+                var prize = other.GetComponent<Prize>();
+                
                 if (prize.onUse == false)
                     return;
                 
@@ -25,9 +26,9 @@ namespace Save.GameObjects.Obstacle
             }
         }
 
-        protected virtual void CallMoneyPileGotHit(Prize money)
+        private void CallMoneyPileGotHit(Prize money)
         {
-            Debug.Log("Money Pile Got Hit");
+            Debug.Log($"Money Pile Got Hit {money.gameObject.name}");
             
             var moneyPiles = gameManager.playerController.pileController.moneyPiles;
 
@@ -41,7 +42,7 @@ namespace Save.GameObjects.Obstacle
                 } 
             }
 
-            var removeCount = moneyPiles.Count - foundIndex;
+            var removeCount = moneyPiles.Count - (foundIndex + 1);
             
             gameManager.selectorManager.Subtraction(removeCount);
 

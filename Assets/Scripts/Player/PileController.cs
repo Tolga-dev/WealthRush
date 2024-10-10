@@ -31,18 +31,17 @@ namespace Player
         {
             prize.transform.SetParent(firstPilePosition);
 
-            var targetPosition = CalculateTargetPosition(prize.gameObject.transform);
+            var targetPosition = CalculateTargetPosition();
             CollectMoney(prize, targetPosition);
 
-            var prizeComponent = prize.GetComponent<Prize>();
-            prizeComponent.onUse = true;
-            var prizeAmount = prizeComponent.prizeAmount;
+            prize.onUse = true;
+            var prizeAmount = prize.prizeAmount;
             
             _playerController.gameManager.playingState.score += prizeAmount;
             _playerController.gameManager.playingState.UpdateScore();
         }
 
-        private Vector3 CalculateTargetPosition(Transform prizeTransform)
+        private Vector3 CalculateTargetPosition()
         {   
             var newPosition = firstPilePosition.position;
             newPosition.y += moneyPiles.Count * heightAdjustment; // Adjust position
@@ -64,7 +63,7 @@ namespace Player
             
             foreach (var moneyPile in moneyPiles)
             {
-                Object.Destroy(moneyPile);
+                Object.Destroy(moneyPile.gameObject);
             }
             moneyPiles.Clear();
 

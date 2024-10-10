@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using Player;
 using Save.GameObjects.Prizes;
 using Save.GameSo;
@@ -46,12 +47,20 @@ namespace Save.GameObjects.Road
             }
             else
             {
-                foreach (var moneyPile in moneyPiles)
-                {
-                    _playerController.gameManager.StartCoroutine(MovePileToBossAndScale(moneyPile));
-                }
+                StartCoroutine(FinishedGameWithPile(moneyPiles));
             }
         }
+
+        private IEnumerator FinishedGameWithPile(List<Prize> moneyPiles)
+        {
+            foreach (var moneyPile in moneyPiles)
+            {
+                StartCoroutine(MovePileToBossAndScale(moneyPile));
+            }
+
+            yield return StartCoroutine(SetGameMainMenu());
+        }
+
 
         private IEnumerator MovePileToBossAndScale(Prize moneyPile)
         {
@@ -93,11 +102,11 @@ namespace Save.GameObjects.Road
 
             // Set the final scale to the clamped target scale
             boss.transform.localScale = targetScale;
-            StartCoroutine(SetGameMainMenu());
         }
 
         private IEnumerator SetGameMainMenu()
         {
+            Debug.Log("Called");
             yield return new WaitForSeconds(3);
             var gameManager = _playerController.gameManager;
             gameManager.ChangeState(gameManager.menuState);

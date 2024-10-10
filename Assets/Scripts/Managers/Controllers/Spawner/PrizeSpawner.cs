@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Save.GameObjects.Prizes;
 using Save.GameObjects.Road;
 using UnityEngine;
+using UnityEngine.Serialization;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 
@@ -11,9 +12,12 @@ namespace Managers.Controllers.Spawner
     [Serializable]
     public class PrizeSpawner
     {
+        [Header("Source")]
         public List<GameObject> prizes = new List<GameObject>();
         public GameObject chest;
+        public Prize standardPrize;
         
+        [Header("Created")]
         public List<GameObject> createdPrizes = new List<GameObject>();
         
         private SpawnerManager _spawnerManager;
@@ -95,7 +99,15 @@ namespace Managers.Controllers.Spawner
                 createdPrizes.Add(prize);
             }
         }
-
+        public void SetRandValuePrize(Prize prize, int factor)
+        {
+            var save = _spawnerManager.GameManager.gamePropertiesInSave;
+            var maxRange = save.currenLevel + save.comboRank;
+            
+            prize.prizeAmount = Random.Range(maxRange - (int)(maxRange/2),maxRange);
+            prize.prizeAmount *= factor;
+        }
+        
         private void ConfigureSelector(GameObject prize)
         {
             var selector = prize.GetComponentInChildren<Selector>();
@@ -119,15 +131,7 @@ namespace Managers.Controllers.Spawner
             
             selector.SetText();
         }
-
-        public void SetRandValuePrize(Prize prize, int factor)
-        {
-            var save = _spawnerManager.GameManager.gamePropertiesInSave;
-            var maxRange = save.currenLevel + save.comboRank;
-            
-            prize.prizeAmount = Random.Range(maxRange - (int)(maxRange/2),maxRange);
-            prize.prizeAmount *= factor;
-        }
+        
 
         private void SpawnChest(SpawnerManager spawnerManager)
         {

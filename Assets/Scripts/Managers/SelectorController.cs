@@ -42,7 +42,7 @@ namespace Managers
                     selectionAction = SelectionAction.Subtraction,
                     selectionOperation = "-",
                     sprite = badSprite
-                },
+                }/*,
                 new()
                 {
                     Action = Multiply,
@@ -56,7 +56,7 @@ namespace Managers
                     selectionAction = SelectionAction.Divide,
                     selectionOperation = "/",
                     sprite = badSprite
-                }
+                }*/
             };
         }
 
@@ -64,7 +64,7 @@ namespace Managers
         public void Sum(int value = 1)
         {
             var pileController = _gameManager.playerController.pileController;
-            var prize = _gameManager.spawnerManager.prizeSpawner.prizes[0];
+            var prize = _gameManager.spawnerManager.prizeSpawner.standardPrize;
             
             for (int i = 0; i < value; i++)
             {
@@ -91,7 +91,6 @@ namespace Managers
                 
                 moneyPiles.Remove(prize);
                 Object.Destroy(prize.gameObject);
-                
             }
         }
 
@@ -102,7 +101,7 @@ namespace Managers
 
             if (moneyPiles.Count == 0) return;
 
-            var prize = _gameManager.spawnerManager.prizeSpawner.prizes[0];
+            var prize = _gameManager.spawnerManager.prizeSpawner.standardPrize;
             var amount = value * moneyPiles.Count;
             
             for (int i = 0; i < amount; i++)

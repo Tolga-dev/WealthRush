@@ -13,9 +13,9 @@ namespace Save.GameObjects.Base
         public Animator animator;
 
         public AudioClip playerHitSound;
-        [FormerlySerializedAs("particleSystem")] 
         public ParticleSystem hitPlayerEffect;
 
+        [Header("Parameters")]
         public bool isHitPlayer = false;
         private static readonly int PlayerHit = Animator.StringToHash("HitPlayer");
         
@@ -26,12 +26,14 @@ namespace Save.GameObjects.Base
                 CallPlayerGotHit(other.gameObject);
             }
         }
-        protected virtual void  CallPlayerGotHit(GameObject player)
+
+        private void  CallPlayerGotHit(GameObject player)
         {
             GameManager.Instance.PlayASound(playerHitSound);
     
             if(animator != null)
                 animator.SetBool(PlayerHit, true);
+            
             if (hitPlayerEffect != null)
             {
                 var playerController = player.GetComponent<PlayerController>();

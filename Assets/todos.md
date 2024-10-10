@@ -85,6 +85,7 @@
   * random highda verelim traplere
   * yoldaki engelleri kaldir
   * save sistemi
+  * tavandan duz duvar koy
   
 * on road prizes -> object pool
 * assagidaki butonlar

@@ -28,7 +28,6 @@ namespace Managers.Controllers.Spawner
                 var selectedSpawnPoint1 = spawnPoints[randomIndex]; // Randomly selected spawn point
                 var selectedSpawnPoint2 = spawnPoints[pairedIndex]; // Paired spawn point
 
-                
                 var spawn = obstacles[Random.Range(0, obstacles.Count)]; // You can adjust this to select a random obstacle if needed
 
                 var created1 = Object.Instantiate(spawn, selectedSpawnPoint1, true);

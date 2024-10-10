@@ -3070,25 +3070,16 @@ MonoBehaviour:
     isGameWon: 0
     gamePanel: {fileID: 3553491884129987739}
     scoreText: {fileID: 1779171855}
+    processLeftText: {fileID: 1120333593}
+    processRightText: {fileID: 1535641960}
     stars:
     - {fileID: 422601687}
     - {fileID: 134039004}
     - {fileID: 15708548}
     processSlider: {fileID: 1709165452}
-    processLeftText: {fileID: 1120333593}
-    processRightText: {fileID: 1535641960}
     reloadButton: {fileID: 1379202621}
     extraBonus: {fileID: 1970958805}
     extraComboBonus: {fileID: 469512975}
-    winTexts:
-    - Stronger. Faster. Unstoppable!
-    - Dominate the next level!
-    - A step closer to greatness!
-    - Victory unlocked!
-    - You're just getting started!
-    - On to the next challenge!
-    - Keep pushing. Keep winning!
-    - You've leveled up!
     clickAvoid: {fileID: 1116690191}
   playerController: {fileID: 5949256529953088783}
   selectorManager:
@@ -3156,6 +3147,7 @@ MonoBehaviour:
     - {fileID: 8717593915610905815, guid: 34c46854f0fc8ffbcaaa4a01ec36a926, type: 3}
     - {fileID: 5480849866933351741, guid: 5a3311e86bfb6dd7eb9dbb97e2277de6, type: 3}
     chest: {fileID: 878732086903297617, guid: ca0abf828b1b155738a4a8fb4030016d, type: 3}
+    standardPrize: {fileID: 1424053203994496914, guid: 608a4a7ab2e18c8b78fdabc75a734350, type: 3}
     createdPrizes: []
 --- !u!82 &789870821
 AudioSource:
@@ -8229,9 +8221,9 @@ MonoBehaviour:
   pileController:
     firstPilePosition: {fileID: 676564505}
     initHigh: 0
+    heightAdjustment: 0.3
     moneyPiles: []
     foundChest: {fileID: 0}
-    heightAdjustment: 0.3
   animationController:
     animator: {fileID: 5949256529953088781}
   prizeEffectSpawnPoint: {fileID: 1940067509}

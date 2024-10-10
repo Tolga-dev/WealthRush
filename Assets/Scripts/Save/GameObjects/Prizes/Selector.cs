@@ -17,6 +17,7 @@ namespace Save.GameObjects.Prizes
 
             if (isHitPlayer)
             {
+                isHitPlayer = false;
                 selection.PerformAction();
             }
         }
@@ -24,8 +25,6 @@ namespace Save.GameObjects.Prizes
         public void SetText()
         {
             selectionText.text = selection.selectionOperation +" " + selection.value;
-            
-           
         }
         
     }
