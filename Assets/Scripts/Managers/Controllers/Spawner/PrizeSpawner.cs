@@ -67,10 +67,10 @@ namespace Managers.Controllers.Spawner
 
             int spawnCount = index switch
             {
-                0 => 10,
-                1 => 4,
+                0 => Random.Range(5, 10),
+                1 => Random.Range(1, 3),
                 2 => 1,
-                _ => 2
+                _ => Random.Range(1, 3)
             };
 
             float[] positionOffsets = { 0, 1, -1, 2, -2, 3, -3, 4, -4, 5 }; // Covers all potential spawn counts for index 0
@@ -79,22 +79,20 @@ namespace Managers.Controllers.Spawner
             for (int i = 0; i < spawnCount; i++)
             {
                 var prize = Object.Instantiate(prizePrefab, spawnPoint, true);
-                
                 var position = spawnPoint.position;
-
-                float randomXOffset = Random.Range(-2f, 2f);
-        
-                prize.transform.position = new Vector3(position.x + randomXOffset, prize.transform.position.y, position.z + positionOffsets[i]);
-                createdPrizes.Add(prize);
 
                 if (index == 2)
                 {
                     ConfigureSelector(prize);
+                    prize.transform.position = new Vector3(position.x, prize.transform.position.y, position.z);
                 }
                 else
                 {
+                    float randomXOffset = Random.Range(-2f, 2f);
+                    prize.transform.position = new Vector3(position.x + randomXOffset, prize.transform.position.y, position.z + positionOffsets[i]);
                     SetRandValuePrize(prize.GetComponent<Prize>(), index+1);
                 }
+                createdPrizes.Add(prize);
             }
         }
 
@@ -111,12 +109,13 @@ namespace Managers.Controllers.Spawner
 
             selector.selection.value = selector.selection.selectionAction switch
             {
-                SelectionAction.Sum => Random.Range(5, 20 + currentLevel),
+                SelectionAction.Sum => Random.Range(5, 10 + currentLevel),
                 SelectionAction.Subtraction => Random.Range(5, 20 + currentLevel),
-                SelectionAction.Multiply => Random.Range(2, 10 + currentLevel),
-                SelectionAction.Divide => Random.Range(2, 10 + currentLevel),
+                SelectionAction.Multiply => Random.Range(2, 4 + currentLevel/10),
+                SelectionAction.Divide => Random.Range(2, 4 + currentLevel),
                 _ => selector.selection.value
             };
+            selector.gateSprite.sprite = selector.selection.sprite;
             
             selector.SetText();
         }

@@ -18,7 +18,9 @@ namespace Managers
     {
         private List<Selection> _selections;
         private GameManager _gameManager;
-        
+
+        public Sprite positiveSprite;
+        public Sprite badSprite;
 
         public void Start()
         {
@@ -30,25 +32,29 @@ namespace Managers
                 {
                     Action = Sum,
                     selectionAction = SelectionAction.Sum,
-                    selectionOperation = "+"
+                    selectionOperation = "+",
+                    sprite = positiveSprite
                 },
                 new()
                 {
                     Action = Subtraction,
                     selectionAction = SelectionAction.Subtraction,
-                    selectionOperation = "-"
+                    selectionOperation = "-",
+                    sprite = badSprite
                 },
                 new()
                 {
                     Action = Multiply,
                     selectionAction = SelectionAction.Multiply,
-                    selectionOperation = "x"
+                    selectionOperation = "x",
+                    sprite = positiveSprite
                 },
                 new()
                 {
                     Action = Divide,
                     selectionAction = SelectionAction.Divide,
-                    selectionOperation = "/"
+                    selectionOperation = "/",
+                    sprite = badSprite
                 }
             };
         }
@@ -142,7 +148,7 @@ namespace Managers
         public Action<int> Action;
         public string selectionOperation;
         public int value;
-
+        public Sprite sprite;
         public void SetAction(Action<int> operation)
         {
             Action = operation;

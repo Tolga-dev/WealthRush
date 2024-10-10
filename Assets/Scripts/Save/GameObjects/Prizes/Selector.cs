@@ -1,6 +1,7 @@
 using Managers;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Save.GameObjects.Prizes
 {
@@ -8,7 +9,8 @@ namespace Save.GameObjects.Prizes
     {
         public Selection selection;
         public TextMeshPro selectionText;
-
+        public SpriteRenderer gateSprite;
+        
         public override void OnTriggerEnter(Collider other)
         {
             base.OnTriggerEnter(other);

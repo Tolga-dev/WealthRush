@@ -10,6 +10,7 @@ using Save;
 using Save.GameSo;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 namespace Managers
 {
@@ -51,7 +52,8 @@ namespace Managers
         public CinemachineVirtualCamera winCam;
 
         private CinemachineVirtualCamera _activeCam;
-        
+        public CinemachineBrain cinemaMachineBrain;
+
         public void Start()
         {
             menuState.Init(this);
@@ -165,7 +167,32 @@ namespace Managers
         {
             SwitchCam(winCam);
         }
+        
+        public void OnCameraSwitch(ICinemachineCamera toCam, ICinemachineCamera fromCam)
+        {
+            Debug.Log("worked");
+            var firstCam = (CinemachineVirtualCamera)fromCam;
+            var secondCam = (CinemachineVirtualCamera)toCam;
+            Debug.Log(firstCam.gameObject.name); // menu
+            Debug.Log(secondCam.gameObject.name); // win
+            if (firstCam == winCam && secondCam == menuStateCam)
+            {
+                menuState.clickToStart.text = playingState.winTexts[Random.Range(0, playingState.winTexts.Length)];
+                playingState.clickAvoid.SetActive(true);
+                StartCoroutine(WaitForCameraBlendToFinish());
+            }
+        }
 
+        private IEnumerator WaitForCameraBlendToFinish()
+        {
+            while (cinemaMachineBrain.IsBlending)
+            {
+                yield return null;  // Wait until the next frame
+            }
 
+            playingState.clickAvoid.SetActive(false);
+            menuState.clickToStart.text = "Tap To Play!";
+            Debug.Log("Arrived at menu state!");
+        }
     }
 }

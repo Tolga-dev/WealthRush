@@ -12,6 +12,7 @@ namespace Save.GameObjects.Road
         public GameObject boss;
         public float scaleDuration = 0.5f; // Duration of the scaling animation for each pile
         public float moveDuration = 0.5f; // Duration for moving the money pile to the boss
+        private readonly Vector3 _maxScale = new Vector3(27.023634f, 810.709106f, 27.023634f);
 
         private void OnTriggerEnter(Collider other)
         {
@@ -54,7 +55,6 @@ namespace Save.GameObjects.Road
 
         private IEnumerator MovePileToBossAndScale(GameObject moneyPile)
         {
-            // Move money pile to the boss position
             Vector3 initialPosition = moneyPile.transform.position;
             Vector3 bossPosition = boss.transform.position;
             float elapsedTime = 0f;
@@ -77,14 +77,21 @@ namespace Save.GameObjects.Road
         {
             Vector3 initialScale = boss.transform.localScale;
             Vector3 targetScale = initialScale + initialScale * (_playerController.pileController.moneyPiles.Count * 0.1f);
+
+            // Ensure target scale does not exceed the maximum allowed scale
+            targetScale = Vector3.Min(targetScale, _maxScale);
+
             float elapsedTime = 0f;
 
             while (elapsedTime < scaleDuration)
             {
+                // Lerp the scale and clamp it to not exceed the maximum scale
                 boss.transform.localScale = Vector3.Lerp(initialScale, targetScale, (elapsedTime / scaleDuration));
                 elapsedTime += Time.deltaTime;
                 yield return null;
             }
+
+            // Set the final scale to the clamped target scale
             boss.transform.localScale = targetScale;
             StartCoroutine(SetGameMainMenu());
         }

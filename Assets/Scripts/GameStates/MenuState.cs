@@ -40,7 +40,10 @@ namespace GameStates
         public Button updateCombo;  
         public TextMeshProUGUI comboAmount;
         public TextMeshProUGUI priceAmount;
-
+        
+        // in scene game play
+        public TextMeshProUGUI clickToStart;
+        
         public override void Init(GameManager gameManager)
         {
             base.Init(gameManager);

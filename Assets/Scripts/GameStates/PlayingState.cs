@@ -34,7 +34,9 @@ namespace GameStates
 
         public TextMeshProUGUI extraBonus;
         public TextMeshProUGUI extraComboBonus;
-        
+
+        public string[] winTexts;
+        public GameObject clickAvoid;
         public override void Init(GameManager gameManager)
         {
             base.Init(gameManager);
@@ -58,6 +60,7 @@ namespace GameStates
             
             GameManager.playerController.ResetPlayer();
             GameManager.playerController.StartRunning();
+            
         }
 
         private void ResetPlayGameUI()
@@ -136,6 +139,8 @@ namespace GameStates
             GameManager.StartCoroutine(GameManager.spawnerManager.ResetSpawners());
             GameManager.gamePropertiesInSave.money += score;
             Debug.Log("PlayingState Exit");
+            
+            // gettingHarder
         }
         
         public void UpdateScore()
