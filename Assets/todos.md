@@ -74,13 +74,17 @@
 * prize ui hizini arttir - > kombo  yu da yaz - ok
 
 * optimizations
-  * scorelarda - game obj yolk etme kullanmada bug var -> missing diyor
-  * kamerayi astiktan sonra -> spawn olmasina gerek yok
   * 50 kez enter out yapti -> playing stateten cikarken
-  * win to menu kasiyor
+  * scorelarda - game obj yolk etme kullanmada bug var -> missing diyor
   * testler gerekli
+  * --------------------
+  * kamerayi astiktan sonra -> spawn olmasina gerek yok
+  * win to menu kasiyor
   * score 0 ise level atlama olmayacak
   * paralarin yok olmasi -> object pool?
+  * random highda verelim traplere
+  * yoldaki engelleri kaldir
+  * save sistemi
   
 * on road prizes -> object pool
 * assagidaki butonlar
@@ -88,4 +92,6 @@
 
 * reklamlar
 * oyun ici satin alim
+
+
 

@@ -17,17 +17,21 @@ namespace Managers
     [Serializable]
     public class GameManager : Singleton<GameManager>
     {
+        [Header("Game Save")]
         public GamePropertiesInSave gamePropertiesInSave;
         public GameState CurrentState;
 
+        [Header("Game States")]
         public MenuState menuState;
         public PlayingState playingState;
 
+        [Header("Game Controllers")]
         public PlayerController playerController;
         public SelectorController selectorManager;
         public SpawnerManager spawnerManager;
 
-        [Header("Road Borders")] public Transform targetA; // First target position
+        [Header("Road Borders")] 
+        public Transform targetA; // First target position
         public Transform targetB; // Second target position
 
         [Header("Game Sounds")]
@@ -41,12 +45,14 @@ namespace Managers
         public List<AudioClip> onGameSound = new List<AudioClip>();
 
         // ui
+        [Header("UI Game Sounds")]
         public AudioClip buttonClickSound;
         public AudioClip updateComboSound;
         public AudioClip starSound;
         public AudioClip notEnoughMoney;
 
         // cams
+        [Header("Game Cams")]
         public CinemachineVirtualCamera playerCam;
         public CinemachineVirtualCamera menuStateCam;
         public CinemachineVirtualCamera winCam;

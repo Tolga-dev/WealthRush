@@ -79,6 +79,12 @@ namespace Player
             zSpeed = 10f;
             animationController.Reset();
             ResetPos();
+            ResetInput();
+        }
+        private void ResetInput()
+        {
+            inputController.isMouseDown = false;
+            inputController.canMove = false;
         }
 
         public void ResetPos()

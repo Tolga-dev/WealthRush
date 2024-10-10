@@ -1,10 +1,8 @@
 using System;
-using System.Globalization;
 using GameStates.Base;
 using Managers;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
@@ -17,6 +15,7 @@ namespace GameStates
         public Transform menuPanel;
         
         // settings
+        [Header("Setting UI")]
         public Button startSettings;
         public Button exitSettings;
         public Transform settingPanel;
@@ -24,6 +23,7 @@ namespace GameStates
         public Button changeStatusSoundButton;
         
         // no ads
+        [Header("Shop UI")]
         public Button startMarket;
         public Button exitMarket;
         public Button buyNoAds;
@@ -34,14 +34,17 @@ namespace GameStates
         private static readonly int Pop = Animator.StringToHash("Pop");
 
         // money
+        [Header("Main Menu UI")]
         public TextMeshProUGUI paraAmount;
         
         // Combo
+        [Header("Main Menu Combo UI")]
         public Button updateCombo;  
         public TextMeshProUGUI comboAmount;
         public TextMeshProUGUI priceAmount;
         
         // in scene game play
+        [Header("Main Menu Starter")]
         public TextMeshProUGUI clickToStart;
         
         public override void Init(GameManager gameManager)
@@ -53,13 +56,12 @@ namespace GameStates
         {
             SetMenuStateUI();
             GameManager.SwitchToMenuStateCam();
-            GameManager.playerController.inputController.isMouseDown = false;
-            GameManager.playerController.inputController.canMove = false;
-            
             GameManager.playerController.ResetPlayer();
+            
             GameManager.GameMusic(GameManager.onMenuStateSound);
             Debug.Log("MenuState Enter");
         }
+
         public override void Update()
         {
             GameManager.playerController.inputController.HandleMouseInput();
@@ -81,52 +83,40 @@ namespace GameStates
             paraAmount.text = GameManager.gamePropertiesInSave.money + "$";
             menuPanel.gameObject.SetActive(true);
         }
+        
         private void SetUI()
         {
-            ToggleButtonPosition(changeStatusMusicButton, GameManager.gamePropertiesInSave.isGameMusicOn);
-            ToggleButtonPosition(changeStatusSoundButton, GameManager.gamePropertiesInSave.isGameSoundOn);
-            if (GameManager.gamePropertiesInSave.isNoAds)
-            {
-                buyNoAds.gameObject.SetActive(false);
-                description.text = "You have already bought No Ads!";
-            }
-            else
-            {
-                description.text = "Remove ads with 2$"; // money might be changed
-            }
+            SetSaveUI();
             
-            updateCombo.onClick.AddListener(() =>
-            {
-                UpdateCombo();
-                GameManager.ButtonClickSound();
-            });
-            
+            // settings
             changeStatusMusicButton.onClick.AddListener(() =>
             {
                 GameManager.ButtonClickSound();
+
+                var save = GameManager.gamePropertiesInSave;
                 
-                if (GameManager.gamePropertiesInSave.isGameMusicOn)
+                if (save.isGameMusicOn)
                 {
                     GameManager.GameMusic(null);
-                    GameManager.gamePropertiesInSave.isGameMusicOn = false;
+                    save.isGameMusicOn = false;
                 }
                 else
                 {
-                    GameManager.gamePropertiesInSave.isGameMusicOn = true;
+                    save.isGameMusicOn = true;
                     GameManager.GameMusic(GameManager.onMenuStateSound);
                 }
                 
-                ToggleButtonPosition(changeStatusMusicButton, GameManager.gamePropertiesInSave.isGameMusicOn);
+                ToggleButtonPosition(changeStatusMusicButton, save.isGameMusicOn);
                 
             });
             changeStatusSoundButton.onClick.AddListener(() =>
             {
+                var save = GameManager.gamePropertiesInSave;
+
                 GameManager.ButtonClickSound();
-                GameManager.gamePropertiesInSave.isGameSoundOn = !GameManager.gamePropertiesInSave.isGameSoundOn;
-                ToggleButtonPosition(changeStatusSoundButton, GameManager.gamePropertiesInSave.isGameSoundOn);
+                save.isGameSoundOn = !save.isGameSoundOn;
+                ToggleButtonPosition(changeStatusSoundButton, save.isGameSoundOn);
             });
-            
-            // settings
             startSettings.onClick.AddListener(() =>
             {
                 settingPanel.gameObject.SetActive(true);
@@ -137,6 +127,13 @@ namespace GameStates
             {
                 GameManager.ButtonClickSound();
                 settingMenuAnimator.SetTrigger(Pop); 
+            });
+            
+            // combo
+            updateCombo.onClick.AddListener(() =>
+            {
+                UpdateCombo();
+                GameManager.ButtonClickSound();
             });
             
             
@@ -164,6 +161,29 @@ namespace GameStates
                 GameManager.ButtonClickSound();
                 GameManager.gamePropertiesInSave.isNoAds = true;
             });
+            
+        }
+
+        private void SetSaveUI()
+        {
+            var save = GameManager.gamePropertiesInSave;
+            
+            ToggleButtonPosition(changeStatusMusicButton, save.isGameMusicOn);
+            ToggleButtonPosition(changeStatusSoundButton, save.isGameSoundOn);
+            
+            // shop
+            if (save.isNoAds)
+            {
+                buyNoAds.gameObject.SetActive(false);
+                description.text = "You have already bought No Ads!";
+            }
+            else
+            {
+                description.text = "Remove ads with 2$"; // money might be changed
+            }
+            
+            // combo
+            SetMenuStateUI();
         }
 
         private void ToggleButtonPosition(Button button, bool isOn)

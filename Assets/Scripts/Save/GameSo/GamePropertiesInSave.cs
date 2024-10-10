@@ -7,21 +7,26 @@ namespace Save.GameSo
     public class GamePropertiesInSave : ScriptableObject
     {
         public int money;
+        public bool isNoAds;
         
+        [Header("Music")]
         public bool isGameMusicOn;
         public bool isGameSoundOn;
         
+        [Header("Volume")]
         public float gameMusicStartVolume = 0.25f;
         public float gameSoundVolume = 0.25f;
         public float gameMusicChangeDuration = 3;
-        public bool isNoAds;
         
+        [Header("Chest")]
         public int chestSpawnCount = 0; 
         public int maxChestSpawns = 3;
 
         [Header("Level")]
         public int currenLevel;
+        public int[] levelRecords;
         
+        [Header("Combo Rank")]
         public int comboRank;
         public int increaseComboAmount;
 
@@ -30,18 +35,15 @@ namespace Save.GameSo
         public int priceLevel; // start with 1
         public int priceMinIncreaseAmount ; // 10 * priceLevel
         public int priceMaxIncreaseAmount ; // 50 * priceLevel
-
         public int newAdditionalPrice;
-
-        public int[] levelRecords;
         
         
         public void ResetThis()
         {
-            chestSpawnCount = 0;
+            /*chestSpawnCount = 0;
             newAdditionalPrice = 1;
             price = 100;
-            priceLevel = 1;
+            priceLevel = 1;*/
         }
     }
  
