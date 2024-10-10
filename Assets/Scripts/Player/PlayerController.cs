@@ -18,6 +18,9 @@ namespace Player
         public InputController inputController;
         public PileController pileController;
         public PlayerAnimationController animationController;
+
+        public Transform prizeEffectSpawnPoint;
+        public Transform canvasSpawnPoint;
         
         [Header("Parameters")]
         public float xSpeed = 15f;
@@ -25,7 +28,7 @@ namespace Player
 
         private float _minBorder;
         private float _maxBorder;
-
+    
         private void Start()
         {
             _minBorder = gameManager.targetA.position.x;
@@ -92,5 +95,6 @@ namespace Player
         {
             animationController.StartWinner();
         }
+        
     }
 } 

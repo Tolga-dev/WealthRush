@@ -12,6 +12,7 @@ namespace Save.GameSo
         public bool isGameSoundOn;
         
         public float gameMusicStartVolume = 0.25f;
+        public float gameSoundVolume = 0.25f;
         public float gameMusicChangeDuration = 3;
         public bool isNoAds;
         
@@ -31,6 +32,7 @@ namespace Save.GameSo
         public int priceMaxIncreaseAmount ; // 50 * priceLevel
 
         public int newAdditionalPrice;
+
         public void ResetThis()
         {
             chestSpawnCount = 0;

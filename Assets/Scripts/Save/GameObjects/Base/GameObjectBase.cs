@@ -1,6 +1,9 @@
 using System;
 using Managers;
+using Player;
 using UnityEngine;
+using UnityEngine.Serialization;
+using Object = UnityEngine.Object;
 
 namespace Save.GameObjects.Base
 {
@@ -10,28 +13,31 @@ namespace Save.GameObjects.Base
         public Animator animator;
 
         public AudioClip playerHitSound;
-        public ParticleSystem particleSystem;
+        [FormerlySerializedAs("particleSystem")] 
+        public ParticleSystem hitPlayerEffect;
 
         public bool isHitPlayer = false;
         private static readonly int PlayerHit = Animator.StringToHash("HitPlayer");
 
+        
         public virtual void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Player"))
             {
-                CallPlayerGotHit();
+                CallPlayerGotHit(other.gameObject);
             }
         }
-        protected virtual void  CallPlayerGotHit()
+        protected virtual void  CallPlayerGotHit(GameObject player)
         {
             GameManager.Instance.PlayASound(playerHitSound);
     
             if(animator != null)
                 animator.SetBool(PlayerHit, true);
-            if (particleSystem != null)
+            if (hitPlayerEffect != null)
             {
-                particleSystem.Play();
-                PlayAdditionalEffects();
+                var playerController = player.GetComponent<PlayerController>();
+                SetParticlePosition(hitPlayerEffect, playerController.prizeEffectSpawnPoint.transform);
+                PlayAdditionalEffects(playerController);
             }
 
             isHitPlayer = true;
@@ -39,7 +45,7 @@ namespace Save.GameObjects.Base
             DisableGameObject();
         }
 
-        protected virtual void PlayAdditionalEffects()
+        protected virtual void PlayAdditionalEffects(PlayerController playerController)
         {
             
         }
@@ -48,5 +54,19 @@ namespace Save.GameObjects.Base
         {
             enabled = false;
         }
+
+        protected void SetParticlePosition(ParticleSystem currentParticle, Transform playerPos)
+        {
+            var particleTransform = currentParticle.transform;
+            particleTransform.parent = playerPos;
+            particleTransform.transform.localPosition = Vector3.zero;
+    
+            currentParticle.Play(); // Start particle system
+
+            var main = currentParticle.main;
+            Destroy(currentParticle.gameObject, main.duration + main.startLifetime.constantMax);
+        }
+
+
     }
 }

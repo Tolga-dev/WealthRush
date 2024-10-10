@@ -15,17 +15,22 @@
   * death
   * finish - ok
   
-- update combo
-- paralarin effekleri playerin uzerinden spawn olmali oynamali
-  
+- update combo -ok
+
+- paralarin effekleri playerin uzerinden spawn olmali oynamali - ok
 - ses efektler duzenlenmeli
+- para tanimla prizelara
+- komboyu, kazandigin paranin ustunde efekt olarak koy
+- belli rekorlarda kombo efekti - hep yukseltmeme efekti
+  - personal rekord ekle
+
 - ui animayonlandirilmali
-- booster eklenmeli
 - in every 5 level reset chest
 - chest open in end level
 - from play to menu -> ui - make cam faster
 - top to play animation
-- para tanimla prizelara
+- playeer collider
+- negatif actif selectors
 
 * son kisim 
   * spawn more cub

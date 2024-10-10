@@ -30,8 +30,10 @@ namespace Player
 
             var targetPosition = CalculateTargetPosition(prize.transform);
             CollectMoney(prize, targetPosition);
-            
-            _playerController.gameManager.playingState.score++;
+
+            var prizeAmount = prize.GetComponent<Prize>().prizeAmount;
+
+            _playerController.gameManager.playingState.score += prizeAmount;
             _playerController.gameManager.playingState.UpdateScore();
         }
 

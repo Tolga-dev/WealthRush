@@ -51,8 +51,7 @@ namespace Managers
         public CinemachineVirtualCamera winCam;
 
         private CinemachineVirtualCamera _activeCam;
-
-
+        
         public void Start()
         {
             menuState.Init(this);
@@ -85,6 +84,7 @@ namespace Managers
             var tempSoundPlayer = new GameObject("TempSoundPlayer");
             var audioSource = tempSoundPlayer.AddComponent<AudioSource>();
             audioSource.clip = audioClip;
+            audioSource.volume = gamePropertiesInSave.gameSoundVolume;
             audioSource.PlayOneShot(audioClip);
             Destroy(tempSoundPlayer, audioClip.length);
         }
