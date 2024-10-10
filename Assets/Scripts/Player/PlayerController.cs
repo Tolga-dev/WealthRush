@@ -76,6 +76,7 @@ namespace Player
 
         public void ResetPlayer()
         {
+            zSpeed = 10f;
             animationController.Reset();
             ResetPos();
         }

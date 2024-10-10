@@ -25,6 +25,11 @@ namespace Managers.Controllers.Spawner
             SpawnPrizes(spawnerManager.roadSpawner.createdCircleRoads);
 
             var save = spawnerManager.GameManager.gamePropertiesInSave;
+            if (save.chestSpawnCount == save.maxChestSpawns && save.currenLevel % 5 == 0)
+            {
+                save.chestSpawnCount = 0;
+            }
+            
             if (save.chestSpawnCount < save.maxChestSpawns)
             {
                 SpawnChest(spawnerManager);

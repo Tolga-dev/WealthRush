@@ -23,7 +23,6 @@
 - belli rekorlarda kombo efekti - hep yukseltmeme efekti -ok
   - personal rekord ekle -ok
 
-- ses efektler duzenlenmeli
 
 * Restart
   * oyun finish olunca olan problem - ok 
@@ -31,17 +30,18 @@
 - ui animayonlandirilmali - ok
 - top to play animation - ok
 
-- in every 5 level reset chest
   - 
 - 5 in katlarinda duzgun spawn olurken digerlerinde sikinti -ok
 - 5 i 10 yap, hizi 0.01 arttir - ok
 
+- in every 5 level reset chest
 - playeer collider arttir rahat toplasin
 - negatif actif selectors
   - miktari azalt
   - sizelarini yol boyu olarak yap
 - chest acilma efekti olsun, oyle gelsin
 
+- ses efektler duzenlenmeli
 * son kisim 
   * spawn more cub
 

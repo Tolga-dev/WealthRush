@@ -50,6 +50,7 @@ namespace GameStates
 
         public override void Enter()
         {
+             
             Debug.Log("PlayingState Enter");
             ResetPlayGameUI();
             GameManager.SwitchToPlayerCam();
