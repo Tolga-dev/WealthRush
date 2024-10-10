@@ -24,6 +24,7 @@ namespace Save.GameObjects.Road
         
         public void PlayerArrived()
         {
+            SetActiveReloadButton(false);
             _playerController.SetWin();
             _playerController.gameManager.SwitchToWinCam();
             CheckForChest();
@@ -36,14 +37,19 @@ namespace Save.GameObjects.Road
             var moneyPiles = _playerController.pileController.moneyPiles;
             if (moneyPiles.Count == 0)
             {
-                StartCoroutine(SetGameMainMenu());
+                _playerController.gameManager.StartCoroutine(SetGameMainMenu());
                 return;
             }
             
             foreach (var moneyPile in moneyPiles)
             {
-                StartCoroutine(MovePileToBossAndScale(moneyPile));
+                _playerController.gameManager.StartCoroutine(MovePileToBossAndScale(moneyPile));
             }
+        }
+
+        private void SetActiveReloadButton(bool b)
+        {
+            _playerController.gameManager.playingState.reloadButton.enabled = b;
         }
 
         private IEnumerator MovePileToBossAndScale(GameObject moneyPile)
@@ -80,7 +86,6 @@ namespace Save.GameObjects.Road
                 yield return null;
             }
             boss.transform.localScale = targetScale;
-
             StartCoroutine(SetGameMainMenu());
         }
 
@@ -89,6 +94,7 @@ namespace Save.GameObjects.Road
             yield return new WaitForSeconds(3);
             var gameManager = _playerController.gameManager;
             gameManager.ChangeState(gameManager.menuState);
+            SetActiveReloadButton(true);
         }
         private void CheckForChest()
         {

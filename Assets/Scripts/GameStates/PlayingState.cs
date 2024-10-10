@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using GameStates.Base;
 using Managers;
@@ -41,11 +42,12 @@ namespace GameStates
             // upper ui
             reloadButton.onClick.AddListener(() =>
             {
-                Debug.Log("Reloading game");
+                GameManager.ChangeState(GameManager.playingState);
             });
 
             startPosZ = playerInitialPosition.transform.position.z;
         }
+
         public override void Enter()
         {
             Debug.Log("PlayingState Enter");
@@ -144,6 +146,6 @@ namespace GameStates
                 star.gameObject.SetActive(active);
             }
         }
-
+    
     }
 }

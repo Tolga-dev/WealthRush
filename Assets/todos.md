@@ -25,22 +25,25 @@
 
 - ses efektler duzenlenmeli
 
-- ui animayonlandirilmali
-- top to play animation
+* Restart
+  * oyun finish olunca olan problem
+
+- ui animayonlandirilmali - ok
+- top to play animation - ok
 
 - in every 5 level reset chest
   - 5 in katlarinda duzgun spawn olurken digerlerinde sikinti
   - 5 i 10 yap, hizi 0.01 arttir
-  
+
 - chest open in end level
 - playeer collider
 - negatif actif selectors
   - miktari azalt
+- chest acilma efekti olsun, oyle gelsin
 
 * son kisim 
   * spawn more cub
 
-* Restart
 * Level
 
 * Yol - ok
