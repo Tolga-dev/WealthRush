@@ -88,11 +88,8 @@ namespace Managers.Controllers.Spawner
             var level = gameManager.gamePropertiesInSave.currenLevel;
             var numberOfRoadsToSpawn = startAmountOfRoad;
 
-            if (level % 5 == 0)
-            {
-                numberOfRoadsToSpawn += level / 5;
-            }
-
+            numberOfRoadsToSpawn += level / 10;
+            
             return numberOfRoadsToSpawn;
         }
     }

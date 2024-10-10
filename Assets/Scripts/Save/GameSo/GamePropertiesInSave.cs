@@ -18,10 +18,10 @@ namespace Save.GameSo
         
         public int chestSpawnCount = 0; 
         public int maxChestSpawns = 3;
-        
+
         [Header("Level")]
         public int currenLevel;
-
+        
         public int comboRank;
         public int increaseComboAmount;
 

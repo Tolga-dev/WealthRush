@@ -26,19 +26,20 @@
 - ses efektler duzenlenmeli
 
 * Restart
-  * oyun finish olunca olan problem
+  * oyun finish olunca olan problem - ok 
 
 - ui animayonlandirilmali - ok
 - top to play animation - ok
 
 - in every 5 level reset chest
-  - 5 in katlarinda duzgun spawn olurken digerlerinde sikinti
-  - 5 i 10 yap, hizi 0.01 arttir
+  - 
+- 5 in katlarinda duzgun spawn olurken digerlerinde sikinti -ok
+- 5 i 10 yap, hizi 0.01 arttir - ok
 
-- chest open in end level
-- playeer collider
+- playeer collider arttir rahat toplasin
 - negatif actif selectors
   - miktari azalt
+  - sizelarini yol boyu olarak yap
 - chest acilma efekti olsun, oyle gelsin
 
 * son kisim 
