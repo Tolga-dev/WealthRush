@@ -68,6 +68,11 @@ namespace GameStates
         public override void Exit()
         {
             gamePanel.gameObject.SetActive(false);
+            if (isGameWon)
+            {
+                GameManager.gamePropertiesInSave.money += score;
+                GameManager.menuState.SetMenuStateUI();
+            }
             
             isGameWon = false;
             
@@ -76,6 +81,7 @@ namespace GameStates
             
             SetStarsTransform(false);
             GameManager.playerController.pileController.ResetPile();
+            
             
             GameManager.StartCoroutine(GameManager.spawnerManager.ResetSpawners());
             Debug.Log("PlayingState Exit");

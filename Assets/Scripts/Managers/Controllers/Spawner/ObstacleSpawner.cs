@@ -12,11 +12,9 @@ namespace Managers.Controllers.Spawner
     {
         public List<GameObject> obstacles = new List<GameObject>();
         public List<GameObject> createdObstacles = new List<GameObject>();
-
         public virtual void SpawnObject(SpawnerManager spawnerManager)
         {
             var createdRoads = spawnerManager.roadSpawner.createdRoads;
-
             foreach (var road in createdRoads)
             {
                 var spawnPoints = road.spawnPoint;
@@ -49,13 +47,13 @@ namespace Managers.Controllers.Spawner
         {
             var obstacle = created.GetComponentInChildren<Obstacle>();
             obstacle.gameManager = spawnerManager.GameManager;
-            
+
             var position = created.transform.position;
             var spawnPosition = spawnPoint.position;
 
             position.x = spawnPosition.x;
             position.z = spawnPosition.z;
-
+            
             created.transform.position = position;
         }
 

@@ -103,9 +103,11 @@ namespace Player
             animationController.StartWinner();
             gameManager.SwitchToWinCam();
             gameManager.playingState.isGameWon = true;
-            
-            if(gameManager.playingState.score > 0)
+
+            if (gameManager.playingState.score > 0)
+            {
                 gameManager.gamePropertiesInSave.currenLevel++;
+            }
         }
         
     }

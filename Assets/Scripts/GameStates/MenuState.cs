@@ -75,7 +75,7 @@ namespace GameStates
             Debug.Log("MenuState Exit");
         }
       
-        private void SetMenuStateUI()
+        public void SetMenuStateUI()
         {
             comboAmount.text = "x" + (float)GameManager.gamePropertiesInSave.comboRank/10;
             priceAmount.text = GameManager.gamePropertiesInSave.price + "$";

@@ -72,28 +72,25 @@
 - game score azalmali - ok
 
 * prize ui hizini arttir - > kombo  yu da yaz - ok
+* 50 kez enter out yapti -> playing stateten cikarken - ok
+* score 0 ise level atlama olmayacak -ok
+* yoldaki engelleri kaldir -ok
+* random highda verelim traplere -ok
+* scorelarda - game obj yolk etme kullanmada bug var -> missing diyor -ok 
+* testler gerekli -ok
+* oyun bittinten sonra money update -ok 
 
 * optimizations
-  * 50 kez enter out yapti -> playing stateten cikarken
-  * scorelarda - game obj yolk etme kullanmada bug var -> missing diyor
-  * testler gerekli
-  * --------------------
-  * kamerayi astiktan sonra -> spawn olmasina gerek yok
   * win to menu kasiyor
-  * score 0 ise level atlama olmayacak
-  * paralarin yok olmasi -> object pool?
-  * random highda verelim traplere
-  * yoldaki engelleri kaldir
+  * tavandan duz duvar koy 
+  * update ui
   * save sistemi
-  * tavandan duz duvar koy
+  * paralarin yok olmasi -> object pool?
+  * kamerayi astiktan sonra -> spawn olmasina gerek yok
   
-* on road prizes -> object pool
 * assagidaki butonlar
 * kamera acisi
 
 * reklamlar
 * oyun ici satin alim
 
-
-
-high icin ->~~~~ pile controller
