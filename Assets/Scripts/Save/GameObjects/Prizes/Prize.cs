@@ -13,16 +13,15 @@ namespace Save.GameObjects.Prizes
         public Canvas prizeCanvas;
 
         public int prizeAmount;
+        public bool onUse = false;
 
         protected override void PlayAdditionalEffects(PlayerController playerController)
         {
             if (emoji != null)
-            {
                 SetParticlePosition(emoji, playerController.prizeEffectSpawnPoint.transform);
-                
-                if(prizeCanvas != null)
+
+            if(prizeCanvas != null)
                     ShowCanvas(playerController.canvasSpawnPoint.transform);
-            }
         }
 
         public  void ShowCanvas(Transform playerPos)
@@ -43,11 +42,11 @@ namespace Save.GameObjects.Prizes
    
         public virtual IEnumerator AnimateCanvas(Transform canvasTransform)
         {
-            float duration = 2f; // Total duration of the animation
+            float duration = 1f; // Total duration of the animation
             float elapsed = 0f;
 
             Vector3 startPos = canvasTransform.localPosition; // Starting position (Vector3.zero)
-            Vector3 endPos = startPos + new Vector3(0, 5, 0); // Move up by 1 unit on the Y axis
+            Vector3 endPos = startPos + new Vector3(0, 10, 0); // Move up by 1 unit on the Y axis
     
             while (elapsed < duration)
             {

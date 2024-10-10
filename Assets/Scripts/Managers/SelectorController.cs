@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Save.GameObjects.Prizes;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -62,43 +63,40 @@ namespace Managers
 
         public void Sum(int value = 1)
         {
-            Debug.Log($"Sum: {value}");
-
             var pileController = _gameManager.playerController.pileController;
             var prize = _gameManager.spawnerManager.prizeSpawner.prizes[0];
             
             for (int i = 0; i < value; i++)
             {
-                pileController.AddPrizeToPile(Object.Instantiate(prize));
+                pileController.AddPrizeToPile(Object.Instantiate(prize).GetComponent<Prize>());
             }
         }
 
         public void Subtraction(int value = 1)
         {
-            Debug.Log($"Subtraction: {value}");
-
             var pileController = _gameManager.playerController.pileController;
             var moneyPiles = pileController.moneyPiles;
 
             if (moneyPiles.Count == 0)
             {
-                Debug.Log("you dead");
                 return;
             }
 
             for (int i = 0; i < value && moneyPiles.Count > 0; i++)
             {
                 var prize = moneyPiles[^1];
+                
+                _gameManager.playingState.score -= prize.prizeAmount;
+                _gameManager.playingState.UpdateScore();
+                
                 moneyPiles.Remove(prize);
-                Object.Destroy(prize);
+                Object.Destroy(prize.gameObject);
                 
             }
         }
 
         public void Multiply(int value = 1)
         {
-            Debug.Log($"Multiply: {value}");
-
             var pileController = _gameManager.playerController.pileController;
             var moneyPiles = pileController.moneyPiles;
 
@@ -109,20 +107,17 @@ namespace Managers
             
             for (int i = 0; i < amount; i++)
             {
-                pileController.AddPrizeToPile(Object.Instantiate(prize));
+                pileController.AddPrizeToPile(Object.Instantiate(prize).GetComponent<Prize>());
             }
         }
 
         public void Divide(int value = 1)
         {
-            Debug.Log($"Divide: {value}");
-
             var pileController = _gameManager.playerController.pileController;
             var moneyPiles = pileController.moneyPiles;
 
             if (moneyPiles.Count == 0)
             {
-                Debug.Log("No prizes to divide.");
                 return;
             }
 

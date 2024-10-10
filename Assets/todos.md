@@ -64,19 +64,25 @@
 
 - kazandiktan sonra tiklama ozelligini kapat -ok
 
-- farkli engeller
-- olme 
-  - ui das failed dicek - reload olacak
+- farkli engeller - ok
+
+- bazi traplere carpinca sadece para kaybedecek -ok
 - yukleme sahnesi gelmeli
-* on road prizes -> object pool
-* prize ui hizini arttir
+
+- game score azalmali - ok
+
+* prize ui hizini arttir - > kombo  yu da yaz - ok
 
 * optimizations
-  * paralarin yok olmasi -> object pool?
+  * scorelarda - game obj yolk etme kullanmada bug var -> missing diyor
   * kamerayi astiktan sonra -> spawn olmasina gerek yok
   * 50 kez enter out yapti -> playing stateten cikarken
   * win to menu kasiyor
+  * testler gerekli
+  * score 0 ise level atlama olmayacak
+  * paralarin yok olmasi -> object pool?
   
+* on road prizes -> object pool
 * assagidaki butonlar
 * kamera acisi
 

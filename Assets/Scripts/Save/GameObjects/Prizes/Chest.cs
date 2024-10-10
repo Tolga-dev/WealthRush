@@ -13,20 +13,11 @@ namespace Save.GameObjects.Prizes
 
             if (isHitPlayer)
             {
-                var playerController = other.GetComponent<PlayerController>();
+                var playerController = other.GetComponentInChildren<PlayerController>();
+                if (playerController == null) // gives null idk
+                    return;
                 playerController.pileController.foundChest = this;
             }
-        }
-        public override IEnumerator AnimateCanvas(Transform canvasTransform)
-        {
-            yield return base.AnimateCanvas(canvasTransform);
-            StartCoroutine(CloseActive());
-        }
-        
-        private IEnumerator CloseActive()
-        {
-            yield return new WaitForSeconds(1);
-            gameObject.SetActive(false);
         }
     }
 }

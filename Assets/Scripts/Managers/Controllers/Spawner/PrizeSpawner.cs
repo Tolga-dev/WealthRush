@@ -137,7 +137,9 @@ namespace Managers.Controllers.Spawner
         }
         private void SpawnAtPoint(GameObject prize, Transform spawnPoint)
         {
-            var created = UnityEngine.Object.Instantiate(prize, spawnPoint.position, Quaternion.identity);
+            var created = Object.Instantiate(prize, spawnPoint.position, Quaternion.identity);
+            var chestPrize = created.GetComponent<Prize>();
+            SetRandValuePrize(chestPrize,2);
             createdPrizes.Add(created);
         }
 

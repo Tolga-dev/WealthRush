@@ -14,18 +14,5 @@ namespace Save.GameObjects.Obstacle
             float rotation = Mathf.Lerp(minAngle, maxAngle, (Mathf.Sin(speed * Time.time) + 1.0f) / 2.0f);
             rotationalTransform.rotation = Quaternion.Euler(0, rotation, 0);
         }
-
-        public override void OnTriggerEnter(Collider other)
-        {
-            base.OnTriggerEnter(other);
-
-            if (isHitPlayer)
-            {
-                 Debug.Log("Lost Money!");
-            }
-        }
-        protected override void DisableGameObject()
-        {
-        }
     }
 }

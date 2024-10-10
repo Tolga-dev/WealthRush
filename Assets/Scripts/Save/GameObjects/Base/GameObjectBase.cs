@@ -18,7 +18,6 @@ namespace Save.GameObjects.Base
 
         public bool isHitPlayer = false;
         private static readonly int PlayerHit = Animator.StringToHash("HitPlayer");
-
         
         public virtual void OnTriggerEnter(Collider other)
         {

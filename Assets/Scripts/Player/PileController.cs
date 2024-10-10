@@ -13,7 +13,7 @@ namespace Player
         public Transform firstPilePosition;
         public float initHigh;
 
-        public List<GameObject> moneyPiles = new List<GameObject>();
+        public List<Prize> moneyPiles = new List<Prize>();
         public Chest foundChest;
         public float heightAdjustment = 0.1f;
 
@@ -24,28 +24,30 @@ namespace Player
             initHigh = firstPilePosition.position.y;
             _playerController = playerController;
         }
-        public void AddPrizeToPile(GameObject prize)
+        public void AddPrizeToPile(Prize prize)
         {
             prize.transform.SetParent(firstPilePosition);
 
-            var targetPosition = CalculateTargetPosition(prize.transform);
+            var targetPosition = CalculateTargetPosition(prize.gameObject.transform);
             CollectMoney(prize, targetPosition);
 
-            var prizeAmount = prize.GetComponent<Prize>().prizeAmount;
-
+            var prizeComponent = prize.GetComponent<Prize>();
+            prizeComponent.onUse = true;
+            var prizeAmount = prizeComponent.prizeAmount;
+            
             _playerController.gameManager.playingState.score += prizeAmount;
             _playerController.gameManager.playingState.UpdateScore();
         }
 
         private Vector3 CalculateTargetPosition(Transform prizeTransform)
-        {
+        {   
             Vector3 newPosition = firstPilePosition.position;
             newPosition.y += moneyPiles.Count * heightAdjustment; // Adjust position
             
             return newPosition;
         }
         
-        private void CollectMoney(GameObject prize, Vector3 finalPosition)
+        private void CollectMoney(Prize prize, Vector3 finalPosition)
         {
             prize.transform.position = finalPosition;
             moneyPiles.Add(prize);

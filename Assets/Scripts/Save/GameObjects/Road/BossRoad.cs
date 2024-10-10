@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Player;
+using Save.GameObjects.Prizes;
 using UnityEngine;
 
 namespace Save.GameObjects.Road
@@ -53,7 +54,7 @@ namespace Save.GameObjects.Road
             _playerController.gameManager.playingState.reloadButton.enabled = b;
         }
 
-        private IEnumerator MovePileToBossAndScale(GameObject moneyPile)
+        private IEnumerator MovePileToBossAndScale(Prize moneyPile)
         {
             Vector3 initialPosition = moneyPile.transform.position;
             Vector3 bossPosition = boss.transform.position;
@@ -67,7 +68,7 @@ namespace Save.GameObjects.Road
             }
 
             moneyPile.transform.position = bossPosition;
-            moneyPile.SetActive(false);
+            moneyPile.gameObject.SetActive(false);
 
             CheckForRecords();
             StartCoroutine(ScaleBoss());

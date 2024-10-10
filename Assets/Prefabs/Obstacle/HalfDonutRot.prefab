@@ -43,8 +43,6 @@ GameObject:
   - component: {fileID: 648772756603377238}
   - component: {fileID: 355517983877743460}
   - component: {fileID: 792087594008232279}
-  - component: {fileID: 3108764469672426035}
-  - component: {fileID: 851601036828268277}
   m_Layer: 0
   m_Name: Half_Donut_Stick
   m_TagString: Untagged
@@ -117,41 +115,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!136 &3108764469672426035
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1401405002113956394}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.012
-  m_Height: 0.36
-  m_Direction: 0
-  m_Center: {x: 0.1698603, y: 0.000000014901161, z: 4.656613e-10}
---- !u!114 &851601036828268277
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1401405002113956394}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 902e3643e6179e741b1a44c3fd31b2ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2649054148882901675
 GameObject:
   m_ObjectHideFlags: 0
@@ -166,6 +129,7 @@ GameObject:
   - component: {fileID: 7689757324017121458}
   - component: {fileID: 7162392688785420485}
   - component: {fileID: 1949938942357943903}
+  - component: {fileID: 7128204766260104271}
   m_Layer: 0
   m_Name: Half_Donut_01
   m_TagString: Untagged
@@ -287,12 +251,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 0}
   playerHitSound: {fileID: 8300000, guid: c6d45d69015ca934fbd95932874c5b59, type: 3}
-  particleSystem: {fileID: 5684674757566208174}
+  hitPlayerEffect: {fileID: 5684674757566208174}
   isHitPlayer: 0
+  gameManager: {fileID: 0}
   speed: 1
   minXValue: 0
   maxXValue: 0.3
   stick: {fileID: 3061438777069964547}
+--- !u!54 &7128204766260104271
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2649054148882901675}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &3327700166244717542
 GameObject:
   m_ObjectHideFlags: 0

@@ -68,7 +68,7 @@ namespace Player
         {
             if (other.CompareTag("Money"))
             {
-                pileController.AddPrizeToPile(other.gameObject);
+                pileController.AddPrizeToPile(other.GetComponent<Prize>());
                 animationController.SetPlayerHolding();
             }
             

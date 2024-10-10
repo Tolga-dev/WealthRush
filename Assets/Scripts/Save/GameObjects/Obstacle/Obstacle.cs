@@ -1,30 +1,35 @@
 using System;
 using Managers;
 using Save.GameObjects.Base;
+using Save.GameObjects.Prizes;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Save.GameObjects.Obstacle
 {
     public class Obstacle : GameObjectBase
     {
+        public GameManager gameManager;
+
         public override void OnTriggerEnter(Collider other)
         {
             base.OnTriggerEnter(other);
             
-            if (isHitPlayer == false)
+            if (other.CompareTag("Money"))
             {
-                if (other.CompareTag("Money"))
-                {
-                    CallMoneyPileGotHit(other.gameObject);
-                }
+                var prize = other.GetComponentInChildren<Prize>();
+                if (prize.onUse == false)
+                    return;
+                
+                CallMoneyPileGotHit(prize);
             }
         }
 
-        protected virtual void CallMoneyPileGotHit(GameObject money)
+        protected virtual void CallMoneyPileGotHit(Prize money)
         {
             Debug.Log("Money Pile Got Hit");
             
-            /*var moneyPiles = gameManager.playerController.pileController.moneyPiles;
+            var moneyPiles = gameManager.playerController.pileController.moneyPiles;
 
             var foundIndex = 0;
             for (int i = 0; i < moneyPiles.Count; i++)
@@ -37,19 +42,15 @@ namespace Save.GameObjects.Obstacle
             }
 
             var removeCount = moneyPiles.Count - foundIndex;
+            
+            gameManager.selectorManager.Subtraction(removeCount);
 
-            for (int i = 0; i < removeCount; i++)
-            {
-                var pile = moneyPiles[^1]; // Get the last pile
-                pile.SetActive(false);
-                
-                moneyPiles.RemoveAt(moneyPiles.Count - 1);   // Remove it from the list
-                Destroy(pile);                               // Destroy the GameObject
-            }*/
         }
 
-
-
+        protected override void DisableGameObject()
+        {
+            
+        }
         
     }
 }
