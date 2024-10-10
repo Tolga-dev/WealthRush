@@ -37,7 +37,9 @@ namespace Save.GameSo
         public int priceMaxIncreaseAmount ; // 50 * priceLevel
         public int newAdditionalPrice;
         
-        
+        [Header("Win Text")]
+        public string[] winTexts;
+
         public void ResetThis()
         {
             /*chestSpawnCount = 0;

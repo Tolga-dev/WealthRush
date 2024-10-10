@@ -13,15 +13,16 @@ MonoBehaviour:
   m_Name: GamePropertiesInSave
   m_EditorClassIdentifier: 
   money: 3314410
+  isNoAds: 1
   isGameMusicOn: 1
   isGameSoundOn: 1
   gameMusicStartVolume: 0.03
   gameSoundVolume: 0.25
   gameMusicChangeDuration: 1
-  isNoAds: 1
   chestSpawnCount: 1
   maxChestSpawns: 3
   currenLevel: 1
+  levelRecords: e8030000d0070000b80b000050c3000080380100d0fb0100
   comboRank: 207
   increaseComboAmount: 1
   isNewPriceCalculated: 0
@@ -30,4 +31,12 @@ MonoBehaviour:
   priceMinIncreaseAmount: 2
   priceMaxIncreaseAmount: 10
   newAdditionalPrice: 1
-  levelRecords: e8030000d0070000b80b000050c3000080380100d0fb0100
+  winTexts:
+  - Stronger. Faster. Unstoppable!
+  - Dominate the next level!
+  - A step closer to greatness!
+  - Victory unlocked!
+  - You're just getting started!
+  - On to the next challenge!
+  - Keep pushing. Keep winning!
+  - You've leveled up!

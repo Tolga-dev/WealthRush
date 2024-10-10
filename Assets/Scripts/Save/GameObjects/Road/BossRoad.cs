@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using Player;
 using Save.GameObjects.Prizes;
+using Save.GameSo;
 using UnityEngine;
 
 namespace Save.GameObjects.Road
@@ -9,7 +10,9 @@ namespace Save.GameObjects.Road
     public class BossRoad : Road
     {
         private PlayerController _playerController;
+        private GamePropertiesInSave _save;
         
+        [Header("Boss")] 
         public GameObject boss;
         public float scaleDuration = 0.5f; // Duration of the scaling animation for each pile
         public float moveDuration = 0.5f; // Duration for moving the money pile to the boss
@@ -20,45 +23,41 @@ namespace Save.GameObjects.Road
             if (other.CompareTag("Player"))
             {
                 _playerController = other.GetComponent<PlayerController>();
+                _save = _playerController.gameManager.gamePropertiesInSave;
                 PlayerArrived();
             }
         }
-        
-        public void PlayerArrived()
+
+        private void PlayerArrived() // player finished game, add score in here
         {
             SetActiveReloadButton(false);
+            
             _playerController.SetWin();
-            _playerController.gameManager.SwitchToWinCam();
+            
             CheckForChest();
             AddComboBonus();
 
             _playerController.gameManager.PlayASound(_playerController.gameManager.onGameWinSound);
-            _playerController.gameManager.gamePropertiesInSave.currenLevel++;
-            _playerController.gameManager.playingState.isGameWon = true;
 
             var moneyPiles = _playerController.pileController.moneyPiles;
             if (moneyPiles.Count == 0)
             {
                 _playerController.gameManager.StartCoroutine(SetGameMainMenu());
-                return;
             }
-            
-            foreach (var moneyPile in moneyPiles)
+            else
             {
-                _playerController.gameManager.StartCoroutine(MovePileToBossAndScale(moneyPile));
+                foreach (var moneyPile in moneyPiles)
+                {
+                    _playerController.gameManager.StartCoroutine(MovePileToBossAndScale(moneyPile));
+                }
             }
-        }
-
-        private void SetActiveReloadButton(bool b)
-        {
-            _playerController.gameManager.playingState.reloadButton.enabled = b;
         }
 
         private IEnumerator MovePileToBossAndScale(Prize moneyPile)
         {
-            Vector3 initialPosition = moneyPile.transform.position;
-            Vector3 bossPosition = boss.transform.position;
-            float elapsedTime = 0f;
+            var initialPosition = moneyPile.transform.position;
+            var bossPosition = boss.transform.position;
+            var elapsedTime = 0f;
 
             while (elapsedTime < moveDuration)
             {
@@ -104,25 +103,15 @@ namespace Save.GameObjects.Road
             gameManager.ChangeState(gameManager.menuState);
             SetActiveReloadButton(true);
         }
-        private void CheckForChest()
-        {
-            var foundChest = _playerController.pileController.foundChest;
-            if (foundChest != null)
-            {
-                var save = _playerController.gameManager.gamePropertiesInSave;
-                save.chestSpawnCount++;
-                
-            }
-        }
+
         private void CheckForRecords()
         {
             var score = _playerController.gameManager.playingState.score;
-            var save = _playerController.gameManager.gamePropertiesInSave;
 
             var findRecord = -1;
-            for (int i = 0; i < save.levelRecords.Length; i++)
+            for (int i = 0; i < _save.levelRecords.Length; i++)
             {
-                if (score > save.levelRecords[i])
+                if (score > _save.levelRecords[i])
                 {
                     findRecord = i;
                 }
@@ -130,19 +119,12 @@ namespace Save.GameObjects.Road
 
             if (findRecord != -1)
             {
-                MadeAScore(save.levelRecords[findRecord]);
+                MadeAScore(_save.levelRecords[findRecord]);
             }
         }
         private void MadeAScore(int recordIndexBonus)
         {
             StartCoroutine(IncreaseBonusOverTime(recordIndexBonus, 1f, "record"));
-        }
-
-        private void AddComboBonus()
-        {
-            var save = _playerController.gameManager.gamePropertiesInSave;
-            var comboRank = _playerController.gameManager.playingState.score * save.comboRank / 100;
-            StartCoroutine(IncreaseBonusOverTime(comboRank, 1f, "combo"));
         }
 
         private IEnumerator IncreaseBonusOverTime(int targetValue, float duration, string bonusType)
@@ -183,8 +165,24 @@ namespace Save.GameObjects.Road
                 playingState.extraComboBonus.text = $"Combo Bonus: {targetValue}";
             }
         }
+        private void SetActiveReloadButton(bool b)
+        {
+            _playerController.gameManager.playingState.reloadButton.enabled = b;
+        }
 
+        private void CheckForChest()
+        {
+            var foundChest = _playerController.pileController.foundChest;
+            if (foundChest != null)
+            {
+                _save.chestSpawnCount++;
+            }
+        }
+        private void AddComboBonus()
+        {
+            var comboRank = _playerController.gameManager.playingState.score * _save.comboRank / 100;
+            StartCoroutine(IncreaseBonusOverTime(comboRank, 1f, "combo"));
+        }
         
-
     }
 }

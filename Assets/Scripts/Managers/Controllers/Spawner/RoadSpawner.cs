@@ -13,15 +13,18 @@ namespace Managers.Controllers.Spawner
     [Serializable]
     public class RoadSpawner
     {
+        [Header("Roads")]
         public GameObject road;
         public GameObject circleRoad;
         public GameObject bossRoad;
     
+        [Header("Positions")]
         public Vector3 offset;
         public Transform spawnPoint;
 
         public Vector3 initPos;
         
+        [Header("Created")]
         public List<Road> createdRoads = new List<Road>();
         public List<Road> createdCircleRoads = new List<Road>();
         public BossRoad createdBossRoad;
@@ -29,10 +32,12 @@ namespace Managers.Controllers.Spawner
         public int startAmountOfRoad = 2;
 
         public CinemachineVirtualCamera prizeCamVirtualCamera;
+        
         public void Init()
         {
             initPos = spawnPoint.position;
         }
+        
         public void SpawnNormalRoad()
         {
             var created = Object.Instantiate(road, spawnPoint.position,road.transform.rotation);

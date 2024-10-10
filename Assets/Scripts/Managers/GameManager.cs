@@ -183,7 +183,7 @@ namespace Managers
             Debug.Log(secondCam.gameObject.name); // win
             if (firstCam == winCam && secondCam == menuStateCam)
             {
-                menuState.clickToStart.text = playingState.winTexts[Random.Range(0, playingState.winTexts.Length)];
+                menuState.clickToStart.text = gamePropertiesInSave.winTexts[Random.Range(0, gamePropertiesInSave.winTexts.Length)];
                 playingState.clickAvoid.SetActive(true);
                 StartCoroutine(WaitForCameraBlendToFinish());
             }

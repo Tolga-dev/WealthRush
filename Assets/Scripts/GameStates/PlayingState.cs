@@ -15,44 +15,39 @@ namespace GameStates
     public class PlayingState : GameState
     {
         // static
+        [Header("Player Pos")] 
         public Transform playerInitialPosition;
         public float startPosZ;
         
         // parameters
+        [Header("Player Parameters")] 
         public int score = 0;
         public bool isGameWon = false;
         
-        [Header("Player Settings")] 
+        [Header("Game UI")] 
         public Transform gamePanel;
-        // upper ui
+        
         public TextMeshProUGUI scoreText;
-        public List<Transform> stars = new List<Transform>();
-        public Slider processSlider;
         public TextMeshProUGUI processLeftText;
         public TextMeshProUGUI processRightText;
+        
+        public List<Transform> stars = new List<Transform>();
+        public Slider processSlider;
         public Button reloadButton;
 
         public TextMeshProUGUI extraBonus;
-        public TextMeshProUGUI extraComboBonus;
-
-        public string[] winTexts;
+        public TextMeshProUGUI extraComboBonus; 
+        
         public GameObject clickAvoid;
+        
         public override void Init(GameManager gameManager)
         {
             base.Init(gameManager);
-            
-            // upper ui
-            reloadButton.onClick.AddListener(() =>
-            {
-                GameManager.ChangeState(GameManager.playingState);
-            });
 
-            startPosZ = playerInitialPosition.transform.position.z;
+            SetProperties();
         }
-
         public override void Enter()
         {
-             
             Debug.Log("PlayingState Enter");
             ResetPlayGameUI();
             GameManager.SwitchToPlayerCam();
@@ -60,22 +55,6 @@ namespace GameStates
             
             GameManager.playerController.ResetPlayer();
             GameManager.playerController.StartRunning();
-            
-        }
-
-        private void ResetPlayGameUI()
-        {
-            gamePanel.gameObject.SetActive(true);
-            scoreText.text = "0";
-            extraBonus.text = "";
-            extraComboBonus.text = "";
-            processSlider.value = 0;
-            score = 0;
-            isGameWon = false;
-            processLeftText.text = GameManager.gamePropertiesInSave.currenLevel.ToString();
-            processRightText.text = (GameManager.gamePropertiesInSave.currenLevel + 1).ToString();
-            
-            SetStarsTransform(false);
         }
         
         public override void Update()
@@ -86,7 +65,42 @@ namespace GameStates
 
             UpdateSlider();
         }
-
+        public override void Exit()
+        {
+            gamePanel.gameObject.SetActive(false);
+            
+            isGameWon = false;
+            
+            extraBonus.text = "";
+            extraComboBonus.text = "";
+            
+            SetStarsTransform(false);
+            GameManager.playerController.pileController.ResetPile();
+            
+            GameManager.StartCoroutine(GameManager.spawnerManager.ResetSpawners());
+            Debug.Log("PlayingState Exit");
+            // gettingHarder
+        }
+        
+        private void ResetPlayGameUI()
+        {
+            gamePanel.gameObject.SetActive(true);
+            
+            scoreText.text = "0";
+            extraBonus.text = "";
+            extraComboBonus.text = "";
+            
+            processSlider.value = 0;
+            score = 0;
+            isGameWon = false;
+            
+            processLeftText.text = GameManager.gamePropertiesInSave.currenLevel.ToString();
+            processRightText.text = (GameManager.gamePropertiesInSave.currenLevel + 1).ToString();
+            
+            SetStarsTransform(false);
+        }
+        
+      
         private void UpdateSlider()
         {
             float endPosZ = GameManager.spawnerManager.roadSpawner.createdBossRoad.transform.position.z;
@@ -125,24 +139,18 @@ namespace GameStates
 
                 GameManager.playerController.zSpeed += p0 * 2;
             }
-
         }
 
-        public override void Exit()
+        private void SetProperties()
         {
-            gamePanel.gameObject.SetActive(false);
-            isGameWon = false;
-            extraBonus.text = "";
-            extraComboBonus.text = "";
-            SetStarsTransform(false);
-            GameManager.playerController.pileController.ResetPile();
-            GameManager.StartCoroutine(GameManager.spawnerManager.ResetSpawners());
-            GameManager.gamePropertiesInSave.money += score;
-            Debug.Log("PlayingState Exit");
-            
-            // gettingHarder
+            // upper ui
+            reloadButton.onClick.AddListener(() =>
+            {
+                GameManager.ChangeState(GameManager.playingState);
+            });
+            startPosZ = playerInitialPosition.transform.position.z;
         }
-        
+
         public void UpdateScore()
         {
             scoreText.text = score.ToString();

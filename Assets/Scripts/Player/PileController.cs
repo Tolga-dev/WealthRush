@@ -8,14 +8,16 @@ using Object = UnityEngine.Object;
 namespace Player
 {
     [Serializable]
-    public class PileController
+    public class PileController 
     {
+        [Header("Pile Parameters")]
         public Transform firstPilePosition;
         public float initHigh;
+        public float heightAdjustment = 0.1f;
 
+        [Header("Collected Prizes")]
         public List<Prize> moneyPiles = new List<Prize>();
         public Chest foundChest;
-        public float heightAdjustment = 0.1f;
 
         private PlayerController _playerController;
         
@@ -24,6 +26,7 @@ namespace Player
             initHigh = firstPilePosition.position.y;
             _playerController = playerController;
         }
+        
         public void AddPrizeToPile(Prize prize)
         {
             prize.transform.SetParent(firstPilePosition);
@@ -41,7 +44,7 @@ namespace Player
 
         private Vector3 CalculateTargetPosition(Transform prizeTransform)
         {   
-            Vector3 newPosition = firstPilePosition.position;
+            var newPosition = firstPilePosition.position;
             newPosition.y += moneyPiles.Count * heightAdjustment; // Adjust position
             
             return newPosition;
