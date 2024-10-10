@@ -13,11 +13,21 @@ namespace Save.GameObjects.Road
         public float scaleDuration = 0.5f; // Duration of the scaling animation for each pile
         public float moveDuration = 0.5f; // Duration for moving the money pile to the boss
 
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.CompareTag("Player"))
+            {
+                _playerController = other.GetComponent<PlayerController>();
+                PlayerArrived();
+            }
+        }
+        
         public void PlayerArrived()
         {
             _playerController.SetWin();
             _playerController.gameManager.SwitchToWinCam();
             CheckForChest();
+            AddComboBonus();
 
             _playerController.gameManager.PlayASound(_playerController.gameManager.onGameWinSound);
             _playerController.gameManager.gamePropertiesInSave.currenLevel++;
@@ -36,8 +46,6 @@ namespace Save.GameObjects.Road
             }
         }
 
-
-
         private IEnumerator MovePileToBossAndScale(GameObject moneyPile)
         {
             // Move money pile to the boss position
@@ -55,6 +63,7 @@ namespace Save.GameObjects.Road
             moneyPile.transform.position = bossPosition;
             moneyPile.SetActive(false);
 
+            CheckForRecords();
             StartCoroutine(ScaleBoss());
         }
 
@@ -77,7 +86,7 @@ namespace Save.GameObjects.Road
 
         private IEnumerator SetGameMainMenu()
         {
-            yield return new WaitForSeconds(2);
+            yield return new WaitForSeconds(3);
             var gameManager = _playerController.gameManager;
             gameManager.ChangeState(gameManager.menuState);
         }
@@ -90,15 +99,78 @@ namespace Save.GameObjects.Road
                 save.chestSpawnCount++;
                 
             }
-            
         }
-        private void OnTriggerEnter(Collider other)
+        private void CheckForRecords()
         {
-            if (other.CompareTag("Player"))
+            var score = _playerController.gameManager.playingState.score;
+            var save = _playerController.gameManager.gamePropertiesInSave;
+
+            var findRecord = -1;
+            for (int i = 0; i < save.levelRecords.Length; i++)
             {
-                _playerController = other.GetComponent<PlayerController>();
-                PlayerArrived();
+                if (score > save.levelRecords[i])
+                {
+                    findRecord = i;
+                }
+            }
+
+            if (findRecord != -1)
+            {
+                MadeAScore(save.levelRecords[findRecord]);
             }
         }
+        private void MadeAScore(int recordIndexBonus)
+        {
+            StartCoroutine(IncreaseBonusOverTime(recordIndexBonus, 1f, "record"));
+        }
+
+        private void AddComboBonus()
+        {
+            var save = _playerController.gameManager.gamePropertiesInSave;
+            var comboRank = _playerController.gameManager.playingState.score * save.comboRank / 100;
+            StartCoroutine(IncreaseBonusOverTime(comboRank, 1f, "combo"));
+        }
+
+        private IEnumerator IncreaseBonusOverTime(int targetValue, float duration, string bonusType)
+        {
+            var playingState = _playerController.gameManager.playingState;
+    
+            float elapsed = 0f;
+            int startValue = 0; // Start from 0 and increase over time
+            int currentScore = bonusType == "record" ? 0 : playingState.score; // Adjust based on bonus type
+
+            while (elapsed < duration)
+            {
+                elapsed += Time.deltaTime;
+        
+                int currentValue = (int)(Mathf.Lerp(startValue, targetValue, elapsed / duration));
+
+                if (bonusType == "record")
+                {
+                    playingState.extraBonus.text = $"WAOW Record! Bonus: {currentValue}";
+                }
+                else if (bonusType == "combo")
+                {
+                    playingState.score = currentScore + currentValue;
+                    playingState.extraComboBonus.text = $"Combo Bonus: {currentValue}";
+                }
+
+                yield return null;
+            }
+
+            // Ensure final value is set to target when finished
+            if (bonusType == "record")
+            {
+                playingState.extraBonus.text = $"WAOW Record! Bonus: {targetValue}";
+            }
+            else if (bonusType == "combo")
+            {
+                playingState.score = currentScore + targetValue;
+                playingState.extraComboBonus.text = $"Combo Bonus: {targetValue}";
+            }
+        }
+
+        
+
     }
 }

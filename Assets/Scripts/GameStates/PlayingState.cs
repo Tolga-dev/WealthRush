@@ -29,8 +29,11 @@ namespace GameStates
         public Slider processSlider;
         public TextMeshProUGUI processLeftText;
         public TextMeshProUGUI processRightText;
-        
         public Button reloadButton;
+
+        public TextMeshProUGUI extraBonus;
+        public TextMeshProUGUI extraComboBonus;
+        
         public override void Init(GameManager gameManager)
         {
             base.Init(gameManager);
@@ -58,6 +61,8 @@ namespace GameStates
         {
             gamePanel.gameObject.SetActive(true);
             scoreText.text = "0";
+            extraBonus.text = "";
+            extraComboBonus.text = "";
             processSlider.value = 0;
             score = 0;
             isGameWon = false;
@@ -119,6 +124,8 @@ namespace GameStates
         {
             gamePanel.gameObject.SetActive(false);
             isGameWon = false;
+            extraBonus.text = "";
+            extraComboBonus.text = "";
             SetStarsTransform(false);
             GameManager.playerController.pileController.ResetPile();
             GameManager.StartCoroutine(GameManager.spawnerManager.ResetSpawners());

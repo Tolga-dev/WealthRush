@@ -18,12 +18,12 @@
 - update combo -ok
 
 - paralarin effekleri playerin uzerinden spawn olmali oynamali - ok
-- ses efektler duzenlenmeli
-- para tanimla prizelara
-- komboyu, kazandigin paranin ustunde efekt olarak koy
+- komboyu, kazandigin paranin ustunde efekt olarak koy -ok
+- para tanimla prizelara - ok
 - belli rekorlarda kombo efekti - hep yukseltmeme efekti
   - personal rekord ekle
 
+- ses efektler duzenlenmeli
 - ui animayonlandirilmali
 - in every 5 level reset chest
 - chest open in end level

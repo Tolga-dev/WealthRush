@@ -33,6 +33,9 @@ namespace Save.GameSo
 
         public int newAdditionalPrice;
 
+        public int[] levelRecords;
+        
+        
         public void ResetThis()
         {
             chestSpawnCount = 0;

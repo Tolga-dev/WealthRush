@@ -12,21 +12,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b641e6644d0e49a890eb47fe4baaed96, type: 3}
   m_Name: GamePropertiesInSave
   m_EditorClassIdentifier: 
-  money: 328538
+  money: 342852
   isGameMusicOn: 1
   isGameSoundOn: 1
   gameMusicStartVolume: 0.03
   gameSoundVolume: 0.25
   gameMusicChangeDuration: 1
   isNoAds: 1
-  chestSpawnCount: 1
+  chestSpawnCount: 0
   maxChestSpawns: 3
-  currenLevel: 32
+  currenLevel: 46
   comboRank: 173
   increaseComboAmount: 1
   isNewPriceCalculated: 0
-  price: 122
-  priceLevel: 3
+  price: 100
+  priceLevel: 1
   priceMinIncreaseAmount: 2
   priceMaxIncreaseAmount: 10
-  newAdditionalPrice: 15
+  newAdditionalPrice: 1
+  levelRecords: e8030000d0070000b80b000050c3000080380100d0fb0100

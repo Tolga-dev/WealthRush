@@ -73,7 +73,8 @@ namespace Managers.Controllers.Spawner
             
             for (int i = 0; i < spawnCount; i++)
             {
-                var prize = UnityEngine.Object.Instantiate(prizePrefab, spawnPoint, true);
+                var prize = Object.Instantiate(prizePrefab, spawnPoint, true);
+                
                 var position = spawnPoint.position;
 
                 float randomXOffset = Random.Range(-2f, 2f);
@@ -84,6 +85,10 @@ namespace Managers.Controllers.Spawner
                 if (index == 2)
                 {
                     ConfigureSelector(prize);
+                }
+                else
+                {
+                    SetRandValuePrize(prize.GetComponent<Prize>(), index+1);
                 }
             }
         }
@@ -109,7 +114,15 @@ namespace Managers.Controllers.Spawner
             };
             
             selector.SetText();
+        }
+
+        public void SetRandValuePrize(Prize prize, int factor)
+        {
+            var save = _spawnerManager.GameManager.gamePropertiesInSave;
+            var maxRange = save.currenLevel + save.comboRank;
             
+            prize.prizeAmount = Random.Range(maxRange - (int)(maxRange/2),maxRange);
+            prize.prizeAmount *= factor;
         }
 
         private void SpawnChest(SpawnerManager spawnerManager)
