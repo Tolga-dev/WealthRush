@@ -124,8 +124,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.031239953, y: 0.06416974, z: 0.018467342}
-  m_Center: {x: 0, y: 0, z: 0.009233671}
+  m_Size: {x: 0.16781688, y: 0.04404872, z: 0.018467342}
+  m_Center: {x: 0.0009894612, y: -0.0019941567, z: 0.009233671}
 --- !u!1001 &5517552244658051575
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -191,8 +191,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2627500898678573445, guid: f1a43edaf6fe5fc5595339f83e20204c, type: 3}
+      propertyPath: lengthInSec
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2627500898678573445, guid: f1a43edaf6fe5fc5595339f83e20204c, type: 3}
       propertyPath: playOnAwake
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2627500898678573445, guid: f1a43edaf6fe5fc5595339f83e20204c, type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.scalar
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3790174673472564242, guid: f1a43edaf6fe5fc5595339f83e20204c, type: 3}
       propertyPath: m_Name

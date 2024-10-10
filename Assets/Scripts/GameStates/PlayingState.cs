@@ -120,7 +120,7 @@ namespace GameStates
                 stars[p0].gameObject.SetActive(true);
                 GameManager.PlayASound(GameManager.starSound);
 
-                GameManager.playerController.zSpeed += p0 * 5;
+                GameManager.playerController.zSpeed += p0 * 2;
             }
 
         }

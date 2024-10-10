@@ -34,7 +34,7 @@
 - 5 in katlarinda duzgun spawn olurken digerlerinde sikinti -ok
 - 5 i 10 yap, hizi 0.01 arttir - ok
 
-- in every 5 level reset chest
+- in every 5 level reset chest - ok
 - playeer collider arttir rahat toplasin
 - negatif actif selectors
   - miktari azalt

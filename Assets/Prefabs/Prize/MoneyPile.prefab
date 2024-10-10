@@ -406,8 +406,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2627500898678573445, guid: f1a43edaf6fe5fc5595339f83e20204c, type: 3}
+      propertyPath: lengthInSec
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2627500898678573445, guid: f1a43edaf6fe5fc5595339f83e20204c, type: 3}
       propertyPath: playOnAwake
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2627500898678573445, guid: f1a43edaf6fe5fc5595339f83e20204c, type: 3}
+      propertyPath: InitialModule.maxNumParticles
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 2627500898678573445, guid: f1a43edaf6fe5fc5595339f83e20204c, type: 3}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.scalar
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3790174673472564242, guid: f1a43edaf6fe5fc5595339f83e20204c, type: 3}
       propertyPath: m_Name
