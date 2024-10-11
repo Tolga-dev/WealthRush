@@ -95,3 +95,5 @@
 * reklamlar
 * oyun ici satin alim
 * size optimizations
+* concept accept
+* giving star

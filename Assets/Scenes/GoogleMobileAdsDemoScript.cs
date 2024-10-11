@@ -12,7 +12,7 @@ namespace Scenes
             // Initialize the Google Mobile Ads SDK.
             MobileAds.Initialize(initStatus =>
             {
-                LoadAd();
+             //   LoadAd();
             });
         }
 #if UNITY_ANDROID
@@ -28,7 +28,7 @@ namespace Scenes
         /// <summary>
         /// Creates a 320x50 banner view at top of the screen.
         /// </summary>
-        public void CreateBannerView()
+        public void CreateBannerView(AdSize adSize, AdPosition adPosition)
         {
             Debug.Log("Creating banner view");
 
@@ -39,18 +39,18 @@ namespace Scenes
             }
 
             // Create a 320x50 banner at top of the screen
-            _bannerView = new BannerView(_adUnitId, AdSize.Banner, AdPosition.Top);
+            _bannerView = new BannerView(_adUnitId, adSize, adPosition);
              
         }
         /// <summary>
         /// Creates the banner view and loads a banner ad.
         /// </summary>
-        public void LoadAd()
+        public void LoadAd(AdSize adSize, AdPosition adPosition)
         {
             // create an instance of a banner view first.
             if(_bannerView == null)
             {
-                CreateBannerView();
+                CreateBannerView(adSize, adPosition);
             }
 
             // create our request used to load the ad.
