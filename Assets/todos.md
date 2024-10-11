@@ -79,19 +79,17 @@
 * scorelarda - game obj yolk etme kullanmada bug var -> missing diyor -ok 
 * testler gerekli -ok
 * oyun bittinten sonra money update -ok 
+* paralarin yok olmasi -> object pool? -ok
+* kamerayi astiktan sonra -> spawn olmasina gerek yok - ok
+* value atama kismi bozuk -ok
+* win to menu kasiyor - ok
+* tavandan duz duvar koy - ok
+* update ui -ok
 
-* optimizations
-  * win to menu kasiyor
-  * tavandan duz duvar koy 
-  * update ui
-  * save sistemi
-  * paralarin yok olmasi -> object pool?
-  * kamerayi astiktan sonra -> spawn olmasina gerek yok
-  * value atama kismi bozuk
-  
+* save sistemi
+
 * assagidaki butonlar
 * kamera acisi
-
 * reklamlar
 * oyun ici satin alim
 

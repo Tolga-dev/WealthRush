@@ -27,7 +27,7 @@ namespace Player
         public float zSpeed = 10f;
 
         private float _minBorder;
-        private float _maxBorder;
+        private float _maxBorder; 
     
         private void Start()
         {

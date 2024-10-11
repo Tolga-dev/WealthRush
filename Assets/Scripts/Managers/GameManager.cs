@@ -30,7 +30,7 @@ namespace Managers
         public SelectorController selectorManager;
         public SpawnerManager spawnerManager;
         public ObjectPoolManager objectPoolManager;
-
+        public SaveManager saveManager;
         [Header("Road Borders")] 
         public Transform targetA; // First target position
         public Transform targetB; // Second target position
@@ -63,6 +63,8 @@ namespace Managers
 
         public void Start()
         {
+            saveManager.Load();
+            
             menuState.Init(this);
             playingState.Init(this);
             selectorManager.Start();
@@ -196,10 +198,15 @@ namespace Managers
             {
                 yield return null;  // Wait until the next frame
             }
-
+            StartCoroutine(saveManager.Save());
             playingState.clickAvoid.SetActive(false);
             menuState.clickToStart.text = "Tap To Play!";
             Debug.Log("Arrived at menu state!");
+        }
+
+        private void OnApplicationQuit()
+        {
+            StartCoroutine(saveManager.Save());
         }
     }
 }
