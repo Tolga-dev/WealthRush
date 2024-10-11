@@ -9,8 +9,6 @@ namespace Managers.Controllers.Ads
     [Serializable]
     public class InterstitialController
     {
-        public Button startInterstitialAds;
-        
         private string _adUnitId = "ca-app-pub-2624974978750920/9719730545";
 
        private InterstitialAd _interstitialAd;
@@ -45,7 +43,7 @@ namespace Managers.Controllers.Ads
         }
         public void ShowAd()
         {
-            if (_interstitialAd != null && _interstitialAd.CanShowAd())
+            if (_interstitialAd != null)
             {
                 Debug.Log("Showing interstitial ad.");
                 _interstitialAd.Show();
@@ -53,7 +51,7 @@ namespace Managers.Controllers.Ads
             else
             {
                 LoadAd();
-                if (_interstitialAd != null && _interstitialAd.CanShowAd())
+                if (_interstitialAd != null)
                 {
                     Debug.Log("Showing interstitial ad.");
                     _interstitialAd.Show();
@@ -98,6 +96,7 @@ namespace Managers.Controllers.Ads
             // Raised when a click is recorded for an ad.
             ad.OnAdClicked += () =>
             {
+                LoadAd();
                 Debug.Log("Interstitial ad was clicked.");
             };
             // Raised when an ad opened full screen content.

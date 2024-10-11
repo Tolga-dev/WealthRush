@@ -11,40 +11,54 @@ namespace Managers
     public class AdsManager : MonoBehaviour
     {
         public BannerAdsController bannerAdsController;
-        public AppOpenController appOpenController;
         public InterstitialController interstitialController;
-        public RewardedInterstitialController rewardedInterstitialController;
         public RewardedController rewardedController;
+        public RewardedInterstitialController rewardedInterstitialController;
         
         public void Start()
         {
             MobileAds.Initialize((InitializationStatus initStatus) =>
             {
                 bannerAdsController.LoadBannerView();
-                appOpenController.LoadAppOpenAd();
+            });
+            Debug.Log("Banner Ad Initialized");
+            MobileAds.Initialize((InitializationStatus initStatus) =>
+            {
                 interstitialController.LoadAd();
-                rewardedInterstitialController.LoadRewardedAd();
+            });
+            Debug.Log("Rewarded Interstitial Ad Initialized");
+            MobileAds.Initialize((InitializationStatus initStatus) =>
+            {
                 rewardedController.LoadRewardedAd();
             });
-            appOpenController.Awake();
+            MobileAds.Initialize((InitializationStatus initStatus) =>
+            {
+                rewardedInterstitialController.LoadRewardedAd();
+            });
+            Debug.Log("Rewarded Ad Initialized");
+            
+        }
+        public void ShowBanner()
+        {
+            bannerAdsController.LoadBannerView();
         }
         
         public void ShowInterstitialAd()
         {
             interstitialController.ShowAd();
         }
-        public void ShowRewardedInterstitialAd()
-        {
-            rewardedInterstitialController.ShowRewardedAd();
-        }
+        
         public void ShowRewardedAd()
         {
             rewardedController.ShowRewardedAd();
         }
-
-        public void OnDestroy()
+        
+        public void ShowRewardedInterstitialAd()
         {
-            appOpenController.OnDestroy();
+            rewardedInterstitialController.ShowRewardedAd();
         }
+
+
+
     }
 }

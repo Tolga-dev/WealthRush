@@ -43,7 +43,7 @@ namespace Managers.Controllers.Ads
         
         public void ShowRewardedAd()
         {
-            if (_rewardedAd != null && _rewardedAd.CanShowAd())
+            if (_rewardedAd != null)
             {
                 Debug.Log("Showing interstitial ad.");
                 _rewardedAd.Show((Reward reward) => {Debug.Log("You Won!");});
@@ -87,6 +87,7 @@ namespace Managers.Controllers.Ads
             // Raised when a click is recorded for an ad.
             ad.OnAdClicked += () =>
             {
+                LoadRewardedAd();
                 Debug.Log("Rewarded ad was clicked.");
             };
             // Raised when the ad opened full screen content.

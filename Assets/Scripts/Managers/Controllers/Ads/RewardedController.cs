@@ -43,7 +43,7 @@ namespace Managers.Controllers.Ads
         
         public void ShowRewardedAd()
         {
-            if (_rewardedAd != null && _rewardedAd.CanShowAd())
+            if (_rewardedAd != null)
             {
                 Debug.Log("Showing interstitial ad.");
                 _rewardedAd.Show((Reward reward) => {Debug.Log("You Won!");});
@@ -51,12 +51,15 @@ namespace Managers.Controllers.Ads
             else
             {
                 LoadRewardedAd();
-                if (_rewardedAd != null && _rewardedAd.CanShowAd())
+                if (_rewardedAd != null)
                 {
                     Debug.Log("Showing interstitial ad.");
                     _rewardedAd.Show((Reward reward) => {Debug.Log("You Won!");});
                 }
-                Debug.LogError("Interstitial ad is not ready yet.");
+                else
+                {
+                    Debug.LogError("Interstitial ad is not ready yet.");
+                }
             }
         }
 
@@ -72,7 +75,6 @@ namespace Managers.Controllers.Ads
         }
         private void RegisterEventHandlers(RewardedAd ad)
         {
-            
             // Raised when the ad is estimated to have earned money.
             ad.OnAdPaid += (AdValue adValue) =>
             {
@@ -88,6 +90,7 @@ namespace Managers.Controllers.Ads
             // Raised when a click is recorded for an ad.
             ad.OnAdClicked += () =>
             {
+                LoadRewardedAd();
                 Debug.Log("Rewarded ad was clicked.");
             };
             // Raised when the ad opened full screen content.
