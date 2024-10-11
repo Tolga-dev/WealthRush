@@ -67,7 +67,6 @@
 - farkli engeller - ok
 
 - bazi traplere carpinca sadece para kaybedecek -ok
-- yukleme sahnesi gelmeli
 
 - game score azalmali - ok
 
@@ -92,8 +91,11 @@
 
 
 * kamera acisi - ui
-* reklamlar
-* oyun ici satin alim
+* reklamlar -ok
+  *yukleme sahnesi gelmeli
+
+* oyun ici satin alim 
 * size optimizations
 * concept accept
 * giving star
+* golgeler iptal
