@@ -65,7 +65,7 @@ namespace GameStates
         public override void Update()
         {
             GameManager.playerController.inputController.HandleMouseInput();
-            if (GameManager.playerController.inputController.canMove)
+            if (GameManager.playerController.inputController.isMouseDown)
             { 
                 GameManager.adsManager.PlaySceneTransitionAds();
                GameManager.ChangeState(GameManager.playingState);

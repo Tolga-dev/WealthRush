@@ -48,7 +48,7 @@ namespace Player
         {
             if (inputController.canMove == false) return;
             
-            var moveX = controller.transform.right * (inputController.IsMouseX() * xSpeed);
+            var moveX = controller.transform.right * (inputController.IsMouseX(Input.GetTouch(0)) * xSpeed);
             var moveZ = controller.transform.forward * zSpeed;
             var move = moveX + moveZ;
             

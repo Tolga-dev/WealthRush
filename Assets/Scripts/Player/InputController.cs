@@ -11,49 +11,44 @@ namespace Player
         public bool isMouseDown;
         public bool canMove;
         
-        /*private bool IsMouseButtonDown() => Input.GetMouseButtonDown(0);
-        private bool IsMouseHeld() => Input.GetMouseButton(0);
-        private bool IsMouseButtonUp() => Input.GetMouseButtonUp(0);
-        public float IsMouseX() => Input.GetAxis("Mouse X");*/
-
-        private bool IsMouseButtonDown() =>   Input.GetTouch(0).phase == TouchPhase.Began;
-        private bool IsMouseHeld() =>   Input.GetTouch(0).phase == TouchPhase.Moved;
-        private bool IsMouseButtonUp() =>   Input.GetTouch(0).phase == TouchPhase.Ended;
-        public float IsMouseX() => Input.GetTouch(0).deltaPosition.x;
-
+        private bool IsMouseButtonDown(Touch touch) =>  touch.phase == TouchPhase.Began;
+        private bool IsMouseHeld(Touch touch) => touch.phase == TouchPhase.Moved;
+        private bool IsMouseButtonUp(Touch touch) => touch.phase == TouchPhase.Ended;
+        public float IsMouseX(Touch touch) => touch.deltaPosition.x;
         
         public void HandleMouseInput()
         {
             if (Input.touchCount == 0) return;
+            var touch = Input.GetTouch(0);
             
-            if (IsPointerOverUIElement())
+            if (IsPointerOverUIElement(touch))
             {
                 canMove = false;
                 isMouseDown = false;
                 return;
             }
             
-            if (IsMouseButtonDown())
+            if (IsMouseButtonDown(touch))
             {
                 canMove = false;
                 isMouseDown = true;
             }
             
-            if (IsMouseHeld() && isMouseDown)
+            if (IsMouseHeld(touch) && isMouseDown)
             {
                 canMove = true;
             }
             
-            if (IsMouseButtonUp() &&  isMouseDown)
+            if (IsMouseButtonUp(touch))
             {
                 canMove = false;
                 isMouseDown = false;
             }
         }
 
-        private bool IsPointerOverUIElement()
+        private bool IsPointerOverUIElement(Touch touch)
         {
-            return EventSystem.current.IsPointerOverGameObject();
+            return EventSystem.current.IsPointerOverGameObject(touch.fingerId);
         }
     }
 }
