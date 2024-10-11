@@ -86,10 +86,12 @@
 * tavandan duz duvar koy - ok
 * update ui -ok
 
-* save sistemi
+* save sistemi -ok
 
-* assagidaki butonlar
-* kamera acisi
+* assagidaki butonlar - ok
+
+
+* kamera acisi - ui
 * reklamlar
 * oyun ici satin alim
-
+* size optimizations
