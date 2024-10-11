@@ -68,8 +68,9 @@ namespace Managers
             
             for (int i = 0; i < value; i++)
             {
-                pileController.AddPrizeToPile(Object.Instantiate(prize).GetComponent<Prize>());
+                pileController.AddPrizeToPile(_gameManager.objectPoolManager.GetPile(), prize.prizeAmount);
             }
+            
         }
 
         public void Subtraction(int value = 1)
@@ -85,12 +86,19 @@ namespace Managers
             for (int i = 0; i < value && moneyPiles.Count > 0; i++)
             {
                 var prize = moneyPiles[^1];
-                
                 _gameManager.playingState.score -= prize.prizeAmount;
                 _gameManager.playingState.UpdateScore();
-                
-                moneyPiles.Remove(prize);
-                Object.Destroy(prize.gameObject);
+
+                if (prize.isPoolPrize)
+                {
+                    _gameManager.objectPoolManager.SetPile(prize);
+                    moneyPiles.Remove(prize);
+                }
+                else
+                {
+                    Object.Destroy(prize.gameObject);
+                    moneyPiles.Remove(prize);
+                }
             }
         }
 
@@ -141,14 +149,13 @@ namespace Managers
         public SelectionAction selectionAction;
         public Action<int> Action;
         public string selectionOperation;
-        public int value;
         public Sprite sprite;
         public void SetAction(Action<int> operation)
         {
             Action = operation;
         }
 
-        public void PerformAction()
+        public void PerformAction(int value)
         {
             Action.Invoke(value); // Trigger the assigned action
         }

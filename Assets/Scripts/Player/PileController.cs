@@ -27,16 +27,19 @@ namespace Player
             _playerController = playerController;
         }
         
-        public void AddPrizeToPile(Prize prize)
+        public void AddPrizeToPile(Prize prize = null, int prizeAmount = 0)
         {
-            prize.transform.SetParent(firstPilePosition);
+            if (prize != null)
+            {
+                prize.transform.SetParent(firstPilePosition);
 
-            var targetPosition = CalculateTargetPosition();
-            CollectMoney(prize, targetPosition);
+                var targetPosition = CalculateTargetPosition();
+                CollectMoney(prize, targetPosition);
 
-            prize.onUse = true;
-            var prizeAmount = prize.prizeAmount;
-            
+                prize.onUse = true;
+                prizeAmount = prize.prizeAmount;
+            }
+
             _playerController.gameManager.playingState.score += prizeAmount;
             _playerController.gameManager.playingState.UpdateScore();
         }
@@ -63,7 +66,10 @@ namespace Player
             
             foreach (var moneyPile in moneyPiles)
             {
-                Object.Destroy(moneyPile.gameObject);
+                if(moneyPile.isPoolPrize)
+                    _playerController.gameManager.objectPoolManager.SetPile(moneyPile);
+                else
+                    Object.Destroy(moneyPile.gameObject);
             }
             moneyPiles.Clear();
 

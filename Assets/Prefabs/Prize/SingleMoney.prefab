@@ -104,7 +104,8 @@ MonoBehaviour:
   isHitPlayer: 0
   emoji: {fileID: 0}
   prizeCanvas: {fileID: 0}
-  prizeAmount: 10
+  prizeAmount: 1
+  onUse: 0
 --- !u!65 &6565771329492624708
 BoxCollider:
   m_ObjectHideFlags: 0

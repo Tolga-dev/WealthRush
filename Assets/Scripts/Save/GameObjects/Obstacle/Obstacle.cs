@@ -45,7 +45,6 @@ namespace Save.GameObjects.Obstacle
             var removeCount = moneyPiles.Count - (foundIndex + 1);
             
             gameManager.selectorManager.Subtraction(removeCount);
-
         }
 
         protected override void DisableGameObject()

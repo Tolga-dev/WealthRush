@@ -119,13 +119,13 @@ namespace Managers.Controllers.Spawner
     
             var currentLevel = gameManager.gamePropertiesInSave.currenLevel;
 
-            selector.selection.value = selector.selection.selectionAction switch
+            selector.prizeAmount = selector.selection.selectionAction switch
             {
                 SelectionAction.Sum => Random.Range(5, 10 + currentLevel),
                 SelectionAction.Subtraction => Random.Range(5, 20 + currentLevel),
                 SelectionAction.Multiply => Random.Range(2, 4 + currentLevel/10),
                 SelectionAction.Divide => Random.Range(2, 4 + currentLevel),
-                _ => selector.selection.value
+                _ => selector.prizeAmount
             };
             selector.gateSprite.sprite = selector.selection.sprite;
             

@@ -18,13 +18,14 @@ namespace Save.GameObjects.Prizes
             if (isHitPlayer)
             {
                 isHitPlayer = false;
-                selection.PerformAction();
+                selection.PerformAction(prizeAmount);
             }
         }
         
         public void SetText()
         {
-            selectionText.text = selection.selectionOperation +" " + selection.value;
+
+            selectionText.text = selection.selectionOperation + " " + prizeAmount;
         }
         
     }

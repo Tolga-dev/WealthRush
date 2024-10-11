@@ -11,10 +11,11 @@ namespace Save.GameObjects.Prizes
     {
         public ParticleSystem emoji;
         public Canvas prizeCanvas;
-
+        
         public int prizeAmount;
         public bool onUse = false;
-
+        public bool isPoolPrize;
+        
         protected override void PlayAdditionalEffects(PlayerController playerController)
         {
             if (emoji != null)

@@ -29,6 +29,7 @@ namespace Managers
         public PlayerController playerController;
         public SelectorController selectorManager;
         public SpawnerManager spawnerManager;
+        public ObjectPoolManager objectPoolManager;
 
         [Header("Road Borders")] 
         public Transform targetA; // First target position

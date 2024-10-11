@@ -87,6 +87,7 @@
   * save sistemi
   * paralarin yok olmasi -> object pool?
   * kamerayi astiktan sonra -> spawn olmasina gerek yok
+  * value atama kismi bozuk
   
 * assagidaki butonlar
 * kamera acisi
