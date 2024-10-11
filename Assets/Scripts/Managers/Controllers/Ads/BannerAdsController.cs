@@ -9,34 +9,17 @@ namespace Managers.Controllers.Ads
     public class BannerAdsController
     {
         
-#if UNITY_ANDROID
         private string _adUnitId = "ca-app-pub-2624974978750920/2553989724";
-#elif UNITY_IPHONE
-  private string _adUnitId = "ca-app-pub-3940256099942544/2934735716";
-#else
-  private string _adUnitId = "unused";
-#endif
         public BannerView BannerView;
 
-        [Obsolete("Obsolete")]
-        public void CreateBannerView()
+        public void LoadBannerView()
         {
-            Debug.Log("Creating banner view");
-
             if (BannerView != null)
             {
                 DestroyAd();
             }
-
-            BannerView = new BannerView(_adUnitId, AdSize.SmartBanner, AdPosition.Bottom);
-        }
-
-        public void LoadBannerView()
-        {
-            if (BannerView == null)
-            {
-                CreateBannerView();
-            }
+            
+            BannerView = new BannerView(_adUnitId, AdSize.Banner, AdPosition.Bottom);
 
             var adRequest = new AdRequest();
             BannerView.LoadAd(adRequest);

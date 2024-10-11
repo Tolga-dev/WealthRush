@@ -7,13 +7,7 @@ namespace Managers.Controllers.Ads
     [Serializable]
     public class RewardedController
     {
-#if UNITY_ANDROID
         private string _adUnitId = "ca-app-pub-2624974978750920/6226475573";
-#elif UNITY_IPHONE
-  private string _adUnitId = "ca-app-pub-2624974978750920/2553989724";
-#else
-  private string _adUnitId = "unused";
-#endif
         
         private RewardedAd _rewardedAd;
         
@@ -56,6 +50,12 @@ namespace Managers.Controllers.Ads
             }
             else
             {
+                LoadRewardedAd();
+                if (_rewardedAd != null && _rewardedAd.CanShowAd())
+                {
+                    Debug.Log("Showing interstitial ad.");
+                    _rewardedAd.Show((Reward reward) => {Debug.Log("You Won!");});
+                }
                 Debug.LogError("Interstitial ad is not ready yet.");
             }
         }

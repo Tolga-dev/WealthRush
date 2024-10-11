@@ -8,24 +8,17 @@ namespace Managers.Controllers.Ads
     [Serializable]
     public class AppOpenController
     {
-#if UNITY_ANDROID
         private string _adUnitId = "ca-app-pub-2624974978750920/8406648871";
-#elif UNITY_IPHONE
-  private string _adUnitId = "ca-app-pub-3940256099942544/2934735716";
-#else
-  private string _adUnitId = "unused";
-#endif
         private AppOpenAd _appOpenAd;
-        private DateTime _expireTime;
 
-        public bool IsAdAvailable => _appOpenAd != null && _appOpenAd.CanShowAd() && DateTime.Now < _expireTime;
+        public bool IsAdAvailable => _appOpenAd != null && _appOpenAd.CanShowAd();
 
-        private void Awake()
+        public void Awake()
         {
             AppStateEventNotifier.AppStateChanged += OnAppStateChanged;
         }
 
-        private void OnDestroy()
+        public void OnDestroy()
         {
             // Always unlisten to events when complete.
             AppStateEventNotifier.AppStateChanged -= OnAppStateChanged;
@@ -35,7 +28,6 @@ namespace Managers.Controllers.Ads
         {
             Debug.Log("App State changed to : "+ state);
 
-            // if the app is Foregrounded and the ad is available, show it.
             if (state == AppState.Foreground)
             {
                 if (IsAdAvailable)
@@ -53,7 +45,11 @@ namespace Managers.Controllers.Ads
             }
             else
             {
-                Debug.LogError("App open ad is not ready yet.");
+                LoadAppOpenAd();
+                if (_appOpenAd != null && _appOpenAd.CanShowAd())
+                {
+                    _appOpenAd.Show();
+                }
             }
         }
         
@@ -67,14 +63,11 @@ namespace Managers.Controllers.Ads
 
             Debug.Log("Loading the app open ad.");
 
-            // Create our request used to load the ad.
             var adRequest = new AdRequest();
 
-            // send the request to load the ad.
             AppOpenAd.Load(_adUnitId, adRequest,
                 (AppOpenAd ad, LoadAdError error) =>
                 {
-                    // if error is not null, the load request failed.
                     if (error != null || ad == null)
                     {
                         Debug.LogError("app open ad failed to load an ad " +
@@ -84,7 +77,6 @@ namespace Managers.Controllers.Ads
 
                     Debug.Log("App open ad loaded with response : "
                               + ad.GetResponseInfo());
-                    _expireTime = DateTime.Now + TimeSpan.FromHours(4);
                     _appOpenAd = ad;
                     RegisterEventHandlers(ad);
                 });

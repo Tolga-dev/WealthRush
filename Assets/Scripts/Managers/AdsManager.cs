@@ -26,7 +26,7 @@ namespace Managers
                 rewardedInterstitialController.LoadRewardedAd();
                 rewardedController.LoadRewardedAd();
             });
-            
+            appOpenController.Awake();
         }
         
         public void ShowInterstitialAd()
@@ -40,6 +40,11 @@ namespace Managers
         public void ShowRewardedAd()
         {
             rewardedController.ShowRewardedAd();
+        }
+
+        public void OnDestroy()
+        {
+            appOpenController.OnDestroy();
         }
     }
 }

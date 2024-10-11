@@ -11,14 +11,7 @@ namespace Managers.Controllers.Ads
     {
         public Button startInterstitialAds;
         
-        // These ad units are configured to always serve test ads.
-#if UNITY_ANDROID
         private string _adUnitId = "ca-app-pub-2624974978750920/9719730545";
-#elif UNITY_IPHONE
-  private string _adUnitId = "ca-app-pub-3940256099942544/4411468910";
-#else
-  private string _adUnitId = "unused";
-#endif
 
        private InterstitialAd _interstitialAd;
 
@@ -59,6 +52,12 @@ namespace Managers.Controllers.Ads
             }
             else
             {
+                LoadAd();
+                if (_interstitialAd != null && _interstitialAd.CanShowAd())
+                {
+                    Debug.Log("Showing interstitial ad.");
+                    _interstitialAd.Show();
+                }
                 Debug.LogError("Interstitial ad is no   t ready yet.");
             }
 
