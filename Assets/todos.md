@@ -106,16 +106,16 @@
 - reload -ok
 - next level -ok
 - update butonu birbirine degiyor -OK 
+* golgeler iptal -ok
 
 * giving star
 * yukleme yaparken yukleme ekrani gec olacak
 * oyun ici satin alim 
 
 // sonraki update
-* golgeler iptal
 * oyun icindeki textler degismeli oyun sonu
 * kamera acisi degismeli
 * size optimizations 
-
+* reklamdan direk oraya giriyor
 
 

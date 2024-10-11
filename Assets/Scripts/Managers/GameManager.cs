@@ -179,15 +179,13 @@ namespace Managers
         
         public void OnCameraSwitch(ICinemachineCamera toCam, ICinemachineCamera fromCam)
         {
-            Debug.Log("worked");
             var firstCam = (CinemachineVirtualCamera)fromCam;
             var secondCam = (CinemachineVirtualCamera)toCam;
-            Debug.Log(firstCam.gameObject.name); // menu
-            Debug.Log(secondCam.gameObject.name); // win
             if (firstCam == winCam && secondCam == menuStateCam)
             {
                 menuState.clickToStart.text = gamePropertiesInSave.winTexts[Random.Range(0, gamePropertiesInSave.winTexts.Length)];
                 playingState.clickAvoid.SetActive(true);
+                adsManager.PlaySceneTransitionAds();
                 StartCoroutine(WaitForCameraBlendToFinish());
             }
         }
@@ -201,7 +199,6 @@ namespace Managers
             StartCoroutine(saveManager.Save());
             playingState.clickAvoid.SetActive(false);
             menuState.clickToStart.text = "Tap To Play!";
-            adsManager.PlaySceneTransitionAds();
             Debug.Log("Arrived at menu state!");
         }
 

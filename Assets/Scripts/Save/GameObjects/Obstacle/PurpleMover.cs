@@ -7,21 +7,19 @@ namespace Save.GameObjects.Obstacle
     {
         private float _startX; // Starting X position
         private float _endX;   // Ending X position
-
-        private float _currentX; // Current X position
-        private bool _movingToEndX = true; // Flag to check direction
+        private bool _movingToEndX = true; // Direction flag
 
         public float moveSpeed = 2f; // Speed of movement
-        public float rotationSpeed = 100f; // Speed of rotation
+        public float smoothness = 0.1f; // Smoothing factor for movement
+
         private void Start()
         {
-            var gameManager = GameManager.Instance;
+            // Get the starting and ending positions from the GameManager
             _startX = gameManager.targetA.position.x;
             _endX = gameManager.targetB.position.x;
-            
-            _currentX = _startX;
-            
-            transform.position = new Vector3(_currentX, transform.position.y, transform.position.z);
+
+            // Initialize position to start point
+            SetPosition(_startX);
         }
 
         private void Update()
@@ -31,27 +29,31 @@ namespace Save.GameObjects.Obstacle
 
         private void MoveAndRotate()
         {
-            var targetX = _movingToEndX ? _endX : _startX;
-            
-            var position = transform.position;
-            var direction = new Vector3(targetX, position.y, position.z) - position;
-            var distance = direction.magnitude;
+            float targetX = _movingToEndX ? _endX : _startX; // Determine the target position
 
-            if (distance > 0.1f)
-            {
-                direction.Normalize();
-                transform.position += direction * (moveSpeed * Time.deltaTime);
-            }
+            // Interpolate smoothly between current position and target position
+            float newX = Mathf.Lerp(transform.position.x, targetX, smoothness * moveSpeed * Time.deltaTime);
 
-            if (distance < 0.1f)
+            SetPosition(newX);
+
+            // If the object is very close to the target, switch direction
+            if (Mathf.Abs(transform.position.x - targetX) < 0.05f)
             {
                 SwitchDirection();
             }
         }
 
+        private void SetPosition(float x)
+        {
+            // Set the X position while keeping Y and Z the same
+            var position = transform.position;
+            position.x = x;
+            transform.position = position;
+        }
+
         private void SwitchDirection()
         {
-            _movingToEndX = !_movingToEndX; // Update direction flag
+            _movingToEndX = !_movingToEndX; // Toggle the direction flag
         }
     }
 }
