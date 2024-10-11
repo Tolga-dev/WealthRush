@@ -31,6 +31,7 @@ namespace Managers
         public SpawnerManager spawnerManager;
         public ObjectPoolManager objectPoolManager;
         public SaveManager saveManager;
+        public AdsManager adsManager;
         [Header("Road Borders")] 
         public Transform targetA; // First target position
         public Transform targetB; // Second target position
@@ -71,7 +72,6 @@ namespace Managers
 
             _activeCam = playerCam;
             ChangeState(menuState);
-            gamePropertiesInSave.ResetThis();
         }
 
         public void Update()
@@ -201,11 +201,15 @@ namespace Managers
             StartCoroutine(saveManager.Save());
             playingState.clickAvoid.SetActive(false);
             menuState.clickToStart.text = "Tap To Play!";
+            adsManager.PlaySceneTransitionAds();
             Debug.Log("Arrived at menu state!");
         }
 
         private void OnApplicationQuit()
         {
+            gamePropertiesInSave.lastTimeNextLevelAdWatched = 0;
+            gamePropertiesInSave.lastTimeComboAdWatched = 0;
+            
             StartCoroutine(saveManager.Save());
         }
     }

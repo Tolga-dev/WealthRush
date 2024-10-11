@@ -65,8 +65,11 @@ namespace GameStates
         public override void Update()
         {
             GameManager.playerController.inputController.HandleMouseInput();
-            if(GameManager.playerController.inputController.canMove)
+            if (GameManager.playerController.inputController.canMove)
+            { 
+                GameManager.adsManager.PlaySceneTransitionAds();
                GameManager.ChangeState(GameManager.playingState);
+            }
         }
 
         public override void Exit()
@@ -77,7 +80,7 @@ namespace GameStates
       
         public void SetMenuStateUI()
         {
-            comboAmount.text = "x" + (float)GameManager.gamePropertiesInSave.comboRank/10;
+            comboAmount.text = "x" + (float)GameManager.gamePropertiesInSave.comboRank/10 + "+";
             priceAmount.text = GameManager.gamePropertiesInSave.price + "$";
             
             paraAmount.text = GameManager.gamePropertiesInSave.money + "$";
@@ -132,6 +135,7 @@ namespace GameStates
             // combo
             updateCombo.onClick.AddListener(() =>
             {
+                GameManager.adsManager.PlayComboTransitionAds();
                 UpdateCombo();
                 GameManager.ButtonClickSound();
             });
@@ -160,6 +164,8 @@ namespace GameStates
             {
                 GameManager.ButtonClickSound();
                 GameManager.gamePropertiesInSave.isNoAds = true;
+                SetShopUI();
+                GameManager.adsManager.CleanUp();
             });
             
         }
@@ -172,6 +178,15 @@ namespace GameStates
             ToggleButtonPosition(changeStatusSoundButton, save.isGameSoundOn);
             
             // shop
+            SetShopUI();
+            
+            // combo
+            SetMenuStateUI();
+        }
+
+        private void SetShopUI()
+        {
+            var save = GameManager.gamePropertiesInSave;
             if (save.isNoAds)
             {
                 buyNoAds.gameObject.SetActive(false);
@@ -181,9 +196,6 @@ namespace GameStates
             {
                 description.text = "Remove ads with 2$"; // money might be changed
             }
-            
-            // combo
-            SetMenuStateUI();
         }
 
         private void ToggleButtonPosition(Button button, bool isOn)

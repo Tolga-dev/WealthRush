@@ -15,8 +15,12 @@ namespace Managers
         public RewardedController rewardedController;
         public RewardedInterstitialController rewardedInterstitialController;
         
+        public GameManager gameManager;
         public void Start()
         {
+            if(gameManager.gamePropertiesInSave.isNoAds)
+                return;
+            
             MobileAds.Initialize((InitializationStatus initStatus) =>
             {
                 bannerAdsController.LoadBannerView();
@@ -31,10 +35,11 @@ namespace Managers
             {
                 rewardedController.LoadRewardedAd();
             });
-            MobileAds.Initialize((InitializationStatus initStatus) =>
+            
+            /*MobileAds.Initialize((InitializationStatus initStatus) =>
             {
                 rewardedInterstitialController.LoadRewardedAd();
-            });
+            });*/
             Debug.Log("Rewarded Ad Initialized");
             
         }
@@ -55,10 +60,57 @@ namespace Managers
         
         public void ShowRewardedInterstitialAd()
         {
-            rewardedInterstitialController.ShowRewardedAd();
+           // rewardedInterstitialController.ShowRewardedAd();
+        }
+        
+        public bool CanPlayAds()
+        {
+            if (gameManager.gamePropertiesInSave.isNoAds)
+                return false;
+            return true;
         }
 
+        public void PlayComboTransitionAds()
+        {
+            var save = gameManager.gamePropertiesInSave;
 
-
+            if (CanPlayAds() == false)
+                return;
+            
+            if (save.lastTimeComboAdWatched >= save.maxTimeBetweenComboAds)
+            {
+                save.lastTimeComboAdWatched = 0;
+                ShowInterstitialAd();
+            }
+            else
+            {
+                save.lastTimeComboAdWatched++;
+            }
+        }
+        public void PlaySceneTransitionAds()
+        {
+            var save = gameManager.gamePropertiesInSave;
+            
+            if (CanPlayAds() == false)
+                return;
+            
+            if (save.lastTimeNextLevelAdWatched >= save.maxTimeBetweenNextLevel)
+            {
+                save.lastTimeNextLevelAdWatched = 0;
+                ShowRewardedAd();
+            }
+            else
+            {
+                save.lastTimeNextLevelAdWatched++;
+            }
+        }
+        public void CleanUp()
+        {
+            bannerAdsController.DestroyAd();
+            interstitialController.DestroyAd();
+            rewardedController.DestroyAd();
+            rewardedInterstitialController.DestroyAd();
+        }
+        
     }
 }

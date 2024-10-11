@@ -7,7 +7,6 @@ namespace Save.GameSo
     public class GamePropertiesInSave : ScriptableObject
     {
         public int money;
-        public bool isNoAds;
         
         [Header("Music")]
         public bool isGameMusicOn;
@@ -39,14 +38,16 @@ namespace Save.GameSo
         
         [Header("Win Text")]
         public string[] winTexts;
-
-        public void ResetThis()
-        {
-            /*chestSpawnCount = 0;
-            newAdditionalPrice = 1;
-            price = 100;
-            priceLevel = 1;*/
-        }
+        
+        [Header("Ads")]
+        public bool isNoAds;
+        
+        public int lastTimeComboAdWatched;
+        public int lastTimeNextLevelAdWatched;
+        
+        public int maxTimeBetweenComboAds = 4;
+        public int maxTimeBetweenNextLevel = 2;
+        
     }
  
 

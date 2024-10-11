@@ -89,13 +89,33 @@
 
 * assagidaki butonlar - ok
 
-
 * kamera acisi - ui
 * reklamlar -ok
   *yukleme sahnesi gelmeli
 
-* oyun ici satin alim 
-* size optimizations
-* concept accept
+- no ads pop up - ok
+- resetle oyun bitince - ok
+- bannet altta - ok
+- update basinca reklam -ok
+- next basinda teklam -ok
+- buy ads - ok
+
+
+- top to start -ok
+- update -ok
+- reload -ok
+- next level -ok
+- update butonu birbirine degiyor -OK 
+
 * giving star
+* yukleme yaparken yukleme ekrani gec olacak
+* oyun ici satin alim 
+
+// sonraki update
 * golgeler iptal
+* oyun icindeki textler degismeli oyun sonu
+* kamera acisi degismeli
+* size optimizations 
+
+
+
