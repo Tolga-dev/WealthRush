@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b641e6644d0e49a890eb47fe4baaed96, type: 3}
   m_Name: GamePropertiesInSave
   m_EditorClassIdentifier: 
-  money: 394003
+  money: 291473
   isGameMusicOn: 1
   isGameSoundOn: 1
   gameMusicStartVolume: 0.03
@@ -20,16 +20,16 @@ MonoBehaviour:
   gameMusicChangeDuration: 1
   chestSpawnCount: 1
   maxChestSpawns: 3
-  currenLevel: 1
+  currenLevel: 9
   levelRecords: e8030000d0070000b80b000050c3000080380100d0fb0100
-  comboRank: 14
+  comboRank: 60
   increaseComboAmount: 1
   isNewPriceCalculated: 0
-  price: 703
-  priceLevel: 7
+  price: 9767
+  priceLevel: 30
   priceMinIncreaseAmount: 2
   priceMaxIncreaseAmount: 50
-  newAdditionalPrice: 241
+  newAdditionalPrice: 808
   winTexts:
   - Stronger. Faster. Unstoppable!
   - Dominate the next level!

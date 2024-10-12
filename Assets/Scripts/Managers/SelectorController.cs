@@ -17,13 +17,13 @@ namespace Managers
     [Serializable]
     public class SelectorController
     {
-        private List<Selection> _selections;
+        private List<Selection> _selections = new List<Selection>();
         private GameManager _gameManager;
 
         public Sprite positiveSprite;
         public Sprite badSprite;
 
-        public void Start()
+        public void Starter()
         {
             _gameManager = GameManager.Instance;
 

@@ -5,7 +5,7 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace ToonyColorsPro
+namespace OutMaterials.JMO_Assets.Toony_Colors_Pro.Demo_TCP2.TCP2_Demo_Assets.Misc
 {
 	namespace Demo
 	{

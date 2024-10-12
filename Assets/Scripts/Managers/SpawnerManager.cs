@@ -21,7 +21,7 @@ namespace Managers
         [Header("Prize Spawner")]
         public PrizeSpawner prizeSpawner;
         
-        private void Start()
+        public void Starter()
         {
             _gameManager = GameManager.Instance;
             roadSpawner.Init();

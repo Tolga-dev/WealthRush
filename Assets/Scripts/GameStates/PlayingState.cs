@@ -152,7 +152,7 @@ namespace GameStates
             // upper ui
             reloadButton.onClick.AddListener(() =>
             {
-                GameManager.adsManager.PlaySceneTransitionAds();
+                GameManager.serviceManager.adsManager.PlaySceneTransitionAds();
                 GameManager.ChangeState(GameManager.playingState);
             });
             startPosZ = playerInitialPosition.transform.position.z;

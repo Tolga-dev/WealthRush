@@ -3,6 +3,7 @@ using GameStates.Base;
 using Managers;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
@@ -28,11 +29,13 @@ namespace GameStates
         public Button exitMarket;
         public Button buyNoAds;
         public TextMeshProUGUI description;
+        public TextMeshProUGUI shopResult;
         public Transform marketPanel;
         public Animator marketMenuAnimator;
         public Animator settingMenuAnimator;
         private static readonly int Pop = Animator.StringToHash("Pop");
-
+        public string noAdsId;
+        public AudioClip failedClickSound;
         // money
         [Header("Main Menu UI")]
         public TextMeshProUGUI paraAmount;
@@ -67,7 +70,7 @@ namespace GameStates
             GameManager.playerController.inputController.HandleMouseInput();
             if (GameManager.playerController.inputController.isMouseDown)
             { 
-                GameManager.adsManager.PlaySceneTransitionAds();
+                GameManager.serviceManager.adsManager.PlaySceneTransitionAds();
                GameManager.ChangeState(GameManager.playingState);
             }
         }
@@ -135,7 +138,7 @@ namespace GameStates
             // combo
             updateCombo.onClick.AddListener(() =>
             {
-                GameManager.adsManager.PlayComboTransitionAds();
+                GameManager.serviceManager.adsManager.PlayComboTransitionAds();
                 UpdateCombo();
                 GameManager.ButtonClickSound();
             });
@@ -159,13 +162,27 @@ namespace GameStates
             exitMarket.onClick.AddListener(() =>
             {
                 GameManager.ButtonClickSound();
+                shopResult.text = "";
             });
             buyNoAds.onClick.AddListener(() =>
             {
-                GameManager.ButtonClickSound();
-                GameManager.gamePropertiesInSave.isNoAds = true;
-                SetShopUI();
-                GameManager.adsManager.CleanUp();
+                var success = new UnityAction<string>((string result) =>
+                {
+                    GameManager.ButtonClickSound();
+                    GameManager.gamePropertiesInSave.isNoAds = true;
+                    SetShopUI();
+                    GameManager.serviceManager.adsManager.CleanUp();
+                    shopResult.text = result;
+                });
+                
+                var failed = new UnityAction<string>((string result) =>
+                {
+                    GameManager.PlayASound(failedClickSound);
+                    shopResult.text = result;
+                });
+                
+                GameManager.serviceManager.inAppPurchase.BuyItem(noAdsId,success,failed);
+                
             });
             
         }
@@ -190,11 +207,11 @@ namespace GameStates
             if (save.isNoAds)
             {
                 buyNoAds.gameObject.SetActive(false);
-                description.text = "You have already bought No Ads!";
+                description.text = "You have bought No Ads!";
             }
             else
             {
-                description.text = "Remove ads with 2$"; // money might be changed
+                description.text = $"Remove ads with {GameManager.serviceManager.inAppPurchase.ReturnLocalizedPrice(noAdsId)}"; // money might be changed
             }
         }
 

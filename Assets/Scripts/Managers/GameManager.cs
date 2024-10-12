@@ -31,7 +31,7 @@ namespace Managers
         public SpawnerManager spawnerManager;
         public ObjectPoolManager objectPoolManager;
         public SaveManager saveManager;
-        public AdsManager adsManager;
+        public ServiceManager serviceManager;
         [Header("Road Borders")] 
         public Transform targetA; // First target position
         public Transform targetB; // Second target position
@@ -65,12 +65,14 @@ namespace Managers
         public void Start()
         {
             saveManager.Load();
+            selectorManager.Starter();
+            spawnerManager.Starter();
             
             menuState.Init(this);
             playingState.Init(this);
-            selectorManager.Start();
 
             _activeCam = playerCam;
+            
             ChangeState(menuState);
         }
 
@@ -185,7 +187,7 @@ namespace Managers
             {
                 menuState.clickToStart.text = gamePropertiesInSave.winTexts[Random.Range(0, gamePropertiesInSave.winTexts.Length)];
                 playingState.clickAvoid.SetActive(true);
-                adsManager.PlaySceneTransitionAds();
+                serviceManager.adsManager.PlaySceneTransitionAds();
                 StartCoroutine(WaitForCameraBlendToFinish());
             }
         }

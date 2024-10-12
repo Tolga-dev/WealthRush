@@ -1,9 +1,8 @@
 using System;
+using System.Threading.Tasks;
 using GoogleMobileAds.Api;
 using Managers.Controllers.Ads;
 using UnityEngine;
-using UnityEngine.Serialization;
-using UnityEngine.UI;
 
 namespace Managers
 {
@@ -16,10 +15,10 @@ namespace Managers
         public RewardedInterstitialController rewardedInterstitialController;
         
         public GameManager gameManager;
-        public void Start()
+        public Task<Task> StartAdsServer()
         {
             if(gameManager.gamePropertiesInSave.isNoAds)
-                return;
+                return Task.FromResult(Task.CompletedTask);
             
             MobileAds.Initialize((InitializationStatus initStatus) =>
             {
@@ -41,7 +40,7 @@ namespace Managers
                 rewardedInterstitialController.LoadRewardedAd();
             });*/
             Debug.Log("Rewarded Ad Initialized");
-            
+            return Task.FromResult(Task.CompletedTask);
         }
         public void ShowBanner()
         {
