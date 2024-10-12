@@ -34,7 +34,6 @@ namespace GameStates
         public Animator marketMenuAnimator;
         public Animator settingMenuAnimator;
         private static readonly int Pop = Animator.StringToHash("Pop");
-        public string noAdsId;
         public AudioClip failedClickSound;
         // money
         [Header("Main Menu UI")]
@@ -181,7 +180,7 @@ namespace GameStates
                     shopResult.text = result;
                 });
                 
-                GameManager.serviceManager.inAppPurchase.BuyItem(noAdsId,success,failed);
+                GameManager.serviceManager.inAppPurchase.BuyItem(GameManager.gamePropertiesInSave.noAdsProductId,success,failed);
                 
             });
             
@@ -211,7 +210,7 @@ namespace GameStates
             }
             else
             {
-                description.text = $"Remove ads with {GameManager.serviceManager.inAppPurchase.ReturnLocalizedPrice(noAdsId)}"; // money might be changed
+                description.text = $"Remove ads with {GameManager.serviceManager.inAppPurchase.ReturnLocalizedPrice(GameManager.gamePropertiesInSave.noAdsProductId)}"; // money might be changed
             }
         }
 

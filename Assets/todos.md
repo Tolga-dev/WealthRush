@@ -108,14 +108,18 @@
 - update butonu birbirine degiyor -OK 
 * golgeler iptal -ok
 
-* giving star
-* yukleme yaparken yukleme ekrani gec olacak
-* oyun ici satin alim 
+* yukleme yaparken yukleme ekrani gec olacak -ok
+* oyun ici satin alim  -ok 
+* loading screen -ok 
+* close bottom part of playing state -ok
 
 // sonraki update
 * oyun icindeki textler degismeli oyun sonu
 * kamera acisi degismeli
 * size optimizations 
 * reklamdan direk oraya giriyor
+
+* giving star 
+  * after playing 2 times every -ok
 
 

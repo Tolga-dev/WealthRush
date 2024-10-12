@@ -1,8 +1,7 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Managers.Controllers.InAppPurchase;
+using TMPro;
 using Unity.Services.Core;
 using Unity.Services.Core.Environments;
 using UnityEngine;
@@ -10,6 +9,7 @@ using UnityEngine.Events;
 using UnityEngine.Purchasing;
 using UnityEngine.Purchasing.Extension;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 namespace Managers
 {
@@ -20,42 +20,61 @@ namespace Managers
         private UnityAction<string> _onPurchaseSuccess;
         private UnityAction<string> _onPurchaseFailed;
 
-        public List<ConsumableItems> consumableItems = new List<ConsumableItems>();
-
-        public async Task<Task> StartInAppServer()
+        public GameManager gameManager;
+        public bool isInitialized;
+        public TextMeshProUGUI errorMessage;
+        
+        public IEnumerator StartInAppServer()
         {
-            await InitializeUnityServices();
-            return Task.FromResult(Task.CompletedTask);
-        }
+            yield return InitializeUnityServices();
 
-        private async Task InitializeUnityServices()
+            float timeout = 10f; // Set your desired timeout duration in seconds
+            float elapsedTime = 0f;
+
+            while (!isInitialized && elapsedTime < timeout)
+            {
+                elapsedTime += Time.deltaTime; // Accumulate elapsed time
+                yield return null; // Wait for the next frame
+            }
+
+            if (!isInitialized)
+            {
+                Debug.LogWarning("IAP initialization timed out.");
+                errorMessage.text= "Failed to initialize IAP. Please try again later.";
+            }
+            yield return null; // Wait for the next frame
+        }
+        private IEnumerator InitializeUnityServices()
         {
             var options = new InitializationOptions().SetEnvironmentName("development"); // Set your environment
-            await UnityServices.InitializeAsync(options);
+            yield return  UnityServices.InitializeAsync(options);
 
             InitializeIAP();
         }
-
+        
         private void InitializeIAP()
         {
+            Debug.Log("Initializing IAP...");
+
             var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
-
-            var products = new List<ProductDefinition>();
-            products.
-                AddRange(consumableItems.Select(
-                        consumableItem => new ProductDefinition(consumableItem.id, ProductType.Consumable)));
-
+            var products = new List<ProductDefinition> { new ProductDefinition(gameManager.gamePropertiesInSave.noAdsProductId, ProductType.NonConsumable) };
             builder.AddProducts(products);
-            
+
             UnityPurchasing.Initialize(this, builder);
+
+            Debug.Log("UnityPurchasing.Initialize called.");
         }
-        
+
         public void OnInitialized(IStoreController controller, IExtensionProvider extensions)
         {
             _storeController = controller;
             ExtensionProvider = extensions;
+            isInitialized = true;
+            foreach (var products in _storeController.products.all)
+            {
+                Debug.Log($"Product available: {products.definition.id}");
+            }
         }
-        
 
         public void OnInitializeFailed(InitializationFailureReason error)
         {
@@ -86,6 +105,7 @@ namespace Managers
         public void BuyItem(string id, UnityAction<string> success, UnityAction<string> failed)
         {
             var noAdsProduct = GetItem(id);
+
             _onPurchaseSuccess = success;
             _onPurchaseFailed = failed;
             if (noAdsProduct != null)
@@ -115,10 +135,23 @@ namespace Managers
 
         private Product GetItem(string id)
         {
+            
+            if (_storeController == null)
+            {
+                Debug.LogError("StoreController is not initialized.");
+                return null;
+            }
+            foreach (var products in _storeController.products.all)
+            {
+                Debug.Log($"Product available: {products.definition.id}");
+            }
+            
             var product = _storeController.products.WithID(id);
+            if (product == null)
+            {
+                Debug.LogError($"Product with id {id} not found.");
+            }
             return product;
         }
-
-
     }
 }

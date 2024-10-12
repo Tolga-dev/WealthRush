@@ -12,10 +12,11 @@ namespace Managers
         [Header("Service Managers")]
         public AdsManager adsManager;
         public InAppPurchase inAppPurchase;
-        
+        public GameReviewManager gameReviewManager;
         [Header("Loading UI")]
         public TextMeshProUGUI loadingDebug;
         public GameObject loadingPanel;
+        public Slider loadingSlider;
         
         public List<GameObject> startGameList = new List<GameObject>();
         private void Start()
@@ -25,14 +26,20 @@ namespace Managers
 
         private IEnumerator Load()
         {
+            loadingSlider.value = 0.25f;
             loadingDebug.text = "Connecting to Server...";
             yield return adsManager.StartAdsServer();
+            
+            loadingSlider.value = 0.50f;
             loadingDebug.text = "Connecting to App...";
             yield return new WaitForSeconds(0.2f);
+            
             yield return inAppPurchase.StartInAppServer();
+            loadingSlider.value = 1f;
             loadingDebug.text = "Connected!";
             yield return new WaitForSeconds(0.2f);
             
+            gameReviewManager.PopUp();
             
             // after connecting 
             foreach (var startGame in startGameList)

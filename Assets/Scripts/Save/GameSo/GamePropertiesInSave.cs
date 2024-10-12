@@ -41,13 +41,17 @@ namespace Save.GameSo
         
         [Header("Ads")]
         public bool isNoAds;
-        
+        public string noAdsProductId;
         public int lastTimeComboAdWatched;
         public int lastTimeNextLevelAdWatched;
         
         public int maxTimeBetweenComboAds = 4;
         public int maxTimeBetweenNextLevel = 2;
-        
+        [Header("Review")] 
+        public bool isReviewed;
+        public int reviewCount;
+        public int maxReviewCount;
+
     }
  
 
