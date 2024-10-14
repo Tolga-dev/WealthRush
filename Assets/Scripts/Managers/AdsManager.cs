@@ -57,10 +57,10 @@ namespace Managers
             rewardedController.ShowRewardedAd();
         }
         
-        public void ShowRewardedInterstitialAd()
+        /*public void ShowRewardedInterstitialAd()
         {
            // rewardedInterstitialController.ShowRewardedAd();
-        }
+        }*/
         
         public bool CanPlayAds()
         {

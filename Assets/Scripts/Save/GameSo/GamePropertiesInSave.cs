@@ -47,11 +47,7 @@ namespace Save.GameSo
         
         public int maxTimeBetweenComboAds = 4;
         public int maxTimeBetweenNextLevel = 2;
-        [Header("Review")] 
-        public bool isReviewed;
-        public int reviewCount;
-        public int maxReviewCount;
-
+        
     }
  
 

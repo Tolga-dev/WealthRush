@@ -12,7 +12,6 @@ namespace Managers
         [Header("Service Managers")]
         public AdsManager adsManager;
         public InAppPurchase inAppPurchase;
-        public GameReviewManager gameReviewManager;
         [Header("Loading UI")]
         public TextMeshProUGUI loadingDebug;
         public GameObject loadingPanel;
@@ -39,9 +38,6 @@ namespace Managers
             loadingDebug.text = "Connected!";
             yield return new WaitForSeconds(0.2f);
             
-            gameReviewManager.PopUp();
-            
-            // after connecting 
             foreach (var startGame in startGameList)
             {
                 startGame.gameObject.SetActive(true);
@@ -49,6 +45,7 @@ namespace Managers
             
             loadingDebug.gameObject.SetActive(false);
             loadingPanel.gameObject.SetActive(false);
+ 
             
             yield return null;
         }

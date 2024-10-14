@@ -137,7 +137,6 @@ namespace GameStates
             // combo
             updateCombo.onClick.AddListener(() =>
             {
-                GameManager.serviceManager.adsManager.PlayComboTransitionAds();
                 UpdateCombo();
                 GameManager.ButtonClickSound();
             });
@@ -259,6 +258,9 @@ namespace GameStates
 
                 save.isNewPriceCalculated = false;
                 GameManager.PlayASound(GameManager.updateComboSound);
+                GameManager.StartCoroutine(GameManager.saveManager.Save());
+                GameManager.serviceManager.adsManager.PlayComboTransitionAds();
+                
                 SetMenuStateUI();
             }
             else

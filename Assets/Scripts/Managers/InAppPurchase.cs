@@ -16,7 +16,7 @@ namespace Managers
     public class InAppPurchase : MonoBehaviour, IDetailedStoreListener
     {
         private IStoreController _storeController;
-        public IExtensionProvider ExtensionProvider;
+        private IExtensionProvider _extensionProvider;
         private UnityAction<string> _onPurchaseSuccess;
         private UnityAction<string> _onPurchaseFailed;
 
@@ -40,15 +40,19 @@ namespace Managers
             if (!isInitialized)
             {
                 Debug.LogWarning("IAP initialization timed out.");
-                errorMessage.text= "Failed to initialize IAP. Please try again later.";
+                errorMessage.text= "Time Out. Please try again later.";
+                
+                yield return new WaitForSeconds(1);
             }
+            
             yield return null; // Wait for the next frame
         }
         private IEnumerator InitializeUnityServices()
         {
             var options = new InitializationOptions().SetEnvironmentName("development"); // Set your environment
             yield return  UnityServices.InitializeAsync(options);
-
+            Debug.Log("Unity Services initialized.");
+            
             InitializeIAP();
         }
         
@@ -57,25 +61,35 @@ namespace Managers
             Debug.Log("Initializing IAP...");
 
             var builder = ConfigurationBuilder.Instance(StandardPurchasingModule.Instance());
-            var products = new List<ProductDefinition> { new ProductDefinition(gameManager.gamePropertiesInSave.noAdsProductId, ProductType.NonConsumable) };
-            builder.AddProducts(products);
 
+            builder.Configure<IGooglePlayConfiguration>().SetDeferredPurchaseListener(OnDeferredPurchase);
+            builder.Configure<IGooglePlayConfiguration>().SetQueryProductDetailsFailedListener(MyFunction);
+
+            builder.AddProduct(gameManager.gamePropertiesInSave.noAdsProductId, ProductType.NonConsumable);
+            
             UnityPurchasing.Initialize(this, builder);
 
             Debug.Log("UnityPurchasing.Initialize called.");
         }
-
+        void OnDeferredPurchase(Product product)
+        {
+            Debug.Log($"Purchase of {product.definition.id} is deferred");
+        }
+        void MyFunction(int myInt)
+        {
+            Debug.Log("Listener = " + myInt.ToString());
+        }
         public void OnInitialized(IStoreController controller, IExtensionProvider extensions)
         {
             _storeController = controller;
-            ExtensionProvider = extensions;
+            _extensionProvider = extensions;
             isInitialized = true;
             foreach (var products in _storeController.products.all)
             {
                 Debug.Log($"Product available: {products.definition.id}");
             }
         }
-
+      
         public void OnInitializeFailed(InitializationFailureReason error)
         {
             _onPurchaseFailed.Invoke("Failed to initialize IAP: " + error);
@@ -97,6 +111,8 @@ namespace Managers
             _onPurchaseFailed.Invoke("purchase failed " + failureReason);
         }
 
+  
+
         public void OnPurchaseFailed(Product product, PurchaseFailureDescription failureDescription)
         {
             _onPurchaseFailed.Invoke("purchase failed " + failureDescription);
@@ -104,6 +120,11 @@ namespace Managers
 
         public void BuyItem(string id, UnityAction<string> success, UnityAction<string> failed)
         {
+            if (!isInitialized)
+            {
+                StartCoroutine(StartInAppServer());
+            }
+            
             var noAdsProduct = GetItem(id);
 
             _onPurchaseSuccess = success;
@@ -152,6 +173,10 @@ namespace Managers
                 Debug.LogError($"Product with id {id} not found.");
             }
             return product;
+        }
+        private bool IsInitialized()
+        {
+            return _storeController != null && _extensionProvider != null;
         }
     }
 }

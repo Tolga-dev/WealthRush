@@ -209,7 +209,7 @@ namespace Managers
             gamePropertiesInSave.lastTimeNextLevelAdWatched = 0;
             gamePropertiesInSave.lastTimeComboAdWatched = 0;
             
-             StartCoroutine(saveManager.Save());
+            StartCoroutine(saveManager.Save());
         }
     }
 }
